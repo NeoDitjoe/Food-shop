@@ -1,13 +1,28 @@
+.header{
+    position: sticky;
+    top: 0;
+}
+
 .nav{
     background-color: gray;
-    padding: 3%;
+    padding: 2%;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
+.navList{
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    right: 0;
+    margin-right: 10%;
+    text-align: center;
+}
+
 .navList a{
-    padding-left: 5%;
+    padding-left: 2%;
+    padding-right: 2%;
     list-style: none;
 }
 
@@ -22,13 +37,13 @@
     font-size: 250%;
 }
 
-.collapsedNavList{
+.collapseNavList{
     display: flex;
     flex-direction: column;
     padding: 5%;
 }
 
-.collapsedNavList a {
+.collapseNavList a {
     color: rgb(167, 164, 164);
     font-size: 120%;
     margin-bottom: 5%;
@@ -36,6 +51,9 @@
 
 .collapseButton{
     display: none;
+    position: fixed;
+    right: 0;
+    margin: 10%;
 }
 
 @media only screen and (max-width: 775px){

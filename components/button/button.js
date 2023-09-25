@@ -1,8 +1,19 @@
 import Link from "next/link";
+import { Fragment } from "react";
 import style from 'styles/button.module.css'
 
-export default function Button({link, name}){
+export default function LinkButton({link, name, text}){
     return(
-        <Link href={link} className={style.link}>{name}</Link>
+
+        <Fragment>
+            <Link href={link} className={style.link}>{name}{text}</Link>
+        </Fragment>
+    )
+}
+
+export function Button({click, name}){
+    return (
+            <button onClick={click} className={style.button}>{name}</button>
+
     )
 }

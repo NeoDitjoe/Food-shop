@@ -1,20 +1,24 @@
 import { Fragment, useState } from "react";
-import Image from "next/image";
 import style from 'styles/header.module.css'
-import Button from "../button/button";
+import LinkButton, { Button } from "../button/button";
 import StateContext from "@/usecontext/stateContext";
+import { FaCartArrowDown } from "react-icons/fa";
+import { CgProfile } from "react-icons/Cg";
+import { AiFillPhone } from "react-icons/Ai";
+import { BiSearchAlt } from "react-icons/Bi";
+import { BsFillRocketTakeoffFill } from "react-icons/Bs";
 
 export function navlist(){
 
     const { collapse } = StateContext()
     
     return (
-        <ul className={ collapse ? style.collapsedNavList : style.navList}>
-            <Button link='/' name='Cart'/>
-            <Button link='/' name='Explore'/>
-            <Button link='/' name='Search'/>
-            <Button link='/' name='Contact'/>
-            <Button link='/' name='Username'/>
+        <ul className={ collapse ? style.collapseNavList : style.navList}>
+            <LinkButton link='/' name={ <FaCartArrowDown/>} text='cart'/>
+            <LinkButton link='/' name={ <BsFillRocketTakeoffFill/>} text='Explore' />
+            <LinkButton link='/' name={ <BiSearchAlt/>} text='Search' />
+            <LinkButton link='/' name={ <AiFillPhone/>} text='Contact' />
+            <LinkButton link='/' name={ <CgProfile/>} text='Username' />
         </ul>
     )
 }
@@ -29,12 +33,12 @@ export default function Header(){
                 <h1 className={style.logo}>BOBO</h1>
                 <div className={style.navListDiv}>{navlist()}</div>
                
-                <button 
-                    className={style.collapseButton} 
-                    onClick={() => setCollapse(!collapse)}
-                >
-                NAVLIST
-                </button>
+                <div className={style.collapseButton}>
+                    <Button  
+                        click={() => setCollapse(!collapse)}
+                        name={'Menu'}
+                    />
+                </div>
             </nav>
         </header>
     )

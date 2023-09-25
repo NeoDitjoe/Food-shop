@@ -26,7 +26,7 @@ export default function Layout({children}){
                 <div className={style.collapseDiv}>{navlist()}</div> : 
                 ''
             }
-            <section>{children}</section>
+            {collapse ? " " : <section>{children}</section>}
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Fragment} from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -6,6 +6,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import style from 'styles/grid.module.css'
+import { Button } from './button/button';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -17,74 +18,86 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function FullWidthGrid() {
 
-    // const [ menu, setMenu ] = useState([])
+    const [ menuu, setMenuu ] = useState([])
+    const [ overlay, setOverlay] = useState(null)
+    const [ overlayCollapse, setOverlayCollapse] = useState(false)
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     fetch('/api/menu')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //         setMenu(data.menu)
-    //     })
+        fetch('/api/menu')
+            .then(response => response.json())
+            .then(data => {
+            setMenuu(data.menu)
+            console.log(data.menu)
+        })
         
-    // }, [])
+    })
+
+    useEffect(() => {
+        console.log(menuu)
+    })
 
     const menu = [
-        {work: 'Chips', more: [
-            {price: ' R20.00', list: 'small'},
-            {price: ' R60.00', list: 'large'},
-            {price: ' R40.00', list: 'medium'}
+
+        {product: 'Chips', more: [
+            {price: '20.00', list: 'small'},
+            {price: '60.00', list: 'large'},
+            {price: '40.00', list: 'medium'}
         ]},
 
-        {work: 'Egg bread Sandwiche',  more: [
-            {price: 'R 8.80', list: '2 slice'},
-            {price: 'R 12.80', list: '3 slice'},
-            {price: 'R 14.80', list: '4 slice'},
-            {price: 'R 16.80', list: '6 slice'},
+        {product: 'Egg bread Sandwiche',  more: [
+            {price: '8.80', list: '2 slice'},
+            {price: '12.80', list: '3 slice'},
+            {price: '14.80', list: '4 slice'},
+            {price: '16.80', list: '6 slice'},
         ]},
 
-        {work: 'Sphathlo',  more: [
-            {price: 'R 35.90',list: 'Russion and cheese'},
-            {price: 'R 35.90', list: 'Russion, cheese and latice Russion, cheese and latice'},
-            {price: 'R 35.90', list: 'vienna and polony'},
-            {price: 'R 35.90', list: 'Russion Vienna'}
+        {product: 'Sphathlo',  more: [
+            {price: '35.90',list: 'Russion and cheese'},
+            {price: '37.90', list: 'Russion, cheese and latice'},
+            {price: '30.90', list: 'vienna and polony'},
+            {price: '45.90', list: 'Russion ,Vienna'}
         ]},
-        {work: 'Burger',  more: [
-            {price: 'R 79.99', list: 'Cheese Burger'},
-            {price: 'R 79.99', list: 'Chicken Burger'},
-            {price: 'R 79.99', list: 'Beef Burger'},
-            {price: 'R 79.99', list: 'Ribs Burger'}
+        {product: 'Burger',  more: [
+            {price: '55.99', list: 'Cheese Burger'},
+            {price: '60.99', list: 'Chicken Burger'},
+            {price: '70.99', list: 'Beef Burger'},
+            {price: '79.99', list: 'Ribs Burger'}
         ]},
-        {work: 'Drinks/ Bevs', more: [
-            { price: 'R19.99', list: ' 500ml Straberry Milkshake'},
-            { price: 'R24.90', list: '2l Cold drink'},
-            { price: 'R15.90', list: '500ml Slush'}
+        {product: 'Drinks/ Bevs', more: [
+            { price: '19.99', list: ' 500ml Straberry Milkshake'},
+            { price: '24.90', list: '2l Cold drink'},
+            { price: '15.90', list: '500ml Slush'}
         ]}
+
     ]
 
   return (
-    <React.Fragment>     
+    <Fragment>     
         <Box  sx={{ flexGrow: 1 }}>
             <Grid container spacing={1}>
                 {
                     menu && menu.map((item) => (
-                        <Grid xs={12} md={4} s={4} key={item.work}>
+                        <Grid xs={12} md={4} s={4} key={item.product}>
                             <Item>
                                 <Image 
                                     // src={item.image} 
                                     src={'next.svg'} 
                                     alt='image' 
-                                    width={300} 
+                                    width={200} 
                                     height={200} 
                                 />
-                                <h2>{item.work}</h2>
+                                <h2>{item.product}</h2>
                          
                                 {
                                     item.more.map((item2) => {
                                         return (
-                                            <div key={item2.list} className={style.menuList}>
+                                            <div key={item2.list} className={style.menuList} onClick={() => {
+                                                setOverlayCollapse(true)
+                                                setOverlay({product : item.product, list:item2.list, price:item2.price})
+                                            }}>
                                                 <h4>{item2.list}</h4>
-                                                <p className={style.price}>{item2.price}</p>
+                                                <p className={style.price}>{item2.price} R</p>
                                             </div>
                                         )
                                     })
@@ -96,6 +109,27 @@ export default function FullWidthGrid() {
                 }
             </Grid>
         </Box>
-    </React.Fragment>
+
+        { overlayCollapse && 
+            <div className={style.overlay}>
+                {
+                    overlay && 
+
+                    <div>
+                        <h1>{overlay.product}</h1>
+                        <p>{overlay.list}</p>
+                        <p>R {overlay.price}</p>
+
+                        <div className={style.button}>
+                            <Button 
+                                name={'CLOSE'} 
+                                click ={() => setOverlayCollapse(false)}
+                            />
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </Fragment>
   );
 }
