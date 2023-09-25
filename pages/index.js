@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <main className={inter.className}>
-      <h1>this should work</h1>
+      {/* <h1>this should work</h1> */}
       <FullWidthGrid/>
     </main>
   )

@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -30,7 +31,7 @@ export default function FullWidthGrid() {
 
     useEffect(() => {
         console.log(menu.map(item => {
-            return <div key={item.work}> <p>{item.work}</p></div>
+            return item
         }));
     }, [menu]);
 
@@ -39,10 +40,18 @@ export default function FullWidthGrid() {
         <Box  sx={{ flexGrow: 1 }}>
             <Grid container spacing={0.2}>
                 {
-                    menu.map((item)=>(
+                    menu && menu.map((item)=>(
                         <Grid xs={12} md={4} s={4} key={item.work}>
-                            <Item><h1>{item.work}</h1></Item>
-                        </Grid>
+                            <Item>
+                                <Image src={item.image} alt='image' width={400} height={400} />
+                                <ul>
+                                    <li>
+                                        <p>{item.price}</p>
+                                        <h2>{item.work}</h2>
+                                    </li>
+                                </ul>
+                            </Item>
+                        </Grid> 
                     ))
                 }
             </Grid>
