@@ -7,6 +7,7 @@ export default async function handler(req, res) {
       client = await connectDatabase()
   } catch(error){
       res.status(500).json({message: 'Connecting to the database failed!'})
+      return;
   }
 
   if( req.method === 'GET'){
@@ -19,28 +20,31 @@ export default async function handler(req, res) {
   }
 
   if(req.method === 'POST'){
-    const { inputValue } = req.body
+    const { product, menu } = req.body
 
-    if(!inputValue){
-      res.status(402).json({message: "Invalid Input"})
-      return;
-    }
+    // if(!product){
+    //   res.status(402).json({message: "Invalid Input"})
+    //   return;
+    // }
 
     const addData = {
-      inputValue
+      product,
+      menu
     }
 
     const db = client.db()
 
     try{
       const result = await db.collection('menu').insertOne(addData)
+      addData.id = result.insertedId
     }catch(error){
       client.close();
       res.status(404).json({message: 'Attempt Failed'})
+      return;
     }
 
     client.close()
 
-    res.status(201).json({ message: 'Successfully stored message!', message: inputValue });
+    res.status(201).json({ message: 'Successfully stored!', message: product });
   }
 }

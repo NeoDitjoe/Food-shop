@@ -14,10 +14,6 @@
 .navList{
     display: flex;
     flex-direction: row;
-    position: fixed;
-    right: 0;
-    margin-right: 10%;
-    text-align: center;
 }
 
 .navList a{
@@ -62,9 +58,17 @@
     margin: 10%;
 }
 
+.navListDiv{
+    position: fixed;
+    right: 0;
+    margin-right: 5%;
+    text-align: center;
+}
+
 @media only screen and (max-width: 775px){
     .navListDiv{
         display: none;
+        
     }
 
     .collapseButton{
