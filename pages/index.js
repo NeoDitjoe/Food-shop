@@ -21,7 +21,7 @@ export default function Home() {
             className='img'
         />
 
-        <FullWidthGrid/>
+        <FullWidthGrid />
         
       </main>
     </Fragment>
