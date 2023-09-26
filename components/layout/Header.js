@@ -7,6 +7,7 @@ import { CgProfile } from "react-icons/Cg";
 import { AiFillPhone } from "react-icons/Ai";
 import { BiSearchAlt } from "react-icons/Bi";
 import { BsFillRocketTakeoffFill } from "react-icons/Bs";
+import Link from "next/link";
 
 export function navlist(){
 
@@ -18,7 +19,7 @@ export function navlist(){
             <LinkButton link='/' name={ <BsFillRocketTakeoffFill/>} text='Explore' />
             <LinkButton link='/' name={ <BiSearchAlt/>} text='Search' />
             <LinkButton link='/' name={ <AiFillPhone/>} text='Contact' />
-            <LinkButton link='/' name={ <CgProfile/>} text='Username' />
+            <LinkButton link='/dashboard' name={ <CgProfile/>} text='Username' />
         </ul>
     )
 }
@@ -30,7 +31,8 @@ export default function Header(){
     return (
         <header className={style.header}>
             <nav className={style.nav}>
-                <h1 className={style.logo}>BOBO</h1>
+                
+                <h1 className={style.logo}><Link href={'/'}>BOBO</Link></h1>
                 <div className={style.navListDiv}>{navlist()}</div>
                
                 <div className={style.collapseButton}>
