@@ -41,6 +41,7 @@ export default function AddToMenuForm(){
                 ]
      
             })
+            console.log('success')
         }catch(error){
             console.log('failed to add menu')
         }

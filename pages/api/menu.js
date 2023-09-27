@@ -22,7 +22,7 @@ export default async function handler(req, res) {
   // }
 
   if(req.method === 'POST'){
-    const { product, menu } = req.body
+    const { product, menu, image } = req.body
 
     if(!product){
       res.status(402).json({message: "Invalid Input"})
