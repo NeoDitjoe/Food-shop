@@ -17,32 +17,31 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function FullWidthGrid() {
+export default function FullWidthGrid({menu}) {
 
-    const [ menu, setMenu ] = useState([])
+    // const [ menu, setMenu ] = useState([])
     const [ overlay, setOverlay] = useState(null)
     const [ overlayCollapse, setOverlayCollapse] = useState(false)
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        fetch('/api/menu')
-            .then(response => response.json())
-            .then(data => {
-            setMenu(data.menu)
-        })
+    //     fetch('/api/menu')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //         setMenu(data.menu)
+    //     })
         
-    })
+    // })
 
   return (
     <Fragment>     
         <Box  sx={{ flexGrow: 1 }}>
             <Grid container spacing={1}>
                 {
-                    menu && menu.map((item) => (
+                    /* menu &&  */menu.map((item) => (
                         <Grid xs={12} md={4} s={4} key={item.id}>
                             <Item>
-                                <Image 
-                                    // src={item.image} 
+                                <Image
                                     src={'next.svg'} 
                                     alt='image' 
                                     width={200} 

@@ -10,16 +10,16 @@ export default async function handler(req, res) {
       return;
   }
 
-  if( req.method === 'GET'){
-    try{
-      const menuList = await getMenuList(client, 'menu')
+  // if( req.method === 'GET'){
+  //   try{
+  //     const menuList = await getMenuList('menu')
 
-      // client.close()
-      res.status(200).json({ menu: menuList})
-    }catch {
-      res.status(404).json({ message: 'Reload Page'})
-    }
-  }
+  //     // client.close()
+  //     res.status(200).json({ menu: menuList})
+  //   }catch {
+  //     res.status(404).json({ message: 'Reload Page'})
+  //   }
+  // }
 
   if(req.method === 'POST'){
     const { product, menu } = req.body

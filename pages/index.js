@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import FullWidthGrid from '@/components/grid'
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import Head from 'next/head'
+import { getMenuList } from '@/database/Database'
 
-export default function Home() {
+export default function Home({menuList}) {
+
   return (
     <Fragment>
       <Head>
@@ -21,9 +23,22 @@ export default function Home() {
             className='img'
         />
 
-        <FullWidthGrid />
+        <FullWidthGrid 
+          menu = {menuList}
+        />
         
       </main>
     </Fragment>
   )
+}
+
+export async function getStaticProps(){
+
+  const menuList = await getMenuList('menu')
+
+  return{
+    props: {
+      menuList,
+    }
+  }
 }
