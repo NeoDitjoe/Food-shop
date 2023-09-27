@@ -16,21 +16,6 @@ export async function insertDocument(client, collection,  document){
     return result
 }
 
-// export async function getMenuList(collection){
-
-//     let client = await connectDatabase()
-
-//     const db = client.db()
-
-//     const documents = await db
-//         .collection(collection)
-//         .find()
-//         .toArray()
-
-//     return documents
-
-// }
-
 export async function getMenuList(collection) {
     let client = await connectDatabase();
     const db = client.db();

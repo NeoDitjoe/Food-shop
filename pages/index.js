@@ -3,8 +3,13 @@ import FullWidthGrid from '@/components/grid'
 import { Fragment, useEffect } from 'react'
 import Head from 'next/head'
 import { getMenuList } from '@/database/Database'
+import StateContext from '@/usecontext/stateContext'
 
 export default function Home({menuList}) {
+
+  const { setOptions } = StateContext()
+
+  setOptions(menuList)
 
   return (
     <Fragment>
@@ -18,8 +23,8 @@ export default function Home({menuList}) {
         <Image 
             src={'https://i.pinimg.com/564x/a5/a7/0d/a5a70dd6d45f21688b18deeac7553efd.jpg'} 
             alt="background" 
-            width={900} 
-            height={900} 
+            width={400} 
+            height={300} 
             className='img'
         />
 

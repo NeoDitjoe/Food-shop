@@ -23,21 +23,18 @@ export default function AddToMenuForm(){
     const menuRef = useRef()
     const menuItemRef = useRef()
     const itemPrice = useRef()
-
-    // function inputs(){
-    //     const inputValue = inputRef.current.value
-
-    //     return inputValue
-    // }
+    const imageRef = useRef()
 
     async function addMenuHandle(e){
         e.preventDefault()
         const inputValue = menuRef.current.value
         const menuItemValue = menuItemRef.current.value
         const itemPriceVaue = itemPrice.current.value
+        const imageValue = imageRef.current.value
 
         try{
             await addMenu({
+                image: imageValue,
                 product: inputValue,
                 menu: [
                     {price: itemPriceVaue, list: menuItemValue}
@@ -63,10 +60,10 @@ export default function AddToMenuForm(){
 
                 <div className={style.imageDiv}>
                     <label>Image Link: </label>
-                    <input type="text" ref={itemPrice} />
+                    <input type="text" ref={imageRef} />
 
                     <label>Image File: </label> 
-                    <input type="file" ref={itemPrice} /> 
+                    <input type="file"  /> 
                 </div>
             </div> 
                 <Button name='submit' />

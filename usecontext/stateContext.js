@@ -10,9 +10,10 @@ export default function StateContext(){
 export function ContextProvider({children}){
 
     const [ collapse , setCollapse ] = useState(false)
+    const [ options , setOptions ] = useState([])
 
     return (
-        <Context.Provider value={{collapse, setCollapse}}>
+        <Context.Provider value={{collapse, setCollapse, options, setOptions}}>
             {children}
         </Context.Provider>
     )

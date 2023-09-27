@@ -19,33 +19,23 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function FullWidthGrid({menu}) {
 
-    // const [ menu, setMenu ] = useState([])
     const [ overlay, setOverlay] = useState(null)
     const [ overlayCollapse, setOverlayCollapse] = useState(false)
-
-    // useEffect(() => {
-
-    //     fetch('/api/menu')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //         setMenu(data.menu)
-    //     })
-        
-    // })
 
   return (
     <Fragment>     
         <Box  sx={{ flexGrow: 1 }}>
             <Grid container spacing={1}>
                 {
-                    /* menu &&  */menu.map((item) => (
+                    menu.map((item) => (
                         <Grid xs={12} md={4} s={4} key={item.id}>
                             <Item>
-                                <Image
-                                    src={'next.svg'} 
+                                <Image 
+                                    src={item.image}
                                     alt='image' 
-                                    width={200} 
-                                    height={200} 
+                                    width={500} 
+                                    height={250} 
+                                    className={style.img}
                                 />
                                 <h2>{item.product}</h2>
                          
@@ -78,6 +68,7 @@ export default function FullWidthGrid({menu}) {
                 click = {() => setOverlayCollapse(false)}
             />
         }
+
     </Fragment>
   );
 }
