@@ -13,6 +13,8 @@ export default async function handler(req, res) {
   if( req.method === 'GET'){
     try{
       const menuList = await getMenuList(client, 'menu')
+
+      // client.close()
       res.status(200).json({ menu: menuList})
     }catch {
       res.status(404).json({ message: 'Reload Page'})
@@ -22,10 +24,10 @@ export default async function handler(req, res) {
   if(req.method === 'POST'){
     const { product, menu } = req.body
 
-    // if(!product){
-    //   res.status(402).json({message: "Invalid Input"})
-    //   return;
-    // }
+    if(!product){
+      res.status(402).json({message: "Invalid Input"})
+      return;
+    }
 
     const addData = {
       product,
