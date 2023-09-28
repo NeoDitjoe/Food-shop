@@ -6,20 +6,20 @@ export default async function handler(req, res) {
   try {
       client = await connectDatabase()
   } catch(error){
-      res.status(500).json({message: 'Connecting to the database failed!'})
+      res.status(500).json({message: 'failed to retrieve data'})
       return;
   }
 
-  // if( req.method === 'GET'){
-  //   try{
-  //     const menuList = await getMenuList('menu')
+  if( req.method === 'GET'){
+    try{
+      const menuList = await getMenuList('menu')
 
-  //     // client.close()
-  //     res.status(200).json({ menu: menuList})
-  //   }catch {
-  //     res.status(404).json({ message: 'Reload Page'})
-  //   }
-  // }
+      // client.close()
+      res.status(200).json({ menu: menuList})
+    }catch {
+      res.status(404).json({ message: 'Reload Page'})
+    }
+  }
 
   if(req.method === 'POST'){
     const { product, menu, image } = req.body
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
 
     try{
       const result = await db.collection('menu').insertOne(addData)
-      addData.id = result.insertedId
+      addData._id = result.insertedId
     }catch(error){
       client.close();
       res.status(404).json({message: 'Attempt Failed'})

@@ -9,7 +9,9 @@ export default function Home({menuList}) {
 
   const { setOptions } = StateContext()
 
-  setOptions(menuList)
+  useEffect(() => {
+    setOptions(menuList)
+  })
 
   return (
     <Fragment>
@@ -44,6 +46,7 @@ export async function getStaticProps(){
   return{
     props: {
       menuList,
-    }
+    },
+    revalidate: 1000
   }
 }

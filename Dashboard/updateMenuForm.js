@@ -1,27 +1,38 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Button } from '@/components/button/button';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import StateContext from '@/usecontext/stateContext';
 
-export default function UpdateDataForm() {
+export default function UpdateMenuForm() {
 
     const selectedChoice = useRef()
     const { options } = StateContext()
+    const [ m , setm ] = useState(null)
+
+    useEffect(() => {
+
+      fetch('/api/menu')
+        .then(res => res.json())
+        .then(data =>  setm(data))
+
+    })
+
+    function l(e){
+      e.preventDefault()
+
+      console.log(selectedChoice.current.value)
+      console.log(m && m)
+    }
 
   return (
-    <form onSubmit={(e) => {
-        e.preventDefault()
+    <form onSubmit={l}>
 
-        console.log(selectedChoice.current.value)
-        console.log(options)
-    }}>
-    <label>Choose a ... :</label>
-
+    <label>Choose a ... : </label>
     <select ref={selectedChoice}>
         {
-            top100Films.map((data) => {
-                return <option key={data.year}>{data.label}</option>
+            options.map((data) => {
+                return <option key={data.year}>{data.product}</option>
             })
         }   
     </select>
