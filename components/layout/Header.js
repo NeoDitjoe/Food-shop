@@ -2,11 +2,11 @@ import { Fragment, useState } from "react";
 import style from 'styles/header.module.css'
 import LinkButton, { Button } from "../button/button";
 import StateContext from "@/usecontext/stateContext";
-import { FaCartArrowDown } from "react-icons/fa";
-import { CgProfile } from "react-icons/Cg";
-import { AiFillPhone } from "react-icons/Ai";
-import { BiSearchAlt } from "react-icons/Bi";
-import { BsFillRocketTakeoffFill } from "react-icons/Bs";
+import { FaCartArrowDown } from "react-icons/ca";
+import { CgProfile } from "react-icons/cg";
+import { AiFillPhone } from "react-icons/ai";
+import { BiSearchAlt } from "react-icons/bi";
+import { BsFillRocketTakeoffFill } from "react-icons/bs";
 import Link from "next/link";
 
 export function navlist(){
