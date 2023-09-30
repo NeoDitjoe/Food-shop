@@ -42,7 +42,7 @@ export default function Home({menuList}) {
 export async function getStaticProps(){
 
   const menuList = await getMenuList('menu')
-  const connect = await connectDatabase()
+  const connect = await connectDatabase('menulist')
 
   const db = connect.db();
   

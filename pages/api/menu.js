@@ -4,7 +4,7 @@ export default async function handler(req, res) {
 
   let client;
   try {
-      client = await connectDatabase()
+      client = await connectDatabase('menulist')
   } catch(error){
       res.status(500).json({message: 'failed to retrieve data'})
       return;

@@ -1,8 +1,8 @@
 import { MongoClient } from 'mongodb'
 
-export async function connectDatabase() {
+export async function connectDatabase(folder) {
 
-    const client = await MongoClient.connect('mongodb+srv://bobo:wHWkFbRSdYCcIBs6@cluster0.x9eyl3e.mongodb.net/menulist?retryWrites=true&w=majority')
+    const client = await MongoClient.connect(`mongodb+srv://bobo:wHWkFbRSdYCcIBs6@cluster0.x9eyl3e.mongodb.net/${folder}?retryWrites=true&w=majority`)
 
     return client
 
@@ -17,7 +17,7 @@ export async function insertDocument(client, collection,  document){
 }
 
 export async function getMenuList(collection) {
-    let client = await connectDatabase();
+    let client = await connectDatabase('menulist');
     const db = client.db();
   
     const documents = await db
