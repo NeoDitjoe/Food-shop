@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import style from 'styles/header.module.css'
 import LinkButton, { Button } from "../button/button";
 import StateContext from "@/usecontext/stateContext";
-import { FaCartArrowDown } from "react-icons/ca";
+import { FaCartArrowDown } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { AiFillPhone } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
