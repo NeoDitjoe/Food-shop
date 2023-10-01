@@ -6,7 +6,7 @@ export default function LinkButton({link, name, text}){
     return(
 
         <Fragment>
-            <Link href={link} className={style.link}>{name}{text}</Link>
+            <Link href={link} className={style.link}>{name} {text}</Link>
         </Fragment>
     )
 }
