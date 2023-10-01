@@ -5,3 +5,8 @@ export default async function hashPassword(password){
 
     return hashedPassword
 }
+
+export async function verifyPassword(password ,hashedPassword ){
+    const isValid = await compare(password, hashedPassword)
+    return isValid
+}

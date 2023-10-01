@@ -9,7 +9,7 @@ function AuthForm() {
   const passwordRef = useRef()
 
   async function createUser(username, email, password){
-    const response = await fetch('/api/auth' , {
+    const response = await fetch('/api/auth/signUp' , {
       method: 'POST',
       body: JSON.stringify({ username, email, password}),
       headers: {
