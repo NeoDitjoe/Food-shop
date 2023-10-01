@@ -23,7 +23,7 @@ export default function Home({menuList}) {
       <main>
 
         <Image 
-            src={'https://i.pinimg.com/564x/a5/a7/0d/a5a70dd6d45f21688b18deeac7553efd.jpg'} 
+            src={'https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} 
             alt="background" 
             width={400} 
             height={300} 
