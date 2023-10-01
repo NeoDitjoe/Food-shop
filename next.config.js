@@ -9,6 +9,11 @@ const nextConfig = {
         protocol:'https',
         hostname: 'i.pinimg.com',
         port: '',
+      },
+      {
+        protocol:'https',
+        hostname: 'images.pexels.com',
+        port: '',
       }
     ]
   }
