@@ -1,6 +1,6 @@
 .link{
     text-decoration: none;
-    color: rgb(140, 214, 29);
+    color: #05e35e;
     font-size: 110%;
 }
 
@@ -8,7 +8,7 @@
     padding: 15px;
     border-radius: 5px;
     border: none;
-    background-color: greenyellow;
+    background-color: #05e35e;
     color: black;
     cursor: pointer;
 }

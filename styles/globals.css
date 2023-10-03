@@ -8,7 +8,7 @@ body{
     background-color: rgb(241, 241, 241);
     align-items: center;
     overflow-x: hidden;
-    border: 1px black solid;
+    /* border: 1px black solid; */
 }
 
 .img{
