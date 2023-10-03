@@ -1,10 +1,10 @@
 import { Button } from '@/components/button/button';
 import { useEffect, useRef, useState } from 'react';
-import StateContext from '@/usecontext/stateContext';
 
-async function createUser() {
+async function createUser(item) {
   const response = await fetch('/api/addItem', {
     method: 'POST',
+    body: JSON.stringify(item),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -21,42 +21,55 @@ async function createUser() {
 
 export default function UpdateMenuForm() {
 
-    const selectedChoice = useRef()
-    const [ m , setm ] = useState(null)
+  const selectProduct = useRef()
+  const itemRef = useRef()
+  const priceRef = useRef()
 
-    useEffect(() => {
+  const [ m , setm ] = useState(null)
 
-      fetch('/api/menu')
-        .then(res => res.json())
-        .then(data =>  setm(data.menu))
+  useEffect(() => {
 
-    })
+    fetch('/api/menu')
+      .then(res => res.json())
+      .then(data =>  setm(data.menu))
+      
+  })
 
-    async function workman(event){
-      event.preventDefault()
-      try {
-          const result = await createUser();
-          console.log(result);
-        } catch (error) {
-          console.log(error);
-        }
-  
+  async function workman(event){
+    event.preventDefault()
+
+    const productInput = selectProduct.current.value
+    const itemInput = itemRef.current.value
+    const priceInput = priceRef.current.value
+
+    try {
+      const result = await createUser({product: productInput, item: itemInput, price: priceInput});
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   return (
     <form onSubmit={workman}>
 
-    <label>Select a product </label>
-    <select ref={selectedChoice}>
-        {
-            m && m.map((data) => {
-                return <option key={data.product}>{data.product}</option>
-            })
-        }   
-    </select>
-
-        <Button name='Submit'/>
-
+      <select ref={selectProduct}>
+          {
+              m && m.map((data) => {
+                  return <option key={data.product}>{data.product}</option>
+              })
+          }   
+      </select>
+      
+      <label>Item:</label>
+      <input type='text' ref={itemRef} required/>
+      
+      <label>Price:</label>
+      <input type='text' ref={priceRef} required/>
+          
+      <Button name='Submit'/>
+      
     </form>
   );
 }

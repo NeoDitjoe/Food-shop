@@ -37,7 +37,7 @@ export default function AddToMenuForm(){
                 image: imageValue,
                 product: inputValue,
                 menu: [
-                    {price: itemPriceVaue, list: menuItemValue}
+                    {price: itemPriceVaue, item: menuItemValue}
                 ]
      
             })
