@@ -1,5 +1,3 @@
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import { Button } from '@/components/button/button';
 import { useEffect, useRef, useState } from 'react';
 import StateContext from '@/usecontext/stateContext';
@@ -24,27 +22,18 @@ async function createUser() {
 export default function UpdateMenuForm() {
 
     const selectedChoice = useRef()
-    const { options } = StateContext()
     const [ m , setm ] = useState(null)
 
     useEffect(() => {
 
       fetch('/api/menu')
         .then(res => res.json())
-        .then(data =>  setm(data))
+        .then(data =>  setm(data.menu))
 
     })
 
-    function l(){
-
-
-      console.log(selectedChoice.current.value)
-      console.log(m && m)
-    }
-
     async function workman(event){
       event.preventDefault()
-      l()
       try {
           const result = await createUser();
           console.log(result);
@@ -60,8 +49,8 @@ export default function UpdateMenuForm() {
     <label>Select a product </label>
     <select ref={selectedChoice}>
         {
-            options.map((data) => {
-                return <option key={data.year}>{data.product}</option>
+            m && m.map((data) => {
+                return <option key={data.product}>{data.product}</option>
             })
         }   
     </select>
