@@ -4,6 +4,23 @@ import { Button } from '@/components/button/button';
 import { useEffect, useRef, useState } from 'react';
 import StateContext from '@/usecontext/stateContext';
 
+async function createUser() {
+  const response = await fetch('/api/addItem', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || 'Something went wrong!');
+  }
+
+  return data;
+}
+
 export default function UpdateMenuForm() {
 
     const selectedChoice = useRef()
@@ -18,17 +35,29 @@ export default function UpdateMenuForm() {
 
     })
 
-    function l(e){
-      e.preventDefault()
+    function l(){
+
 
       console.log(selectedChoice.current.value)
       console.log(m && m)
     }
 
-  return (
-    <form onSubmit={l}>
+    async function workman(event){
+      event.preventDefault()
+      l()
+      try {
+          const result = await createUser();
+          console.log(result);
+        } catch (error) {
+          console.log(error);
+        }
+  
+  }
 
-    <label>Choose a ... : </label>
+  return (
+    <form onSubmit={workman}>
+
+    <label>Select a product </label>
     <select ref={selectedChoice}>
         {
             options.map((data) => {
@@ -42,11 +71,3 @@ export default function UpdateMenuForm() {
     </form>
   );
 }
-
-const top100Films = [
-    
-  { label: 'The Shawshank Redemption', year: 1994 },
-  { label: 'The Godfather', year: 1972 },
-  { label: 'The Godfather: Part II', year: 1974 }
-
-];
