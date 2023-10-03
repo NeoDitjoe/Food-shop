@@ -6,7 +6,7 @@ export default async function handler( req, res){
         const { username, email, password } = req.body
 
         if(!email || !email.includes('@') || !password || !password.length >= 8){
-            res.status('400').json({ message: 'Invalid Input password should include atleast 8 characters'})
+            res.status(400).json({ message: 'Invalid Input password should include atleast 8 characters'})
             return;
         }
 

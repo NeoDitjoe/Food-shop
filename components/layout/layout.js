@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Layout({children}){
 
-    const { collapse } = StateContext()
+    const { collapse,setCollapse } = StateContext()
 
     return(
         <div className={inter.className}>
@@ -23,7 +23,9 @@ export default function Layout({children}){
             <Header/>
             {
                 collapse && collapse ? 
-                <div className={style.collapseDiv}>{navlist()}</div> : 
+                <div className={style.collapseDiv} onClick={() => setTimeout(() => {
+                    setCollapse(false)
+                }, 300)}> {navlist()} </div> : 
                 ''
             }
             {collapse ? " " : <section>{children}</section>}
