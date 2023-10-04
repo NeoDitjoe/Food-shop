@@ -14,13 +14,13 @@ export default async function handler( req, res){
 
         const db = client.db()
 
-        const existingUser = db.collection('users').findOne({ email: email })
+        const existingUser = await db.collection('users').findOne({ email: email })
 
-        // if(existingUser){
-        //     res.status(400).json({ message : 'email is already in use'})
-        //     client.close()
-        //     return;
-        // }
+        if(existingUser){
+            res.status(400).json({ message : 'email is already in use'})
+            client.close()
+            return;
+        }
 
         const hashedPassword = await hashPassword(password)
 

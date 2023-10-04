@@ -37,6 +37,14 @@ export default async function handler(req, res) {
 
     const db = client.db()
 
+    const productExist = await db.collection('menu').findOne({ product: product })
+
+    if(productExist){
+      res.status(400).json({ message: 'Product  already inserted' })
+      client.close()
+      return;
+    }
+
     try{
       const result = await db.collection('menu').insertOne(addData)
       addData._id = result.insertedId
