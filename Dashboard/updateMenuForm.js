@@ -1,5 +1,6 @@
 import { Button } from '@/components/button/button';
 import { useEffect, useRef, useState } from 'react';
+import style from 'styles/inputBox.module.css'
 
 async function createUser(item) {
   const response = await fetch('/api/addItem', {
@@ -25,13 +26,13 @@ export default function UpdateMenuForm() {
   const itemRef = useRef()
   const priceRef = useRef()
 
-  const [ m , setm ] = useState(null)
+  const [ menu , setmenu ] = useState(null)
 
   useEffect(() => {
 
     fetch('/api/menu')
       .then(res => res.json())
-      .then(data =>  setm(data.menu))
+      .then(data =>  setmenu(data.menu))
       
   })
 
@@ -52,24 +53,31 @@ export default function UpdateMenuForm() {
   }
 
   return (
-    <form onSubmit={workman}>
+      <form onSubmit={workman}>
 
-      <select ref={selectProduct}>
-          {
-              m && m.map((data) => {
+        <div>
+          <label>Modify</label>
+          <select ref={selectProduct} style={{ height:'9vh', width: '200px', borderRadius: '4px', background: 'transparent' }}>
+            {
+              menu && menu.map((data) => {
                   return <option key={data.product}>{data.product}</option>
               })
-          }   
-      </select>
-      
-      <label>Item:</label>
-      <input type='text' ref={itemRef} required/>
-      
-      <label>Price:</label>
-      <input type='text' ref={priceRef} required/>
-          
-      <Button name='Submit'/>
-      
-    </form>
+            }   
+          </select>
+        </div>
+
+        <div>
+          <label>Item:</label>
+          <input type='text' ref={itemRef} required style={{ height:'9vh', width: '200px', borderRadius: '4px', background: 'transparent' }}/>
+        </div>
+
+        <div>
+          <label>Price:</label>
+          <input type='text' ref={priceRef} required style={{ height:'9vh', width: '200px', borderRadius: '4px', background: 'transparent' }}/>
+        </div>
+            
+        <Button name='Submit'/>
+
+      </form>
   );
 }

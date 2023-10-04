@@ -51,7 +51,7 @@ export default function AddToMenuForm(){
         <form onSubmit={addMenuHandle} className={style.form}>
             <div className={style.formDiv}>
                 <label>Menu: </label>
-                <input type="text" required ref={menuRef} />
+                <input type="text" required ref={menuRef} className={style.k}/>
 
                 <label>Menu Item: </label>
                 <input type="text" required ref={menuItemRef} />
