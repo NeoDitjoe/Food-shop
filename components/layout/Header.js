@@ -24,7 +24,7 @@ export function Navlist(){
             <LinkButton link='/' name={ <BsFillRocketTakeoffFill/>} text='Explore' />
             <LinkButton link='/' name={ <BiSearchAlt/>} text='Search' />
             <LinkButton link='/' name={ <AiFillPhone/>} text='Contact' />
-            <LinkButton link='/dashboard' name={ <CgProfile/>} text={session ? session.user.email[1] : 'Login' } />
+            <LinkButton link={session ? '/profile' : '/auth'} name={ <CgProfile/>} text={session ? session.user.email[1] : 'Login' } />
         </ul>
     )
 }
