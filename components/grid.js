@@ -72,3 +72,32 @@ export default function FullWidthGrid({menu}) {
     </Fragment>
   );
 }
+
+
+export function FormsGrid(props){
+    return(
+
+        <Fragment>     
+        <Box  sx={{ flexGrow: 1 }}>
+            <Grid container spacing={3}>
+                <Grid xs={12} md={6} s={2} >
+                    <Item style={{backgroundColor:'transparent'}}> 
+                        <h1>Create a new menu</h1>
+                        <br/>
+                        {props.addMenu}
+                    </Item>
+                </Grid> 
+                <Grid xs={12} md={6} s={2}>
+                    <Item style={{backgroundColor:'transparent'}}>
+                        <h1>Add more Items to Existing menu</h1>
+                        <br/>
+                        {props.updateMenu}
+                    </Item>
+                </Grid> 
+                
+            </Grid>
+        </Box>
+    </Fragment>
+
+    )
+}

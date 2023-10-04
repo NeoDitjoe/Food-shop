@@ -1,6 +1,6 @@
 import { Button } from '@/components/button/button';
 import { useEffect, useRef, useState } from 'react';
-import style from 'styles/inputBox.module.css'
+import style from 'styles/updateform.module.css'
 
 async function createUser(item) {
   const response = await fetch('/api/addItem', {
@@ -55,9 +55,9 @@ export default function UpdateMenuForm() {
   return (
       <form onSubmit={workman}>
 
-        <div>
+        <div className={style.inputDiv}>
           <label>Modify</label>
-          <select ref={selectProduct} style={{ height:'9vh', width: '200px', borderRadius: '4px', background: 'transparent' }}>
+          <select ref={selectProduct} className={style.input}>
             {
               menu && menu.map((data) => {
                   return <option key={data.product}>{data.product}</option>
@@ -66,14 +66,14 @@ export default function UpdateMenuForm() {
           </select>
         </div>
 
-        <div>
+        <div className={style.inputDiv}>
           <label>Item:</label>
-          <input type='text' ref={itemRef} required style={{ height:'9vh', width: '200px', borderRadius: '4px', background: 'transparent' }}/>
+          <input type='text' ref={itemRef} required className={style.input}/>
         </div>
 
-        <div>
+        <div className={style.inputDiv}>
           <label>Price:</label>
-          <input type='text' ref={priceRef} required style={{ height:'9vh', width: '200px', borderRadius: '4px', background: 'transparent' }}/>
+          <input type='text' ref={priceRef} required className={style.input}/>
         </div>
             
         <Button name='Submit'/>
