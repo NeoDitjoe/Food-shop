@@ -10,7 +10,7 @@ export default function UserProfile(){
         <Fragment>
             <h1>{session && session.user.email[1]}</h1>
 
-            <Button click={() => signOut()} name='LOGOUT'/> 
+            {session ? <Button click={() => signOut()} name='LOGOUT'/> : <p>redirect to <LinkButton link='/auth' name='Login' /> page</p> }
         </Fragment>
     )
 }
