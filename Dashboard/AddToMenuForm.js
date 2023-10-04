@@ -35,7 +35,7 @@ export default function AddToMenuForm(){
         try{
             await addMenu({
                 image: imageValue,
-                product: inputValue,
+                product: inputValue.toLowerCase(),
                 menu: [
                     {price: itemPriceVaue, item: menuItemValue}
                 ]

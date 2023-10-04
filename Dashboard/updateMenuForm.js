@@ -44,7 +44,7 @@ export default function UpdateMenuForm() {
     const priceInput = priceRef.current.value
 
     try {
-      const result = await createUser({product: productInput, item: itemInput, price: priceInput});
+      const result = await createUser({product: productInput.toLowerCase(), item: itemInput, price: priceInput});
       console.log(result);
     } catch (error) {
       console.log(error);

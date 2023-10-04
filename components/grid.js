@@ -37,8 +37,8 @@ export default function FullWidthGrid({menu}) {
                                     height={250} 
                                     className={style.img}
                                 />
-                                <h2>{item.product}</h2>
-                         
+                                <h2>{item.product.charAt(0).toUpperCase() + item.product.slice(1)}</h2>
+
                                 {
                                     item.menu && item.menu.map((item2) => {
                                         return (
