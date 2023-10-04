@@ -8,10 +8,15 @@ import { AiFillPhone } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
 import { BsFillRocketTakeoffFill } from "react-icons/bs";
 import Link from "next/link";
+import { useSession } from "next-auth/react"
 
-export function navlist(){
+export function Navlist(){
 
     const { collapse } = StateContext()
+    const { data: session, status } = useSession()
+
+    console.log(session && session.user)
+    console.log(status)
     
     return (
         <ul className={ collapse ? style.collapseNavList : style.navList}>
@@ -19,7 +24,7 @@ export function navlist(){
             <LinkButton link='/' name={ <BsFillRocketTakeoffFill/>} text='Explore' />
             <LinkButton link='/' name={ <BiSearchAlt/>} text='Search' />
             <LinkButton link='/' name={ <AiFillPhone/>} text='Contact' />
-            <LinkButton link='/dashboard' name={ <CgProfile/>} text='Username' />
+            <LinkButton link='/dashboard' name={ <CgProfile/>} text={session ? session.user.email[1] : 'Login' } />
         </ul>
     )
 }
@@ -33,7 +38,7 @@ export default function Header(){
             <nav className={style.nav}>
                 
                 <h1 className={style.logo}><Link href={'/'}>BOBO</Link></h1>
-                <div className={style.navListDiv}>{navlist()}</div>
+                <div className={style.navListDiv}>{Navlist()}</div>
                
                 <div className={style.collapseButton}>
                     <Button  

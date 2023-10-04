@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import Header from "./Header";
 import { Inter } from 'next/font/google'
 import Head from "next/head";
-import { navlist } from "./Header";
+import { Navlist } from "./Header";
 import StateContext from "@/usecontext/stateContext";
 import style from 'styles/layout.module.css'
 
@@ -25,7 +25,7 @@ export default function Layout({children}){
                 collapse && collapse ? 
                 <div className={style.collapseDiv} onClick={() => setTimeout(() => {
                     setCollapse(false)
-                }, 300)}> {navlist()} </div> : 
+                }, 300)}> {Navlist()} </div> : 
                 ''
             }
             {collapse ? " " : <section>{children}</section>}

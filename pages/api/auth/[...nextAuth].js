@@ -13,7 +13,6 @@ export default NextAuth({
 
 providers: [
   CredentialsProvider({
-    // name: "Credentials",
 
     async authorize(credentials) {
         
@@ -33,7 +32,7 @@ providers: [
             throw new Error('Could not log you in')
         }
         client.close()
-        return { email: user.email }
+        return { email: [user.email, user.username] }
     }
   })
 ]
