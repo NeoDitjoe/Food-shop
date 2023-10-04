@@ -18,7 +18,7 @@ export default async function handler(req, res) {
             menu: { price: price, item: item}
             }
         });
-
+        
         console.log(result)
 
         }catch(error){

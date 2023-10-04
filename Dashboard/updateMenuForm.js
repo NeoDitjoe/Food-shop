@@ -2,7 +2,7 @@ import { Button } from '@/components/button/button';
 import { useEffect, useRef, useState } from 'react';
 import style from 'styles/updateform.module.css'
 
-async function createUser(item) {
+async function addItem(item) {
   const response = await fetch('/api/addItem', {
     method: 'POST',
     body: JSON.stringify(item),
@@ -36,7 +36,7 @@ export default function UpdateMenuForm() {
       
   })
 
-  async function workman(event){
+  async function updateHandler(event){
     event.preventDefault()
 
     const productInput = selectProduct.current.value
@@ -44,7 +44,7 @@ export default function UpdateMenuForm() {
     const priceInput = priceRef.current.value
 
     try {
-      const result = await createUser({product: productInput.toLowerCase(), item: itemInput, price: priceInput});
+      const result = await addItem({product: productInput, item: itemInput, price: priceInput});
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -53,7 +53,7 @@ export default function UpdateMenuForm() {
   }
 
   return (
-      <form onSubmit={workman}>
+      <form onSubmit={updateHandler}>
 
         <div className={style.inputDiv}>
           <label>Modify</label>
