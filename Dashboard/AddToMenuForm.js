@@ -60,9 +60,9 @@ export default function AddToMenuForm(){
                 <input type="text" required ref={itemPrice} />
 
                 <div className={style.imageDiv}>
-                    <label>Image Link: </label>
+                    <label>Paste Image Link: </label>
                     <input type="text" ref={imageRef} />
-
+                    <br/>
                     <label>Image File: </label> 
                     <input type="file"  /> 
                 </div>
