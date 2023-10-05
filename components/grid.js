@@ -66,7 +66,6 @@ export default function FullWidthGrid({menu}) {
                 item={overlay.item}
                 product={overlay.product}
                 click = {() => setOverlayCollapse(false)}
-                addtoCart = {() => console.log('Add to Cart')}
                 orderNow = {() => console.log('Order Now')}
             />
         }

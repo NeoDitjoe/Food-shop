@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 
         }catch(error){
             client.close();
-            res.status(404).json({message: 'Attempt Failed'})
+            res.status(417).json({message: 'Attempt Failed'})
             return;
         }
 

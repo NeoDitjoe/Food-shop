@@ -8,14 +8,6 @@ export async function connectDatabase(folder) {
 
 }
 
-export async function insertDocument(client, collection,  document){
-
-    const db = client.db()
-
-    const result  = await db.collection(collection).insertOne(document)
-    return result
-}
-
 export async function getMenuList(collection) {
     let client = await connectDatabase('menulist');
     const db = client.db();
