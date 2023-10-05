@@ -39,24 +39,27 @@ function AuthForm() {
 
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
-    const enteredUsername = usernameInputRef.current.value;
+    let enteredUsername ;
+    if(!isLogin){
+      enteredUsername = usernameInputRef.current.value;
+    }
 
 
     if (isLogin) {
       const result = await signIn('credentials', {
         redirect: false,
-        email: enteredEmail,
+        email: enteredEmail.toLowerCase(),
         password: enteredPassword,
       });
 
-      if (!result) {
+      if (!result.error) {
         // set some auth state
         router.replace('/profile');
       }
 
     } else {
       try {
-        const result = await createUser(enteredUsername, enteredEmail, enteredPassword);
+        const result = await createUser(enteredUsername, enteredEmail.toLowerCase(), enteredPassword);
         console.log(result);
       } catch (error) {
         console.log(error);
@@ -69,17 +72,20 @@ function AuthForm() {
       <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
       <form onSubmit={submitHandler}>
 
-        <div className={classes.control}>
+        {!isLogin && <div className={classes.control}>
+          <br/>
           <label htmlFor='name'>Username</label>
           <input type='name' id='name' required ref={usernameInputRef} />
-        </div>
+        </div>}
 
         <div className={classes.control}>
+          <br/>
           <label htmlFor='email'>Your Email</label>
           <input type='email' id='email' required ref={emailInputRef} />
         </div>
 
         <div className={classes.control}>
+          <br/>
           <label htmlFor='password'>Your Password</label>
           <input
             type='password'

@@ -5,6 +5,7 @@
 }
 
 .form input {
+    font-size: 150%;
     height: 9vh;
     width: 250px; 
     border-radius: 4px; 
