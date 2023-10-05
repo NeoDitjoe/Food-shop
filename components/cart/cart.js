@@ -1,28 +1,30 @@
 import { ShowCart } from "@/pages/cart"
-import { Fragment, useEffect, useState } from "react"
+import style from 'styles/cart.module.css'
+import imgV from 'public/vercel.svg'
+import imgN from 'public/next.svg'
+import Image from "next/image"
 
 
 export default function Cart(){
     
     const results = ShowCart()
     let totalPrice = []
-    // useEffect(() => console.log())
-
 
     const dummyData = [
-        {price :'20.99', item: 'Chips' },
-        {price :'25.00', item: 'Coke 2L' },
-        {price :'21.00', item: 'Bread' },
+        {price :'20.99', item: 'Chips', img: imgV},
+        {price :'25.00', item: 'Coke 2L', img: imgN},
+        {price :'21.00', item: 'Bread', img: imgV },
 
     ]
-
+    
     return (
-        <Fragment>
+        <div className={style.cart}>
             {
                 dummyData && dummyData.map((item) => {
                     totalPrice.push(+item.price)
                     return (
                         <div key={item.item + item.price}>
+                            <Image alt='image' src={item.img} heigh={100} width={100}/>
                             <p>{item.item}</p>
                             <p>{item.price}</p>
                         </div>
@@ -30,6 +32,6 @@ export default function Cart(){
                 })
             }
             <h3>{totalPrice.reduce((a, b) => a + b)}</h3>
-        </Fragment>
+        </div>
     )
 }
