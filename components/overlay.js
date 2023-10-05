@@ -3,28 +3,29 @@ import style from 'styles/overlay.module.css'
 import { useSession } from "next-auth/react";
 
 
-export default function Overlay({click, orderNow, addtoCart, product, item, price}){
+export default function Overlay({click, orderNow, addtoCart, product, item, price, img}){
 
     const { data: session, status } = useSession()
 
     async function toCart(){
 
-        console.log('topp')
+        console.log('pending')
 
         await fetch('/api/cart/cart', {
             method: 'POST',
-            body: JSON.stringify({ item: item, price: price, user: session.user.email[0] }),
+            body: JSON.stringify({ item: item, price: price, img: img, user: session.user.email[0] }),
             headers: {
                 'Content-Type': 'application/json',
             }
         })
 
-        console.log('bottom')
+        console.log('success')
     }
 
     return(
         <div className={style.overlay}>
             <div>
+                <p>{img}</p>
                 <h1>{product}</h1>
                 <p>{item}</p>
                 <p>R {price}</p>

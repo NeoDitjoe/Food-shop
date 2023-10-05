@@ -12,12 +12,13 @@ export default async function Handler(req, res){
 
     if( req.method === 'POST'){
 
-        const { item, price, user } = req.body
+        const { item, price, user, img } = req.body
         
         const db = client.db()
 
         try{
-            await db.collection('placedOrders').insertOne({
+            await db.collection('pendingOrder').insertOne({
+                img: img,
                 user: user,
                 item: item,
                 price: price
@@ -38,7 +39,7 @@ export default async function Handler(req, res){
         let userOrders;
 
         try{
-            userOrders = await db.collection('placedOrders').find({ user: 'ditjoeneo@gmail.com' }).toArray()
+            userOrders = await db.collection('pendingOrders').find({ user: 'ditjoeneo@gmail.com' }).toArray()
             res.status(200).json({ orders: userOrders})
         }catch(error){
             res.status(417).json({ message: error })

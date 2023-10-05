@@ -44,7 +44,7 @@ export default function FullWidthGrid({menu}) {
                                         return (
                                             <div key={item2.item} className={style.menuList} onClick={() => {
                                                 setOverlayCollapse(true)
-                                                setOverlay({product : item.product, item:item2.item, price:item2.price})
+                                                setOverlay({product : item.product, item:item2.item, price:item2.price, img: item.image})
                                             }}>
                                                 <h4>{item2.item}</h4>
                                                 <p className={style.price}>{item2.price} R</p>
@@ -62,6 +62,7 @@ export default function FullWidthGrid({menu}) {
 
         { overlayCollapse && overlay &&
             <Overlay 
+                img = {overlay.img}
                 price={overlay.price}
                 item={overlay.item}
                 product={overlay.product}

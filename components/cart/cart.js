@@ -1,6 +1,6 @@
 import { ShowCart } from "@/pages/cart"
 import style from 'styles/cart.module.css'
-import imgV from 'public/vercel.svg'
+import imgV from 'public/burger.jpeg'
 import imgN from 'public/next.svg'
 import Image from "next/image"
 
@@ -18,20 +18,22 @@ export default function Cart(){
     ]
     
     return (
-        <div className={style.cart}>
+        <div >
             {
-                dummyData && dummyData.map((item) => {
+                results && results.map((item) => {
                     totalPrice.push(+item.price)
                     return (
-                        <div key={item.item + item.price}>
-                            <Image alt='image' src={item.img} heigh={100} width={100}/>
-                            <p>{item.item}</p>
-                            <p>{item.price}</p>
+                        <div key={item.item + item.price} className={style.cart}>
+                            <Image alt='image' src={item.img} height={200} width={200} className={style.img}/>
+                            <div>
+                                <h2>{item.item}</h2>
+                                <h4>{item.price}</h4>
+                            </div>
                         </div>
                     )
                 })
             }
-            <h3>{totalPrice.reduce((a, b) => a + b)}</h3>
+            <h3 className={style.totalPrice}>Total Cost: R {results && totalPrice.reduce((a, b) => a + b)}</h3>
         </div>
     )
 }
