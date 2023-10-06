@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
   if( req.method === 'GET'){
     try{
-      const menuList = await getMenuList('menu')
+      const menuList = await getMenuList('menulist', 'menu')
 
       // client.close()
       res.status(200).json({ menu: menuList})

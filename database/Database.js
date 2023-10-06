@@ -8,8 +8,8 @@ export async function connectDatabase(folder) {
 
 }
 
-export async function getMenuList(collection) {
-    let client = await connectDatabase('menulist');
+export async function getMenuList(folder, collection) {
+    let client = await connectDatabase(folder);
     const db = client.db();
   
     const documents = await db

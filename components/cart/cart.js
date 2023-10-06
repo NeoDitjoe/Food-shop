@@ -1,20 +1,39 @@
 import style from 'styles/cart.module.css'
-import imgV from 'public/burger.jpeg'
-import imgN from 'public/next.svg'
 import Image from "next/image"
 
 export default function Cart({results}){
     
-    // const results = ShowCart()
     let totalPrice = []
     let items = []
 
-    // const dummyData = [
-    //     {price :'20.99', item: 'Chips', img: imgV},
-    //     {price :'25.00', item: 'Coke 2L', img: imgN},
-    //     {price :'21.00', item: 'Bread', img: imgV },
-    
-    // ]
+    async function placeOrder(item, price) {
+        const response = await fetch('/api/cart/placeOrder', {
+          method: 'POST',
+          body: JSON.stringify({ item, price}),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      
+        const data = await response.json();
+      
+        if (!response.ok) {
+          throw new Error(data.message || 'Something went wrong!');
+        }
+      
+        return data;
+      }
+
+    async function orderHandler(e){
+        e.preventDefault()
+
+    try {
+        const result = await placeOrder( items ,totalPrice.reduce((a, b) => a + b, 0) );
+        console.log(result);
+        } catch (error) {
+        console.log(error);
+        }
+    }
 
     return (
         <>
@@ -23,19 +42,19 @@ export default function Cart({results}){
                 {
                     results && results.map((item) => {
                         totalPrice.push(+item.price)
-                        items.push(item.item)
+                        items.push(item.item + ' '+ item.product)
                         return (
                             <div key={item.item + item.price} className={style.cart}>
                                 <Image alt='image' src={item.img} height={200} width={200} className={style.img}/>
                                 <div>
-                                    <h3>{item.item}</h3>
+                                    <h3>{item.item} {item.product}</h3>
                                     <h4>R {item.price}</h4>
                                 </div>
                             </div>
                         )
                     })
                 }
-                <div className={style.totalPrice} onClick={() => console.log( items && items, results && totalPrice.reduce((a, b) => a + b, 0))} >
+                <div className={style.totalPrice} onClick={orderHandler} >
                     <h4>Total Cost: R {results && totalPrice.reduce((a, b) => a + b, 0)}</h4>
                     <br />
                     <h4>Place Order</h4>

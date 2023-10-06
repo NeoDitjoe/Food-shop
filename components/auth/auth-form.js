@@ -32,7 +32,7 @@ function AuthForm() {
 
   function switchAuthModeHandler() {
     setIsLogin((prevState) => !prevState);
-}
+  }
  
   async function submitHandler(event) {
     event.preventDefault();

@@ -13,12 +13,13 @@ export default async function Handler(req, res){
 
     if( req.method === 'POST'){
 
-        const { item, price, user, img } = req.body
+        const { product,  item, price, user, img } = req.body
         
         const db = client.db()
 
         try{
             await db.collection('pendingOrders').insertOne({
+                product: product,
                 img: img,
                 user: user,
                 item: item,
