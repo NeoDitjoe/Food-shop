@@ -1,10 +1,27 @@
 import Cart from "@/components/cart/cart"
-import { useEffect, useState } from "react"
+import { use, useEffect, useState } from "react"
+import imgV from 'public/burger.jpeg'
+import imgN from 'public/next.svg'
+import { getCartList } from "@/database/Database"
+import { useSession } from "next-auth/react"
 
-export default function cart(){
+const dummyData = [
+    {price :'20.99', item: 'Chips', img: imgV},
+    {price :'25.00', item: 'Coke 2L', img: imgN},
+    {price :'21.00', item: 'Bread', img: imgV },
+
+]
+
+export default function Ccart({cart}){
+
+    useEffect(() =>{
+        console.log(cart)
+    })
     
     return(
-        <Cart />
+        <Cart 
+            results = {cart}
+        />
     )
 }
 
@@ -18,4 +35,16 @@ export function ShowCart(){
     })
 
     return results
+}
+
+export async function getServerSideProps(){
+    
+    const cart = await getCartList('cart', 'pendingOrders')
+
+    return {
+        props:{
+            cart
+        }
+    }
+
 }

@@ -1,5 +1,4 @@
 import { MongoClient } from 'mongodb'
-import { useEffect, useState } from 'react';
 
 export async function connectDatabase(folder) {
 
@@ -24,4 +23,20 @@ export async function getMenuList(collection) {
     });
   
     return menuList;
-  }
+}
+export async function getCartList(folder, collection, user) {
+    let client = await connectDatabase(folder);
+    const db = client.db();
+  
+    const documents = await db
+      .collection(collection)
+      .find({ user: 'ditjoeneo33@gmail.com' })
+      .toArray();
+      
+    const menuList = documents.map((doc) => {
+      const { _id, ...menuData } = doc;
+      return menuData;
+    });
+  
+    return menuList;
+}

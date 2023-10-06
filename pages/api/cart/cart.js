@@ -2,6 +2,7 @@ import { connectDatabase } from "@/database/Database";
 
 export default async function Handler(req, res){
 
+    // const { user } = StateContext()
     let client;
 
     try{
@@ -39,7 +40,7 @@ export default async function Handler(req, res){
         let userOrders;
 
         try{
-            userOrders = await db.collection('pendingOrders').find({ user: 'ditjoeneo@gmail.com' }).toArray()
+            userOrders = await db.collection('pendingOrders').find({ user: 'ditjoeneo33@gmail.com' }).toArray()
             res.status(200).json({ orders: userOrders})
         }catch(error){
             res.status(417).json({ message: error })

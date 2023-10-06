@@ -14,10 +14,11 @@
     background-color: #05e35e;
     padding: 2%;
     border-radius: 5px;
+    margin: 1%;
 }
 
 .img{
-    width: 150px;
+    width: 110px;
     height: auto;
 }
 
