@@ -25,7 +25,7 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
     return(
         <div className={style.overlay}>
             <div>
-                <p>{img}</p>
+                <dialog>{img}</dialog>
                 <h1>{product}</h1>
                 <p>{item}</p>
                 <p>R {price}</p>

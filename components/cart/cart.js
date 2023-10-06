@@ -1,4 +1,3 @@
-import { ShowCart } from "@/pages/cart"
 import style from 'styles/cart.module.css'
 import imgV from 'public/burger.jpeg'
 import imgN from 'public/next.svg'
