@@ -24,6 +24,7 @@ export async function getMenuList(folder, collection) {
   
     return menuList;
 }
+
 export async function getCartList(folder, collection, user) {
     let client = await connectDatabase(folder);
     const db = client.db();

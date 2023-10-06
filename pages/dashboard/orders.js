@@ -1,19 +1,38 @@
 import { getMenuList } from "@/database/Database"
+import { useEffect } from "react"
 
-export default function Orders({menuList}){
+export default function Orders({placedOrders}){
+
+    useEffect(() => {
+        console.log(placedOrders)
+    })
+
+
 
     return (
-        <h1>Orders</h1>
+        <div>
+            {
+                placedOrders.map((order) => {
+                    return (
+                        <div key={order.totalPrice}>
+
+                            <p>{order.item}</p>
+                            <p>{order.totalPrice}</p>
+                        </div>
+                    )
+                })
+            }
+        </div>
     )
 }
 
 export async function getServerSideProps(){
 
-    const menuList = await getMenuList('cart', 'placedOrders')
-    
+    const placedOrders = await getMenuList('cart', 'placedOrders')
+
     return{
         props: {
-            menuList
+            placedOrders
         }
     }
 }
