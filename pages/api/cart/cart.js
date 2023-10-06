@@ -17,7 +17,7 @@ export default async function Handler(req, res){
         const db = client.db()
 
         try{
-            await db.collection('pendingOrder').insertOne({
+            await db.collection('pendingOrders').insertOne({
                 img: img,
                 user: user,
                 item: item,
