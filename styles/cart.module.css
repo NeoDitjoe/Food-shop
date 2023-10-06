@@ -3,7 +3,7 @@
     flex-direction: row;
     align-items: center;
     gap: 5%;
-    padding: 2%;
+    padding: 1%;
     border: solid #05e35e 1px;
     margin: 2.5%;
 }
@@ -17,7 +17,7 @@
 }
 
 .img{
-    width: 13%;
+    width: 150px;
     height: auto;
 }
 
@@ -26,5 +26,4 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 }

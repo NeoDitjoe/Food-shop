@@ -28,16 +28,17 @@ export default function Cart(){
                             <div key={item.item + item.price} className={style.cart}>
                                 <Image alt='image' src={item.img} height={200} width={200} className={style.img}/>
                                 <div>
-                                    <h2>{item.item}</h2>
-                                    <h4>{item.price}</h4>
+                                    <h3>{item.item}</h3>
+                                    <h4>R {item.price}</h4>
                                 </div>
                             </div>
                         )
                     })
                 }
                 <div className={style.totalPrice}>
-                    <h3>Total Cost: R {results && totalPrice.reduce((a, b) => a + b, 0)}</h3>
-                    <h2>Place Order</h2>
+                    <h4>Total Cost: R {results && totalPrice.reduce((a, b) => a + b, 0)}</h4>
+                    <br />
+                    <h4>Place Order</h4>
                 </div>
                 
             </div> : <h2 className={style.emptyCart}>YOUR CART IS EMPTY</h2>
