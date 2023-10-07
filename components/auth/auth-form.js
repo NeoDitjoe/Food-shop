@@ -51,7 +51,7 @@ function AuthForm() {
 
     if (isLogin) {
       const result = await signIn('credentials', {
-        redirect: false,
+        redirect: true,
         email: enteredEmail.toLowerCase(),
         password: enteredPassword,
       });
