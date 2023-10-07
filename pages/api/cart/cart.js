@@ -39,9 +39,12 @@ export default async function Handler(req, res){
     if( req.method === 'GET'){
         const db = client.db()
         let userOrders;
+        const user = sessionStorage.getItem("Token")
 
         try{
-            userOrders = await db.collection('pendingOrders').find({ user: 'ditjoeneo33@gmail.com' }).toArray()
+            userOrders = await db.collection('pendingOrders')
+                .find({ user: user})
+                .toArray()
             res.status(200).json({ orders: userOrders})
         }catch(error){
             res.status(417).json({ message: error })
