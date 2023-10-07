@@ -8,16 +8,6 @@ export async function connectDatabase(folder) {
 
 }
 
-export async function connectToDatabase() {
-
-  const dbConnectionString = process.env.DB_CONNECTION_STRING;
-  
-  const client = await MongoClient.connect(dbConnectionString)
-
-  return client
-
-}
-
 export async function getMenuList(folder, collection) {
     let client = await connectDatabase(folder);
     const db = client.db();
