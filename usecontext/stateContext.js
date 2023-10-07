@@ -11,9 +11,19 @@ export function ContextProvider({children}){
 
     const [ collapse , setCollapse ] = useState(false)
     const [ options , setOptions ] = useState([])
+    const [ text, setText ] = useState(null)
+    const [ background, setBackground ] = useState(null)
+
+    const notification = {
+        setText,
+        text,
+        setBackground,
+        background
+
+    }
 
     return (
-        <Context.Provider value={{collapse, setCollapse, options, setOptions}}>
+        <Context.Provider value={{ notification, collapse, setCollapse, options, setOptions}}>
             {children}
         </Context.Provider>
     )

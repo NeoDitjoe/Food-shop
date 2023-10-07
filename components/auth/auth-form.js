@@ -1,10 +1,11 @@
 import { useState, useRef } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
-
 import classes from 'styles/auth-form.module.css';
+import StateContext from '@/usecontext/stateContext';
 
 async function createUser(username, email, password) {
+
   const response = await fetch('/api/auth/signUp', {
     method: 'POST',
     body: JSON.stringify({ username, email, password }),
@@ -23,6 +24,9 @@ async function createUser(username, email, password) {
 }
 
 function AuthForm() {
+
+  const { notification } = StateContext()
+
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const usernameInputRef = useRef();
@@ -64,10 +68,16 @@ function AuthForm() {
 
     } else {
       try {
+        notification.setText('Loading...')
+        notification.setBackground('loadingNotification')
         const result = await createUser(enteredUsername.toLowerCase(), enteredEmail.toLowerCase(), enteredPassword);
-        console.log(result);
+        if(result){
+          notification.setText(`Welcome ${enteredUsername}`)
+          notification.setBackground('welcomeNotification')
+        }
       } catch (error) {
-        console.log(error);
+        notification.setText(error.message);
+        notification.setBackground('errorNotification');
       }
     }
   }

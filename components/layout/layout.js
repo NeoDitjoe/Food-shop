@@ -5,13 +5,14 @@ import Head from "next/head";
 import { Navlist } from "./Header";
 import StateContext from "@/usecontext/stateContext";
 import style from 'styles/layout.module.css'
+import Notification from "../Notification/Notification";
 
 const inter = Inter({ subsets: ['latin'] })
 
 
 export default function Layout({children}){
 
-    const { collapse,setCollapse } = StateContext()
+    const { collapse, setCollapse, notification } = StateContext()
 
     return(
         <div className={inter.className}>
@@ -29,6 +30,8 @@ export default function Layout({children}){
                 ''
             }
             {collapse ? " " : <section>{children}</section>}
+
+            {notification.text && <Notification notificationMessage={notification.text} />}
         </div>
     )
 }

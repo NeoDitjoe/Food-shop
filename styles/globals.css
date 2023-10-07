@@ -15,3 +15,17 @@ body{
     width: 100%;
     height: 85vh;
 }
+
+
+/* notification styling */
+.loadingNotification{
+    background-color: gray;
+}
+
+.welcomeNotification{
+    background-color: green;
+}
+
+.errorNotification {
+    background-color: rgb(245, 42, 42);
+}
