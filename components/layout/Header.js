@@ -16,11 +16,10 @@ export function Navlist(){
     const { data: session, status } = useSession()
 
     console.log(session && session.user)
-    console.log(status)
     
     return (
         <ul className={ collapse ? style.collapseNavList : style.navList}>
-            <LinkButton link='/cart' name={ <FaCartArrowDown/>} text='cart'/>
+            <LinkButton link={`/cart/${session && session.user.email[0]}`} name={ <FaCartArrowDown/>} text='cart'/>
             <LinkButton link='/' name={ <BsFillRocketTakeoffFill/>} text='Explore' />
             <LinkButton link='/' name={ <BiSearchAlt/>} text='Search' />
             <LinkButton link='/' name={ <AiFillPhone/>} text='Contact' />

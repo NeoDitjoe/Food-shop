@@ -1,12 +1,8 @@
 import Cart from "@/components/cart/cart"
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { getCartList } from "@/database/Database"
 
-export default function Ccart({cart}){
-
-    useEffect(() =>{
-        console.log(cart)
-    })
+export default function Ccart({cart, what}){
     
     return(
         <Cart 
@@ -27,13 +23,17 @@ export function ShowCart(){
     return results
 }
 
-export async function getServerSideProps(){
+export async function getServerSideProps({params}){
+
+    const { slug } = params
+    const what = slug[1]
     
-    const cart = await getCartList('cart', 'pendingOrders')
+    const cart = await getCartList('cart', 'pendingOrders', what)
 
     return {
         props:{
-            cart
+            cart,
+            what
         }
     }
 

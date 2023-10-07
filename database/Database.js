@@ -31,7 +31,7 @@ export async function getCartList(folder, collection, user) {
   
     const documents = await db
       .collection(collection)
-      .find({ user: 'ditjoeneo33@gmail.com' })
+      .find({ user: user })
       .toArray();
       
     const menuList = documents.map((doc) => {
