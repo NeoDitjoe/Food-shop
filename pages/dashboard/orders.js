@@ -1,3 +1,4 @@
+import Error from "@/components/Error/Error"
 import { getMenuList } from "@/database/Database"
 import { useEffect } from "react"
 import style from 'styles/dashboard.module.css'
@@ -12,11 +13,10 @@ export default function Orders({placedOrders}){
 
     if( placedOrders.length === 0 ) {
         return (
-            <p className={style.noOrder}>NO ORDERS PLACED</p>
+            <Error errorMessage={'NO ORDERS PLACED, click to'} link='/' linkText={'Place Order'}/>
+            
         )
     }
-
-
 
     return (
         <div>

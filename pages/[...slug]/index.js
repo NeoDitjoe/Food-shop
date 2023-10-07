@@ -4,6 +4,7 @@ import { getCartList } from "@/database/Database"
 import { useSession } from "next-auth/react";
 import Error from "@/components/Error/Error";
 import Head from "next/head";
+import LinkButton from "@/components/button/button";
 
 export default function Ccart({cart, path, pathToo}){
 
@@ -26,7 +27,7 @@ export default function Ccart({cart, path, pathToo}){
             {
                 user ? <Cart 
                     results = {cart}
-                /> : <Error errorMessage='user not found' />
+                /> : <Error errorMessage={'User No Found, click to'} link='/auth' linkText={'Login'}/>
             }
         </Fragment>
 
