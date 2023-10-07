@@ -12,8 +12,9 @@
     position: absolute;
     right: 60px;
     background-color: #05e35e;
-    padding: 2%;
+    padding: 1%;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .img{
@@ -26,4 +27,5 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
 }
