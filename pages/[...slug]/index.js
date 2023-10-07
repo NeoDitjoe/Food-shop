@@ -13,8 +13,8 @@ export default function Ccart({cart, path}){
 
     useEffect(() => {
 
-        console.log([session && session.user.email[0], path])
-        setUserEmail(session && session.user.email[0])
+        console.log([session && session.user.email[1], path])
+        setUserEmail(session && session.user.email[1])
     }, [session, path])
     
     if(!userEmail === path){
@@ -36,19 +36,8 @@ export default function Ccart({cart, path}){
     )
 }
 
-export function ShowCart(){
-    const [ results, setResults ] = useState()
 
-    useEffect(() => {
-      fetch('/api/cart/cart')
-        .then((res) => res.json())
-        .then((data) => setResults(data.orders))
-    })
-
-    return results
-}
-
-export async function getServerSideProps({params, req}){
+export async function getServerSideProps({params}){
 
     const { slug } = params
     const path = slug[1]

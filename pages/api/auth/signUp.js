@@ -14,10 +14,17 @@ export default async function handler( req, res){
         
         const db = client.db()
 
-        const existingUser = await db.collection('users').findOne({ email: email })
+        const existingUserEmail = await db.collection('users').findOne({ email: email })
+        const existingUsername = await db.collection('users').findOne({ username: username })
 
-        if(existingUser){
+        if(existingUserEmail){
             res.status(400).json({ message : 'email is already in use'})
+            client.close()
+            return;
+        }
+
+        if(existingUsername){
+            res.status(400).json({ message : 'username is already in use'})
             client.close()
             return;
         }

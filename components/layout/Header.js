@@ -19,7 +19,7 @@ export function Navlist(){
     
     return (
         <ul className={ collapse ? style.collapseNavList : style.navList}>
-            <LinkButton link={`/cart/${session && session.user.email[0]}`} name={ <FaCartArrowDown/>} text='cart'/>
+            <LinkButton link={`/cart/${session && session.user.email[1]}`} name={ <FaCartArrowDown/>} text='cart'/>
             <LinkButton link='/' name={ <BsFillRocketTakeoffFill/>} text='Explore' />
             <LinkButton link='/' name={ <BiSearchAlt/>} text='Search' />
             <LinkButton link='/' name={ <AiFillPhone/>} text='Contact' />

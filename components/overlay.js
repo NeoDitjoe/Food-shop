@@ -13,7 +13,7 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
 
         await fetch('/api/cart/cart', {
             method: 'POST',
-            body: JSON.stringify({ product: product, item: item, price: price, img: img, user: session.user.email[0] }),
+            body: JSON.stringify({ product: product, item: item, price: price, img: img, user: session.user.email[1] }),
             headers: {
                 'Content-Type': 'application/json',
             }
