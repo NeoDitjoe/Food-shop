@@ -1,7 +1,7 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { verifyPassword } from "@/database/auth";
 
-import { connectDatabase } from "@/database/Database";
+import { connectToDatabase } from "@/database/Database";
 import NextAuth from "next-auth";
 
 export default NextAuth({
@@ -16,7 +16,7 @@ providers: [
 
     async authorize(credentials) {
         
-        const client = await connectDatabase('authentication')
+        const client = await connectToDatabase()
         const userscollection = client.db().collection('users')
         const user = await userscollection.findOne({ email: credentials.email})
         
