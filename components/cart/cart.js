@@ -1,11 +1,13 @@
 import style from 'styles/cart.module.css'
 import Image from "next/image"
+import { useRouter } from 'next/router'
 
 export default function Cart({results}){
     
     let totalPrice = []
     let items = []
-    
+    const router = useRouter()
+    const customer = router.query.slug[1]
 
     async function placeOrder(item, price, customer) {
         const response = await fetch('/api/cart/placeOrder', {
@@ -29,7 +31,7 @@ export default function Cart({results}){
         e.preventDefault()
 
     try {
-        const result = await placeOrder( items ,totalPrice.reduce((a, b) => a + b, 0)  );
+        const result = await placeOrder( items ,totalPrice.reduce((a, b) => a + b, 0), customer );
         console.log(result);
         } catch (error) {
         console.log(error);

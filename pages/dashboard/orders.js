@@ -24,7 +24,9 @@ export default function Orders({placedOrders}){
                 placedOrders.map((order) => {
                     return (
                         <div key={order.totalPrice}>
-
+                            <br/>
+                            <hr/>
+                            <h4>{order.customer}</h4>
                             <p>{order.item}</p>
                             <p>{order.totalPrice}</p>
                         </div>

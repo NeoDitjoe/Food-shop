@@ -2,7 +2,7 @@ import { connectDatabase } from "@/database/Database";
 
 export default async function handler( req, res){
     if( req.method === 'POST'){
-        const { item, price  } = req.body
+        const { item, price, customer  } = req.body
 
         if( !item || !price  ){
             res.status(400).json({ message: 'Failed'})
@@ -15,7 +15,8 @@ export default async function handler( req, res){
 
         const result = await db.collection('placedOrders').insertOne({
             item: item,
-            totalPrice: price
+            totalPrice: price,
+            customer: customer
         })
 
         res.status(201).json({ message: 'success'})
