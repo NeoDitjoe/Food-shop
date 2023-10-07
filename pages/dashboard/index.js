@@ -13,6 +13,7 @@ export default function Dashboard(){
             <button className={style.button}>
                 <LinkButton link={'dashboard/orders'} text='View Orders' />
             </button>
+            
             <div className={style.main}>
                 
                 <FormsGrid 

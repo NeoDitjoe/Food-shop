@@ -5,11 +5,12 @@ export default function Cart({results}){
     
     let totalPrice = []
     let items = []
+    
 
-    async function placeOrder(item, price) {
+    async function placeOrder(item, price, customer) {
         const response = await fetch('/api/cart/placeOrder', {
           method: 'POST',
-          body: JSON.stringify({ item, price}),
+          body: JSON.stringify({ item, price, customer}),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -22,13 +23,13 @@ export default function Cart({results}){
         }
       
         return data;
-      }
+    }
 
     async function orderHandler(e){
         e.preventDefault()
 
     try {
-        const result = await placeOrder( items ,totalPrice.reduce((a, b) => a + b, 0) );
+        const result = await placeOrder( items ,totalPrice.reduce((a, b) => a + b, 0)  );
         console.log(result);
         } catch (error) {
         console.log(error);

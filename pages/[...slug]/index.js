@@ -1,36 +1,34 @@
 import Cart from "@/components/cart/cart"
-import { useEffect, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { getCartList } from "@/database/Database"
 import { useSession } from "next-auth/react";
+import Error from "@/components/Error/Error";
+import Head from "next/head";
 
-export default function Ccart({cart, path}){
+export default function Ccart({cart, path, pathToo}){
 
     const { data: session} = useSession()
     const [ userEmail, setUserEmail ] = useState(null)
 
-    let useremail
-
     useEffect(() => {
-
-        console.log([session && session.user.email[1], path])
         setUserEmail(session && session.user.email[1])
-    }, [session, path])
-    
-    if(!userEmail === path){
-        return <p>Error</p>
-    }
+    }, [session])
 
     const user = userEmail === path
     
     return(
 
-        <>
+        <Fragment>
+
+            <Head>
+                <title>{path +"'s "+ pathToo.charAt(0).toUpperCase() + pathToo.slice(1)}</title>
+            </Head>
             {
                 user ? <Cart 
                     results = {cart}
-                /> : <p>Error: User No Found</p>
+                /> : <Error errorMessage='user not found' />
             }
-        </>
+        </Fragment>
 
     )
 }
@@ -40,13 +38,15 @@ export async function getServerSideProps({params}){
 
     const { slug } = params
     const path = slug[1]
+    const pathToo = slug[0]
     
     const cart = await getCartList('cart', 'pendingOrders', path)
 
     return {
         props:{
             cart,
-            path
+            path,
+            pathToo
         }
     }
 

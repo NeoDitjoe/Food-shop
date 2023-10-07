@@ -16,8 +16,8 @@ export default function Home({menuList}) {
   return (
     <Fragment>
       <Head>
-        <title>BOBO</title>
-        <meta name='description' content=''/>
+        <title>BOBO. Delious Food</title>
+        <meta name="description" content="Browse our menu at BOBO. Discover a wide range of kota, sphathlo, bunny, chips dishes." />
       </Head>
 
       <main>
