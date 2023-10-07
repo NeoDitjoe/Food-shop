@@ -1,11 +1,20 @@
 import { getMenuList } from "@/database/Database"
 import { useEffect } from "react"
+import style from 'styles/dashboard.module.css'
 
 export default function Orders({placedOrders}){
 
     useEffect(() => {
         console.log(placedOrders)
     })
+
+    let NoOrders
+
+    if( placedOrders.length === 0 ) {
+        return (
+            <p className={style.noOrder}>NO ORDERS PLACED</p>
+        )
+    }
 
 
 

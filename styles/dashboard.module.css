@@ -5,3 +5,18 @@
     margin: 20px;
     
 }
+
+.button{
+    border: solid 1px #05e35e;
+    padding: 1.2%;
+    border-radius: 5px;
+    margin: 2%;
+
+}
+
+.noOrder {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

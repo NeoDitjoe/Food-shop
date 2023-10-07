@@ -42,7 +42,7 @@ export default function Cart({results}){
                 {
                     results && results.map((item) => {
                         totalPrice.push(+item.price)
-                        items.push(item.item + ' '+ item.product + ' |')
+                        items.push(item.item + ' - '+ item.product + ' | ')
                         return (
                             <div key={item.item + item.price} className={style.cart}>
                                 <Image alt='image' src={item.img} height={200} width={200} className={style.img}/>
