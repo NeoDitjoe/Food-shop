@@ -1,7 +1,6 @@
 import Cart from "@/components/cart/cart"
 import { useEffect, useState } from "react"
 import { getCartList } from "@/database/Database"
-import { parse } from 'cookie';
 import { useSession } from "next-auth/react";
 
 export default function Ccart({cart, path}){
