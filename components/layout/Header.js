@@ -14,8 +14,6 @@ export function Navlist(){
 
     const { collapse } = StateContext()
     const { data: session, status } = useSession()
-
-    console.log(session && session.user)
     
     return (
         <ul className={ collapse ? style.collapseNavList : style.navList}>

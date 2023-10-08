@@ -1,6 +1,8 @@
 import { Button } from '@/components/button/button';
 import { useEffect, useRef, useState } from 'react';
 import style from 'styles/updateform.module.css'
+import StateContext from '@/usecontext/stateContext';
+import { useRouter } from 'next/router';
 
 async function addItem(item) {
   const response = await fetch('/api/addItem', {
@@ -22,6 +24,9 @@ async function addItem(item) {
 
 export default function UpdateMenuForm() {
 
+  const { notification } = StateContext()
+  const router = useRouter()
+
   const selectProduct = useRef()
   const itemRef = useRef()
   const priceRef = useRef()
@@ -39,15 +44,21 @@ export default function UpdateMenuForm() {
   async function updateHandler(event){
     event.preventDefault()
 
+    notification.setText(`Updating ${selectProduct.current.value} menu`)
+    notification.setBackground('loadingNotification')
+
     const productInput = selectProduct.current.value
     const itemInput = itemRef.current.value
     const priceInput = priceRef.current.value
 
     try {
       const result = await addItem({product: productInput, item: itemInput, price: priceInput});
-      console.log(result);
+      notification.setText(`successfully added ${itemRef.current.value} item to ${selectProduct.current.value} menu`)
+      notification.setBackground('successNotification')
+      router.reload()
     } catch (error) {
-      console.log(error);
+      notification.setText(`failed to Update Menu`)
+      notification.setBackground('errorNotification')
     }
 
   }
