@@ -12,22 +12,28 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
     const { data: session, status } = useSession()
 
     async function toCart(){
-        //tracks process 
-        console.log('pending')
-        
-        /**
-         * Add data that is defined in the @components folder then in the / @grid file
-         */
-        await fetch('/api/cart/cart', {
-            method: 'POST',
-            body: JSON.stringify({ product: product, item: item, price: price, img: img, user: session.user.email[1] }),
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
+        if(!session){
+            alert('login')
+        }
 
-        //tracks process
-        console.log('success')
+        if(session){
+            //tracks process 
+            console.log('pending')
+
+            /**
+             * Add data that is defined in the @components folder then in the / @grid file
+             */
+            await fetch('/api/cart/cart', {
+                method: 'POST',
+                body: JSON.stringify({ product: product, item: item, price: price, img: img, user: session.user.email[1] }),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+    
+            //tracks process
+            console.log('success')
+        }
     }
 
     return(
@@ -50,7 +56,7 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
                     <div className={style.button} >
                         <Button 
                             name={'ADD TO CART'} 
-                            click = {() => session ? toCart : alert('please log in')}
+                            click = {toCart}
                         />
                     </div>
 

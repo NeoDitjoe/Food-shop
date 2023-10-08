@@ -35,7 +35,7 @@ export default function Ccart({cart, path, pathToo}){
                 user ? 
                     <Cart 
                         results = {cart}
-                        deleteOrder={() => console.log('kjkh')}
+                        deleteOrder={'what'}
                     /> : 
                     <Error errorMessage={'User No Found, click to'} link='/auth' linkText={'Login'}/>
             }
@@ -52,14 +52,22 @@ export async function getServerSideProps({params}){
     const pathToo = slug[0]
     
     const cart = await getCartList('cart', 'pendingOrders', path)
-    const deleteOrder =await deleteSentOrder('cart', 'pendingOrders', path)
+
+    /**
+     * This is done to handle default deleting of cart  
+     * so when the order button is clicked,
+     * A 3rd path is adde on the route
+     * when we have the 3rd path and it matches the message{@link  we have received your order} then the customers cart will be cleaned
+     */
+    if(slug[2] === 'we have received your order') {
+       await deleteSentOrder('cart', 'pendingOrders', path)
+    }
 
     return {
         props:{
             cart,
             path,
-            pathToo,
-            deleteOrder
+            pathToo
         }
     }
 

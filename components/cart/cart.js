@@ -63,12 +63,22 @@ export default function Cart({results, deleteOrder}){
      */    
     async function orderHandler(e){
         e.preventDefault()
+        console.log('pending')
 
     try {
         const result = await placeOrder( items ,totalPrice.reduce((a, b) => a + b, 0), customer );
-        console.log(result);
+            // console.log(result);
+            console.log('success')
+
+            /**
+             * {@link route } p
+             */
+            const route = router.push(`/cart/${customer}/we have received your order`)
+            if(route){
+                router.reload()
+            }
         } catch (error) {
-        console.log(error);
+            console.log(error);
         }
     }
 
@@ -93,7 +103,7 @@ export default function Cart({results, deleteOrder}){
                         )
                     })
                 }
-                <button onClick={deleteOrder}>DELETE ORDER</button>
+                {/* <button onClick={deleteOrder}>DELETE ORDER</button> */}
                 <div className={style.totalPrice} onClick={orderHandler} >
                     <h4>Total Cost: R {results && totalPrice.reduce((a, b) => a + b, 0).toFixed(2)}</h4>
                     <br />

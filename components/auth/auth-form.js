@@ -58,12 +58,7 @@ function AuthForm() {
 
       if(result){
         sessionStorage.setItem('Token', enteredEmail.toLowerCase())
-      }
-      
-
-      if (!result.error) {
-        // set some auth state
-        router.replace('/profile');
+        router.replace('/profile')
       }
 
     } else {
