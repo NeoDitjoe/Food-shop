@@ -1,6 +1,8 @@
 import { Button } from "@/components/button/button";
 import { useRef } from "react";
 import style from 'styles/AddToMenuForm.module.css'
+import StateContext from "@/usecontext/stateContext";
+import { useRouter } from "next/router";
 
 async function addMenu(menu){
     const response = await fetch('/api/menu', {
@@ -20,6 +22,10 @@ async function addMenu(menu){
 
 export default function AddToMenuForm(){
 
+
+    const { notification } = StateContext()
+    const router = useRouter()
+
     const menuRef = useRef()
     const menuItemRef = useRef()
     const itemPrice = useRef()
@@ -32,6 +38,9 @@ export default function AddToMenuForm(){
         const itemPriceVaue = itemPrice.current.value
         const imageValue = imageRef.current.value
 
+        notification.setText('Loading...')
+        notification.setBackground('loadingNotification')
+
         try{
             await addMenu({
                 image: imageValue,
@@ -39,11 +48,16 @@ export default function AddToMenuForm(){
                 menu: [
                     {price: itemPriceVaue, item: menuItemValue}
                 ]
-     
             })
-            console.log('success')
+            
+            notification.setText('Item is added to menu')
+            notification.setBackground('successNotification')
+            router.reload()
+
         }catch(error){
             console.log('failed to add menu')
+            notification.setText('Failed to add menu')
+            notification.setBackground('errorNotification')
         }
     }
 
