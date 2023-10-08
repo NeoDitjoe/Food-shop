@@ -2,15 +2,22 @@ import { Button } from "./button/button"
 import style from 'styles/overlay.module.css'
 import { useSession } from "next-auth/react";
 
-
+/**
+ * Appears when customers clicks on a product 
+ * @returns {Component}
+ */
 export default function Overlay({click, orderNow, addtoCart, product, item, price, img}){
 
+    //Extract user details
     const { data: session, status } = useSession()
 
     async function toCart(){
-
+        //tracks process 
         console.log('pending')
-
+        
+        /**
+         * Add data that is defined in the @components folder then in the / @grid file
+         */
         await fetch('/api/cart/cart', {
             method: 'POST',
             body: JSON.stringify({ product: product, item: item, price: price, img: img, user: session.user.email[1] }),
@@ -19,6 +26,7 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
             }
         })
 
+        //tracks process
         console.log('success')
     }
 
@@ -42,7 +50,7 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
                     <div className={style.button} >
                         <Button 
                             name={'ADD TO CART'} 
-                            click = {toCart}
+                            click = {() => session ? toCart : alert('please log in')}
                         />
                     </div>
 

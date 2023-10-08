@@ -11,9 +11,9 @@ export default function LinkButton({link, name, text}){
     )
 }
 
-export function Button({click, name}){
+export function Button({click, name, text}){
     return (
-            <button onClick={click} className={style.button}>{name}</button>
+            <button onClick={click} className={style.button}>{name} {text}</button>
 
     )
 }
