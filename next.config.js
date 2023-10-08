@@ -16,7 +16,11 @@ const nextConfig = {
         port: '',
       }
     ]
-  }
+  },
+
+  env: {
+    SECRET : '7$Dp@9!z#Rt*2QvP'
+  },
 }
 
 module.exports = nextConfig
