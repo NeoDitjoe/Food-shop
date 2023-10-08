@@ -3,6 +3,7 @@ import { verifyPassword } from "@/database/auth";
 
 import { connectDatabase } from "@/database/Database";
 import NextAuth from "next-auth";
+import StateContext from "@/usecontext/stateContext";
 
 export default NextAuth({
 
@@ -29,7 +30,7 @@ export default NextAuth({
 
                 if(!isValid){
                     client.close()
-                    throw new Error('Could not log you in')
+                    throw new Error('Incorrect Password')
                 }
                 client.close()
                 return { email: [user.email, user.username] }

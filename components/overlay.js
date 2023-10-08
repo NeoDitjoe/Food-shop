@@ -1,6 +1,7 @@
 import { Button } from "./button/button"
 import style from 'styles/overlay.module.css'
 import { useSession } from "next-auth/react";
+import StateContext from "@/usecontext/stateContext";
 
 /**
  * Appears when customers clicks on a product 
@@ -10,15 +11,19 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
 
     //Extract user details
     const { data: session, status } = useSession()
+    
+    const { notification } = StateContext()
 
     async function toCart(){
         if(!session){
-            alert('login')
+            notification.setText(`Login to place order`)
+            notification.setBackground('errorNotification')
         }
 
         if(session){
             //tracks process 
-            console.log('pending')
+            notification.setText('Adding to cart')
+            notification.setBackground('loadingNotification')
 
             /**
              * Add data that is defined in the @components folder then in the / @grid file
@@ -32,7 +37,8 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
             })
     
             //tracks process
-            console.log('success')
+            notification.setText('Added to cart')
+            notification.setBackground('successNotification')
         }
     }
 

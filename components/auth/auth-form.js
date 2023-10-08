@@ -48,29 +48,47 @@ function AuthForm() {
       enteredUsername = usernameInputRef.current.value;
     }
 
-
+    /**
+     * {@link isLogin} check if user is login or signing up 
+     * 
+     * {@link notification.setText} used to track the prosess of login or signing up
+     * it displays a text showing user what exactly is happenning once the login or signup is clicked 
+     */
     if (isLogin) {
+      notification.setText('loading...')
+      notification.setBackground('loadingNotification')
       const result = await signIn('credentials', {
-        redirect: true,
+        redirect: false,
         email: enteredEmail.toLowerCase(),
         password: enteredPassword,
       });
 
       if(result){
         sessionStorage.setItem('Token', enteredEmail.toLowerCase())
-        router.replace('/profile')
+       
+      }
+      if(!result.error){
+        router.push('/profile')
       }
 
+      if(result.error){
+        notification.setText(result.error)
+        notification.setBackground('errorNotification')
+      }
     } else {
+
       try {
         notification.setText('Loading...')
         notification.setBackground('loadingNotification')
+
         const result = await createUser(enteredUsername.toLowerCase(), enteredEmail.toLowerCase(), enteredPassword);
         if(result){
+
           notification.setText(`Welcome ${enteredUsername}`)
-          notification.setBackground('welcomeNotification')
+          notification.setBackground('successNotification')
         }
       } catch (error) {
+
         notification.setText(error.message);
         notification.setBackground('errorNotification');
       }

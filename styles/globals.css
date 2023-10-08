@@ -20,12 +20,15 @@ body{
 /* notification styling */
 .loadingNotification{
     background-color: gray;
+    z-index: 2;
 }
 
-.welcomeNotification{
-    background-color: rgb(28, 167, 28);
+.successNotification{
+    background-color: rgb(29, 156, 29);
+    z-index: 2;
 }
 
 .errorNotification {
     background-color: rgb(245, 42, 42);
+    z-index: 2;
 }
