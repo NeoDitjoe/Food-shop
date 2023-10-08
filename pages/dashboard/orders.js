@@ -19,7 +19,7 @@ export default function Orders({placedOrders}){
             {
                 placedOrders.map((order) => {
                     return (
-                        <div key={order.totalPrice}>
+                        <div key={order.totalPrice+order.customer+order.item} className={style.order}>
                             <br/>
                             <hr/>
                             <h4>{order.customer}</h4>
