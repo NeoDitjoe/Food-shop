@@ -2,11 +2,14 @@ import { Button } from "./button/button"
 import style from 'styles/overlay.module.css'
 import { useSession } from "next-auth/react";
 import StateContext from "@/usecontext/stateContext";
+import {notificationTimer} from "./Notification/Notification";
 
 /**
  * Appears when customers clicks on a product 
  * @returns {Component}
  */
+
+
 export default function Overlay({click, orderNow, addtoCart, product, item, price, img}){
 
     //Extract user details
@@ -18,6 +21,7 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
         if(!session){
             notification.setText(`Login to place order`)
             notification.setBackground('errorNotification')
+            notificationTimer(notification)
         }
 
         if(session){
@@ -39,6 +43,7 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
             //tracks process
             notification.setText('Added to cart')
             notification.setBackground('successNotification')
+            notificationTimer(notification)
         }
     }
 

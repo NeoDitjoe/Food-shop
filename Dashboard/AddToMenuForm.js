@@ -52,12 +52,14 @@ export default function AddToMenuForm(){
             
             notification.setText('Item is added to menu')
             notification.setBackground('successNotification')
+            notificationTimer(notification)
             router.reload()
 
         }catch(error){
             console.log('failed to add menu')
             notification.setText('Failed to add menu')
             notification.setBackground('errorNotification')
+            notificationTimer(notification)
         }
     }
 

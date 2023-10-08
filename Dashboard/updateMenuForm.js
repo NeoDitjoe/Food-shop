@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import style from 'styles/updateform.module.css'
 import StateContext from '@/usecontext/stateContext';
 import { useRouter } from 'next/router';
+import { notificationTimer } from '@/components/Notification/Notification';
 
 async function addItem(item) {
   const response = await fetch('/api/addItem', {
@@ -55,10 +56,12 @@ export default function UpdateMenuForm() {
       const result = await addItem({product: productInput, item: itemInput, price: priceInput});
       notification.setText(`successfully added ${itemRef.current.value} item to ${selectProduct.current.value} menu`)
       notification.setBackground('successNotification')
+      notificationTimer(notification)
       router.reload()
     } catch (error) {
       notification.setText(`failed to Update Menu`)
       notification.setBackground('errorNotification')
+      notificationTimer(notification)
     }
 
   }

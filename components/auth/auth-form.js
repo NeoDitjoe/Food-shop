@@ -3,6 +3,7 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import classes from 'styles/auth-form.module.css';
 import StateContext from '@/usecontext/stateContext';
+import { notificationTimer } from '../Notification/Notification';
 
 async function createUser(username, email, password) {
 
@@ -74,6 +75,7 @@ function AuthForm() {
       if(result.error){
         notification.setText(result.error)
         notification.setBackground('errorNotification')
+        notificationTimer(notification)
       }
     } else {
 
@@ -86,11 +88,13 @@ function AuthForm() {
 
           notification.setText(`Welcome ${enteredUsername}`)
           notification.setBackground('successNotification')
+          notificationTimer(notification)
         }
       } catch (error) {
 
         notification.setText(error.message);
         notification.setBackground('errorNotification');
+        notificationTimer(notification)
       }
     }
   }

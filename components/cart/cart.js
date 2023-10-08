@@ -2,6 +2,7 @@ import style from 'styles/cart.module.css'
 import Image from "next/image"
 import { useRouter } from 'next/router'
 import StateContext from '@/usecontext/stateContext'
+import { notificationTimer } from '../Notification/Notification'
 
 export default function Cart({results, deleteOrder}){
 
@@ -79,12 +80,16 @@ export default function Cart({results, deleteOrder}){
             if(route){
                 notification.setText('Order has been sent successfully')
                 notification.setBackground('successNotification')
-                router.push('/')
+                
+                // router.push('/')
+                notificationTimer(notification)
+
             }
             router.push('/')
         } catch (error) {
             notification.setText("failed to send order: Please reload page and try again and make sure your cart has Items")
             notification.setBackground('errorNotification')
+            notificationTimer(notification)
         }
     }
 
