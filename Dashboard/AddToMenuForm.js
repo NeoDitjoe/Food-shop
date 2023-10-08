@@ -3,6 +3,7 @@ import { useRef } from "react";
 import style from 'styles/AddToMenuForm.module.css'
 import StateContext from "@/usecontext/stateContext";
 import { useRouter } from "next/router";
+import { notificationTimer } from "@/components/Notification/Notification";
 
 async function addMenu(menu){
     const response = await fetch('/api/menu', {
@@ -56,7 +57,7 @@ export default function AddToMenuForm(){
             router.reload()
 
         }catch(error){
-            console.log('failed to add menu')
+
             notification.setText('Failed to add menu')
             notification.setBackground('errorNotification')
             notificationTimer(notification)

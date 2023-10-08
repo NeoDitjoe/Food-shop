@@ -69,6 +69,9 @@ function AuthForm() {
        
       }
       if(!result.error){
+        notification.setText('logged in')
+        notification.setBackground('successNotification')
+        notificationTimer(notification)
         router.push('/profile')
       }
 

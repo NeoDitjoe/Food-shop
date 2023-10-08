@@ -76,16 +76,21 @@ export default function Cart({results, deleteOrder}){
             /**
              * {@link route } p
              */
-            const route = router.replace(`/cart/${customer}/we have received your order`)
-            if(route){
+            // const route = 
+            if(result){
                 notification.setText('Order has been sent successfully')
                 notification.setBackground('successNotification')
-                
-                // router.push('/')
+                router.replace(`/cart/${customer}/we have received your order`)
+
+                setTimeout(() => {
+                    router.push('/')
+                    
+                }, [800]);
+
                 notificationTimer(notification)
 
             }
-            router.push('/')
+           
         } catch (error) {
             notification.setText("failed to send order: Please reload page and try again and make sure your cart has Items")
             notification.setBackground('errorNotification')

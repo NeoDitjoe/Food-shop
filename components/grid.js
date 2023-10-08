@@ -82,7 +82,7 @@ export default function FullWidthGrid({menu}) {
                 item={overlay.item}
                 product={overlay.product}
                 click = {() => setOverlayCollapse(false)}
-                orderNow = {() => console.log('Order Now')}
+                orderNow = {() => alert('Feature is being updated')}
             />
         }
 
