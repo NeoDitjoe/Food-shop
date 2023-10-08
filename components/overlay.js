@@ -15,7 +15,7 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
     //Extract user details
     const { data: session, status } = useSession()
     
-    const { notification } = StateContext()
+    const {notification, setOverlayCollapse } = StateContext()
 
     async function toCart(){
         if(!session){
@@ -45,6 +45,8 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
             notification.setBackground('successNotification')
             notificationTimer(notification)
         }
+
+        setOverlayCollapse(false)
     }
 
     return(

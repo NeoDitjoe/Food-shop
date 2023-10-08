@@ -7,6 +7,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import style from 'styles/grid.module.css'
 import Overlay from './overlay';
+import StateContext from '@/usecontext/stateContext';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -35,7 +36,7 @@ export default function FullWidthGrid({menu}) {
     const [ overlay, setOverlay] = useState(null)
 
     //hiddes and/or displays the add order overlay
-    const [ overlayCollapse, setOverlayCollapse] = useState(false)
+    const { overlayCollapse, setOverlayCollapse } = StateContext()
 
   return (
     <Fragment>     
