@@ -1,8 +1,11 @@
 import style from 'styles/cart.module.css'
 import Image from "next/image"
 import { useRouter } from 'next/router'
+import StateContext from '@/usecontext/stateContext'
 
 export default function Cart({results, deleteOrder}){
+
+    const { notification } = StateContext()
     
     /**
      * Stores the order
@@ -63,22 +66,25 @@ export default function Cart({results, deleteOrder}){
      */    
     async function orderHandler(e){
         e.preventDefault()
-        console.log('pending')
+        notification.setText('sending Order')
+        notification.setBackground('loadingNotification')
 
     try {
         const result = await placeOrder( items ,totalPrice.reduce((a, b) => a + b, 0), customer );
-            // console.log(result);
-            console.log('success')
 
             /**
              * {@link route } p
              */
-            const route = router.push(`/cart/${customer}/we have received your order`)
+            const route = router.replace(`/cart/${customer}/we have received your order`)
             if(route){
-                router.reload()
+                notification.setText('Order has been sent successfully')
+                notification.setBackground('successNotification')
+                router.push('/')
             }
+            router.push('/')
         } catch (error) {
-            console.log(error);
+            notification.setText("failed to send order: Please reload page and try again and make sure your cart has Items")
+            notification.setBackground('errorNotification')
         }
     }
 
@@ -103,7 +109,6 @@ export default function Cart({results, deleteOrder}){
                         )
                     })
                 }
-                {/* <button onClick={deleteOrder}>DELETE ORDER</button> */}
                 <div className={style.totalPrice} onClick={orderHandler} >
                     <h4>Total Cost: R {results && totalPrice.reduce((a, b) => a + b, 0).toFixed(2)}</h4>
                     <br />
