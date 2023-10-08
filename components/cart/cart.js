@@ -2,13 +2,38 @@ import style from 'styles/cart.module.css'
 import Image from "next/image"
 import { useRouter } from 'next/router'
 
-export default function Cart({results}){
+export default function Cart({results, deleteOrder}){
     
+    /**
+     * Stores the order
+     * when {@link results}  is being mapped over {@link totalPrice} array then stores the 
+     * list of costs in this array which wil later be combined into a total sum
+     * 
+     * {@link item } Array stores the Items that is in the cart, 
+     * until customer is certisfied to place the order
+     */
     let totalPrice = []
     let items = []
+
+    /**
+     * Extract the user name from the path
+     * 
+     * This name will then be used to identify who placed the order when order is being collected
+     * hence the the database restrict duplicate names in the system
+     */
     const router = useRouter()
     const customer = router.query.slug[1]
 
+
+    /**
+     * 
+     * @param {string} item - Item the customer orders
+     * @param {number} price - The total cost of the customer's order
+     * @param {string} customer - Then name of the customer who placed an order
+     * @returns 
+     * 
+     * 
+     */
     async function placeOrder(item, price, customer) {
         const response = await fetch('/api/cart/placeOrder', {
           method: 'POST',
@@ -27,6 +52,15 @@ export default function Cart({results}){
         return data;
     }
 
+
+    /**
+     * 
+     * @param {*} e - prevent any default
+     * 
+     * This function calls the {@link placeOrder} function
+     * it defines its parameters and also handles any possible errors using the
+     * try catch method
+     */    
     async function orderHandler(e){
         e.preventDefault()
 
@@ -44,8 +78,10 @@ export default function Cart({results}){
                 <div >
                 {
                     results && results.map((item) => {
+
                         totalPrice.push(+item.price)
                         items.push(item.item + ' - '+ item.product + ' | ')
+
                         return (
                             <div key={item.item + item.price} className={style.cart}>
                                 <Image alt='image' src={item.img} height={200} width={200} className={style.img}/>
@@ -57,6 +93,7 @@ export default function Cart({results}){
                         )
                     })
                 }
+                <button onClick={deleteOrder}>DELETE ORDER</button>
                 <div className={style.totalPrice} onClick={orderHandler} >
                     <h4>Total Cost: R {results && totalPrice.reduce((a, b) => a + b, 0)}</h4>
                     <br />

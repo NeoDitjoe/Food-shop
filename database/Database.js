@@ -8,6 +8,15 @@ export async function connectDatabase(folder) {
 
 }
 
+/**
+ * 
+ * @param {string} folder - This will be the name of the folder
+ * @param {string} collection This will be the name of collection we stored data in
+ * 
+ * {@link menuList} variable is used to seperate the _id from the rest of the data
+ * This is because It was causing errors
+ * @returns 
+ */
 export async function getMenuList(folder, collection) {
     let client = await connectDatabase(folder);
     const db = client.db();
@@ -40,4 +49,17 @@ export async function getCartList(folder, collection, user) {
     });
   
     return menuList;
+}
+
+export async function deleteSentOrder(folder, collection, user){
+  let client = await connectDatabase(folder);
+
+  const db = client.db()
+
+  const documents = await db
+  .collection(collection)
+  .deleteMany({ user: user })
+
+  return documents;
+
 }

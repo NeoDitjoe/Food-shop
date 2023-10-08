@@ -4,17 +4,24 @@ import { getCartList } from "@/database/Database"
 import { useSession } from "next-auth/react";
 import Error from "@/components/Error/Error";
 import Head from "next/head";
-import LinkButton from "@/components/button/button";
+import { deleteSentOrder } from "@/database/Database";
 
 export default function Ccart({cart, path, pathToo}){
 
+
+    /**
+     * {@link session} idetifies the current user while {@link setUserEmail} stores the extracted name from the {@link session}
+     * 
+     */
     const { data: session} = useSession()
     const [ userEmail, setUserEmail ] = useState(null)
 
     useEffect(() => {
         setUserEmail(session && session.user.email[1])
     }, [session])
-
+    
+    //compares the logged in user from the session with the name from the path
+    //so the correct users data can always be retrieved
     const user = userEmail === path
     
     return(
@@ -25,9 +32,12 @@ export default function Ccart({cart, path, pathToo}){
                 <title>{path +"'s "+ pathToo.charAt(0).toUpperCase() + pathToo.slice(1)}</title>
             </Head>
             {
-                user ? <Cart 
-                    results = {cart}
-                /> : <Error errorMessage={'User No Found, click to'} link='/auth' linkText={'Login'}/>
+                user ? 
+                    <Cart 
+                        results = {cart}
+                        deleteOrder={() => console.log('kjkh')}
+                    /> : 
+                    <Error errorMessage={'User No Found, click to'} link='/auth' linkText={'Login'}/>
             }
         </Fragment>
 
@@ -42,12 +52,14 @@ export async function getServerSideProps({params}){
     const pathToo = slug[0]
     
     const cart = await getCartList('cart', 'pendingOrders', path)
+    const deleteOrder =await deleteSentOrder('cart', 'pendingOrders', path)
 
     return {
         props:{
             cart,
             path,
-            pathToo
+            pathToo,
+            deleteOrder
         }
     }
 

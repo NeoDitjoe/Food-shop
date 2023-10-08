@@ -23,7 +23,7 @@ body{
 }
 
 .welcomeNotification{
-    background-color: green;
+    background-color: rgb(28, 167, 28);
 }
 
 .errorNotification {
