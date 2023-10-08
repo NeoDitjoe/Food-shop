@@ -95,7 +95,7 @@ export default function Cart({results, deleteOrder}){
                 }
                 <button onClick={deleteOrder}>DELETE ORDER</button>
                 <div className={style.totalPrice} onClick={orderHandler} >
-                    <h4>Total Cost: R {results && totalPrice.reduce((a, b) => a + b, 0)}</h4>
+                    <h4>Total Cost: R {results && totalPrice.reduce((a, b) => a + b, 0).toFixed(2)}</h4>
                     <br />
                     <h4>Place Order</h4>
                 </div>
