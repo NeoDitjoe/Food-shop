@@ -9,7 +9,7 @@ export default function Orders({placedOrders}){
 
     if( placedOrders.length === 0 ) {
         return (
-            <Error errorMessage={'NO ORDERS PLACED, click to'} link='/' linkText={'Place Order'}/>
+            <Error errorMessage={'NO ORDERS PLACED'} />
             
         )
     }
@@ -24,7 +24,7 @@ export default function Orders({placedOrders}){
                             <hr/>
                             <h4>{order.customer}</h4>
                             <p>{order.item}</p>
-                            <p>{order.totalPrice}</p>
+                            <p>R {order.totalPrice.toFixed(2)}</p>
                         </div>
                     )
                 })

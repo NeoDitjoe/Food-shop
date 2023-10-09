@@ -30,3 +30,8 @@
     transform: translate(-50%, -50%);
     
 }
+
+.bin{
+    position: absolute;
+    right: 5%;
+}

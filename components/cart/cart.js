@@ -3,6 +3,7 @@ import Image from "next/image"
 import { useRouter } from 'next/router'
 import StateContext from '@/usecontext/stateContext'
 import { notificationTimer } from '../Notification/Notification'
+import { BsFillTrashFill } from "react-icons/bs";
 
 export default function Cart({results, deleteOrder}){
 
@@ -115,6 +116,9 @@ export default function Cart({results, deleteOrder}){
                                     <h3>{item.item} {item.product}</h3>
                                     <h4>R {item.price}</h4>
                                 </div>
+                               <div className={style.bin}>
+                                    <BsFillTrashFill color='red' size={25} />
+                               </div>
                             </div>
                         )
                     })
