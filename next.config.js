@@ -17,7 +17,7 @@ const nextConfig = {
       },
       {
         protocol:'https',
-        hostname: 'www.livekindly.com',
+        hostname: 's41230.pcdn.co',
         port: '',
       },
     ]
