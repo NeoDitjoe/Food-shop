@@ -22,8 +22,19 @@
 
 .img{
     margin: 2%;
-    width: 30%;
+    width: 35%;
     height: auto;
     box-shadow: 10px 10px 10px rgb(146, 148, 146);
     border-radius: 10px;
+}
+
+
+@media only screen and (min-width: 560px){
+    .img{
+        margin: 2%;
+        width: 20%;
+        height: auto;
+        box-shadow: 10px 10px 10px rgb(146, 148, 146);
+        border-radius: 10px;
+    }
 }
