@@ -7,6 +7,7 @@ import { CgProfile } from "react-icons/cg";
 import { AiFillPhone } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
 import { BsFillRocketTakeoffFill } from "react-icons/bs";
+import { ImHome } from "react-icons/im";
 import Link from "next/link";
 import { useSession } from "next-auth/react"
 
@@ -17,6 +18,7 @@ export function Navlist(){
     
     return (
         <ul className={ collapse ? style.collapseNavList : style.navList}>
+            <LinkButton link='/' name={ <ImHome/>} text='Home' />
             {session ? <LinkButton link={`/cart/${session && session.user.email[1]}`} name={ <FaCartArrowDown/>} text='Cart'/> : ''}
             <LinkButton link='/' name={ <BsFillRocketTakeoffFill/>} text='Explore' />
             <LinkButton link='/' name={ <BiSearchAlt/>} text='Search' />
