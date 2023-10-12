@@ -3,3 +3,7 @@
     height: 86vh;
     width: 80%;
 }
+
+.section {
+    min-height: 50vh;
+}

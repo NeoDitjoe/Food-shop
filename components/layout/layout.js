@@ -6,6 +6,7 @@ import { Navlist } from "./Header";
 import StateContext from "@/usecontext/stateContext";
 import style from 'styles/layout.module.css'
 import Notification from "../Notification/Notification";
+import Footer from "./footer";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,11 +28,13 @@ export default function Layout({children}){
                 <div className={style.collapseDiv} onClick={() => setTimeout(() => {
                     setCollapse(false)
                 }, 300)}> {Navlist()} </div> : 
-                ''
+                <div/>
             }
-            {collapse ? " " : <section>{children}</section>}
+            {collapse ? <div/> : <section className={style.section}>{children}</section>}
 
             {notification.text && <Notification notificationMessage={notification.text} />}
+
+            <Footer/>
         </div>
     )
 }
