@@ -56,9 +56,6 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
                 <h1>{product}</h1>
                 <p>{item}</p>
                 <p>R {price}</p>
-                <br/>
-                <p>Have a Request ?</p>
-                <textarea type="text" />
 
                 <div className={style.buttons}>
 
