@@ -9,9 +9,9 @@ export default async function handler( req, res){
             return;
         }
 
-        const client = await connectDatabase('cart')
+        const client = await connectDatabase()
         
-        const db = client.db()
+        const db = client.db('cart')
 
         const result = await db.collection('placedOrders').insertOne({
             item: item,

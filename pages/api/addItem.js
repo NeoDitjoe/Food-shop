@@ -5,9 +5,9 @@ export default async function handler(req, res) {
 
         const { product, item, price } = req.body
   
-        let client = await connectDatabase('menulist')
+        let client = await connectDatabase()
 
-        const db = client.db()
+        const db = client.db('menulist')
 
         try{
         const result = await db.collection('menu').updateOne({

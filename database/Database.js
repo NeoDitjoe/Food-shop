@@ -1,8 +1,8 @@
 import { MongoClient } from 'mongodb'
 
-export async function connectDatabase(folder) {
+export async function connectDatabase() {
 
-    const client = await MongoClient.connect(`mongodb+srv://bobo:wHWkFbRSdYCcIBs6@cluster0.x9eyl3e.mongodb.net/${folder}?retryWrites=true&w=majority`)
+    const client = await MongoClient.connect(process.env.DATABASE)
 
     return client
 
@@ -18,8 +18,8 @@ export async function connectDatabase(folder) {
  * @returns 
  */
 export async function getMenuList(folder, collection) {
-    let client = await connectDatabase(folder);
-    const db = client.db();
+    let client = await connectDatabase();
+    const db = client.db(folder);
   
     const documents = await db
       .collection(collection)
@@ -35,8 +35,8 @@ export async function getMenuList(folder, collection) {
 }
 
 export async function getCartList(folder, collection, user) {
-    let client = await connectDatabase(folder);
-    const db = client.db();
+    let client = await connectDatabase();
+    const db = client.db(folder);
   
     const documents = await db
       .collection(collection)
@@ -52,9 +52,9 @@ export async function getCartList(folder, collection, user) {
 }
 
 export async function deleteSentOrder(folder, collection, user){
-  let client = await connectDatabase(folder);
+  let client = await connectDatabase();
 
-  const db = client.db()
+  const db = client.db(folder)
 
   const documents = await db
   .collection(collection)

@@ -11,7 +11,7 @@ export default function Dashboard(){
     
         <div>
             <button className={style.button}>
-                <LinkButton link={'dashboard/orders'} text='View Orders' />
+                <LinkButton link={'dashboard2090BoBo/orders'} text='View Orders' />
             </button>
             
             <div className={style.main}>

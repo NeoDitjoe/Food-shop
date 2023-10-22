@@ -6,7 +6,7 @@ export default async function Handler(req, res){
     let client;
 
     try{
-        client = await connectDatabase('cart')
+        client = await connectDatabase()
     }catch(error){
         res.status(400).json({ message: error || 'Failed Attempt'})
     }
@@ -15,7 +15,7 @@ export default async function Handler(req, res){
 
         const { product,  item, price, user, img } = req.body
         
-        const db = client.db()
+        const db = client.db('cart')
 
         try{
             await db.collection('pendingOrders').insertOne({
@@ -37,7 +37,7 @@ export default async function Handler(req, res){
     }
 
     if( req.method === 'GET'){
-        const db = client.db()
+        const db = client.db('cart')
         let userOrders;
         const user = sessionStorage.getItem("Token")
 

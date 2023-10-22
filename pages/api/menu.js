@@ -4,7 +4,7 @@ export default async function handler(req, res) {
 
   let client;
   try {
-      client = await connectDatabase('menulist')
+      client = await connectDatabase()
   } catch(error){
       res.status(500).json({message: 'failed to retrieve data'})
       return;
@@ -35,7 +35,7 @@ export default async function handler(req, res) {
       menu
     }
 
-    const db = client.db()
+    const db = client.db('menulist')
 
     const productExist = await db.collection('menu').findOne({ product: product })
 

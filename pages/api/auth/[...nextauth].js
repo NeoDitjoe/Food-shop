@@ -17,8 +17,8 @@ export default NextAuth({
 
             async authorize(credentials) {
                 
-                const client = await connectDatabase('authentication')
-                const userscollection = client.db().collection('users')
+                const client = await connectDatabase()
+                const userscollection = client.db('authentication').collection('users')
                 const user = await userscollection.findOne({ email: credentials.email})
                 
                 if (!user){

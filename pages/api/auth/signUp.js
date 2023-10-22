@@ -24,9 +24,9 @@ export default async function handler( req, res){
         }
 
         //connect to database
-        const client = await connectDatabase('authentication')
+        const client = await connectDatabase()
         
-        const db = client.db()
+        const db = client.db('authentication')
 
         /** 
          * checks if the email and Or username is already used.
