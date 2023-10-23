@@ -4,10 +4,15 @@ import { useRouter } from 'next/router'
 import StateContext from '@/usecontext/stateContext'
 import { notificationTimer } from '../Notification/Notification'
 import { BsFillTrashFill } from "react-icons/bs";
+import { useSession } from 'next-auth/react'
+import { useEffect } from 'react'
 
 export default function Cart({results, deleteOrder}){
 
     const { notification } = StateContext()
+    const { data: session } = useSession()
+
+    const username = session &&  session.user.email[1]
     
     /**
      * Stores the order
@@ -116,7 +121,9 @@ export default function Cart({results, deleteOrder}){
                                     <h3>{item.item} {item.product}</h3>
                                     <h4>R {item.price}</h4>
                                 </div>
-                               <div className={style.bin}>
+                               <div className={style.bin} onClick={() => {
+                                removeItem({ username: username , item: item.item})
+                               }}>
                                     <BsFillTrashFill color='red' size={25} />
                                </div>
                             </div>
@@ -133,4 +140,14 @@ export default function Cart({results, deleteOrder}){
             }
         </>
     )
+}
+
+async function removeItem(item){
+    await fetch('/api/cart/removePendingOrders', {
+        method: 'POST',
+        body: JSON.stringify(item),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
 }
