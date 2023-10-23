@@ -123,7 +123,7 @@ export default function Cart({results, deleteOrder}){
                                 </div>
                                <div className={style.bin} onClick={() => {
                                 removeItem({ username: username , item: item.item})
-                               }}>
+                                    }}>
                                     <BsFillTrashFill color='red' size={25} />
                                </div>
                             </div>
