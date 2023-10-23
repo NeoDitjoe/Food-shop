@@ -26,3 +26,23 @@
 .order h4{
     margin: 1%;
 }
+
+.bin{
+    cursor: pointer;
+    margin: 10px;
+}
+
+.orders{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 25px;
+    border-bottom: white solid 1px;
+    border-right: white solid 1px;
+    align-items: center;
+}
+
+.price{
+    margin: 10px;
+    color: blue;
+}
