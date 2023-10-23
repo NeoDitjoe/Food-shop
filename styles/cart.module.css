@@ -9,13 +9,14 @@
 }
 
 .totalPrice {
-    position: absolute;
-    right: 60px;
     background-color: #05e35e;
     padding: 1%;
     border-radius: 5px;
     cursor: pointer;
     margin: 4%;
+    border: none;
+    float: right;
+    
 }
 
 .img{
@@ -34,4 +35,5 @@
 .bin{
     position: absolute;
     right: 5%;
+    cursor: pointer;
 }

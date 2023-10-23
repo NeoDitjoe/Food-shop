@@ -123,11 +123,11 @@ export default function Cart({results, deleteOrder}){
                         )
                     })
                 }
-                <div className={style.totalPrice} onClick={orderHandler} >
+                <button className={style.totalPrice} onClick={orderHandler} >
                     <h4>Total Cost: R {results && totalPrice.reduce((a, b) => a + b, 0).toFixed(2)}</h4>
                     <br />
                     <h4>Place Order</h4>
-                </div>
+                </button>
                 
             </div> : <h2 className={style.emptyCart}>YOUR CART IS EMPTY</h2>
             }
