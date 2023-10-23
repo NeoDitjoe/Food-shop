@@ -15,6 +15,7 @@ export function Navlist(){
 
     const { collapse } = StateContext()
     const { data: session, status } = useSession()
+    const username = session && session.user.email[1]
     
     return (
         <ul className={ collapse ? style.collapseNavList : style.navList}>
@@ -23,7 +24,7 @@ export function Navlist(){
             <LinkButton link='/' name={ <BsFillRocketTakeoffFill/>} text='Explore' />
             <LinkButton link='/search' name={ <BiSearchAlt/>} text='Search' />
             <LinkButton link='/' name={ <AiFillPhone/>} text='Contact' />
-            <LinkButton link={session ? '/profile' : '/auth'} name={ <CgProfile/>} text={session ? session.user.email[1] : 'Login' } />
+            <LinkButton link={session ? '/profile' : '/auth'} name={ <CgProfile/>} text={username ? username.charAt(0).toLocaleUpperCase() + username.slice(1) : 'Login' } />
         </ul>
     )
 }
