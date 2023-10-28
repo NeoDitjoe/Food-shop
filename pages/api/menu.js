@@ -1,20 +1,11 @@
-import { getMenuList, connectDatabase } from "@/database/Database"
+import { getMenuList, client } from "@/database/Database"
 
 export default async function handler(req, res) {
-
-  let client;
-  try {
-      client = await connectDatabase()
-  } catch(error){
-      res.status(500).json({message: 'failed to retrieve data'})
-      return;
-  }
 
   if( req.method === 'GET'){
     try{
       const menuList = await getMenuList('menulist', 'menu')
 
-      // client.close()
       res.status(200).json({ menu: menuList})
     }catch {
       res.status(404).json({ message: 'Reload Page'})
@@ -41,7 +32,6 @@ export default async function handler(req, res) {
 
     if(productExist){
       res.status(400).json({ message: 'Product  already inserted' })
-      client.close()
       return;
     }
 
@@ -49,12 +39,9 @@ export default async function handler(req, res) {
       const result = await db.collection('menu').insertOne(addData)
       addData._id = result.insertedId
     }catch(error){
-      client.close();
       res.status(404).json({message: 'Attempt Failed'})
       return;
     }
-
-    client.close()
 
     res.status(201).json({ message: 'Successfully stored!', message: product });
   }

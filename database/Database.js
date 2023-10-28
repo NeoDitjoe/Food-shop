@@ -1,12 +1,15 @@
-import { MongoClient } from 'mongodb'
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
-export async function connectDatabase() {
+const uri = process.env.DATABASE;
 
-  const client = await MongoClient.connect(process.env.DATABASE)
+export const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
 
-  return client
-
-}
 
 /**
  * 
@@ -18,7 +21,6 @@ export async function connectDatabase() {
  * @returns 
  */
 export async function getMenuList(folder, collection) {
-    let client = await connectDatabase();
     const db = client.db(folder);
   
     const documents = await db
@@ -35,7 +37,6 @@ export async function getMenuList(folder, collection) {
 }
 
 export async function getCartList(folder, collection, user) {
-    let client = await connectDatabase();
     const db = client.db(folder);
   
     const documents = await db
@@ -52,7 +53,6 @@ export async function getCartList(folder, collection, user) {
 }
 
 export async function deleteSentOrder(folder, collection, user){
-  let client = await connectDatabase();
 
   const db = client.db(folder)
 

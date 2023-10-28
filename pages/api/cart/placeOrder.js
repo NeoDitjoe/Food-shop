@@ -1,4 +1,4 @@
-import { connectDatabase } from "@/database/Database";
+import { client } from "@/database/Database";
 
 export default async function handler( req, res){
     if( req.method === 'POST'){
@@ -9,8 +9,6 @@ export default async function handler( req, res){
             return;
         }
 
-        const client = await connectDatabase()
-        
         const db = client.db('cart')
 
         const result = await db.collection('placedOrders').insertOne({
