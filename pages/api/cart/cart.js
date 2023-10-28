@@ -1,16 +1,8 @@
-import { connectDatabase } from "@/database/Database";
+import { client } from "@/database/Database";
 
 export default async function Handler(req, res){
 
-    // const { user } = StateContext()
-    let client;
-
-    try{
-        client = await connectDatabase()
-    }catch(error){
-        res.status(400).json({ message: error || 'Failed Attempt'})
-    }
-
+    
     if( req.method === 'POST'){
 
         const { product,  item, price, user, img } = req.body
@@ -27,12 +19,10 @@ export default async function Handler(req, res){
             })
 
         }catch(error){
-            client.close()
             res.status(417).json({ message: error || 'Failed Attempt' }) //expectation failed
             return;
         }
 
-        client.close()
         res.status(200).json({ message: 'Order in cart'}) //Ok
     }
 

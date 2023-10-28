@@ -1,4 +1,4 @@
-import { connectDatabase } from "@/database/Database";
+import { client } from "@/database/Database";
 import hashPassword from "@/database/auth";
 
 export default async function handler( req, res){
@@ -24,7 +24,6 @@ export default async function handler( req, res){
         }
 
         //connect to database
-        const client = await connectDatabase()
         
         const db = client.db('authentication')
 
@@ -38,14 +37,12 @@ export default async function handler( req, res){
         //Notify customer that details are already in use
         if(existingUserEmail){
             res.status(400).json({ message : 'Email is already used'})
-            client.close()
             return;
         }
 
         //Notify customer that details are already in use
         if(existingUsername){
             res.status(400).json({ message : 'username is already in use'})
-            client.close()
             return;
         }
 
