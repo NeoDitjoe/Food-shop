@@ -1,4 +1,4 @@
-import { client } from "@/database/Database";
+import removePlaceOrder from "@/database/helpers/dashboard/removePlacedOrders"
 
 export default async function handler(req, res){
 
@@ -7,9 +7,7 @@ export default async function handler(req, res){
     if( req.method === 'POST'){
 
         try{
-            const db = client.db('cart')
-
-            db.collection('placedOrders').deleteOne({customer: username, item : item})
+            removePlaceOrder(username, item)
             res.status(200).json({ message: 'removed item' })
 
         }catch(error){
