@@ -84,7 +84,7 @@ export default function Cart({results, deleteOrder}){
              */
             // const route = 
             if(result){
-                notification.setText('Order has been sent successfully')
+                notification.setText('Order has been sent successfully sent')
                 notification.setBackground('successNotification')
                 router.replace(`/cart/${customer}/we have received your order`)
 

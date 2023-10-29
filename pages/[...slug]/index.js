@@ -1,13 +1,23 @@
 import Cart from "@/components/cart/cart"
 import { Fragment, useEffect, useState } from "react"
-import { getCartList } from "@/database/Database"
 import { useSession } from "next-auth/react";
 import Error from "@/components/Error/Error";
 import Head from "next/head";
-import { deleteSentOrder } from "@/database/Database";
+import { useRouter } from "next/router";
 
-export default function Ccart({cart, path, pathToo}){
+export default function Ccart(){
 
+    const route = useRouter()
+    const [ cartList, setCartList ] = useState(null)
+
+    const getUserCart = route.query.slug[1]
+    const pathname = route.query.slug[0]
+
+    useEffect(() => {
+        fetch(`/api/cart/placeOrder?user=${getUserCart}`)
+            .then(res => res.json())
+            .then(data => setCartList(data && data.cart))
+    })
 
     /**
      * {@link session} idetifies the current user while {@link setUserEmail} stores the extracted name from the {@link session}
@@ -22,19 +32,19 @@ export default function Ccart({cart, path, pathToo}){
     
     //compares the logged in user from the session with the name from the path
     //so the correct users data can always be retrieved
-    const user = userEmail === path
+    const checkUser = userEmail === getUserCart
     
     return(
 
         <Fragment>
 
             <Head>
-                <title>{path +"'s "+ pathToo.charAt(0).toUpperCase() + pathToo.slice(1)}</title>
+                <title>{getUserCart +"'s "+ pathname.charAt(0).toUpperCase() + pathname.slice(1)}</title>
             </Head>
             {
-                user ? 
+                checkUser ? 
                     <Cart 
-                        results = {cart}
+                        results = {cartList}
                         deleteOrder={'what'}
                     /> : 
                     <Error errorMessage={'User No Found, click to'} link='/auth' linkText={'Login'}/>
@@ -45,30 +55,18 @@ export default function Ccart({cart, path, pathToo}){
 }
 
 
+
+// this is not used at all, but if i remove it and refresh the cart things do work
 export async function getServerSideProps({params}){
 
     const { slug } = params
     const path = slug[1]
     const pathToo = slug[0]
-    
-    const cart = await getCartList('cart', 'pendingOrders', path)
-
-    /**
-     * This is done to handle default deleting of cart  
-     * so when the order button is clicked,
-     * A 3rd path is adde on the route
-     * when we have the 3rd path and it matches the message{@link  we have received your order} then the customers cart will be cleaned
-     */
-    if(slug[2] === 'we have received your order') {
-       await deleteSentOrder('cart', 'pendingOrders', path)
-    }
 
     return {
         props:{
-            cart,
             path,
             pathToo
         }
     }
-
 }
