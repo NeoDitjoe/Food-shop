@@ -58,7 +58,7 @@ export default function AddToMenuForm(){
 
         }catch(error){
 
-            notification.setText('Failed to add menu')
+            notification.setText(error.message)
             notification.setBackground('errorNotification')
             notificationTimer(notification)
         }

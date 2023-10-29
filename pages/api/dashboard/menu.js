@@ -1,4 +1,5 @@
-import { getMenuList, client } from "@/database/Database"
+import { getMenuList } from "@/database/Database"
+import menuData from "@/database/helpers/dashboard/menu"
 
 export default async function handler(req, res) {
 
@@ -26,20 +27,11 @@ export default async function handler(req, res) {
       menu
     }
 
-    const db = client.db('menulist')
-
-    const productExist = await db.collection('menu').findOne({ product: product })
-
-    if(productExist){
-      res.status(400).json({ message: 'Product  already inserted' })
-      return;
-    }
-
     try{
-      const result = await db.collection('menu').insertOne(addData)
-      addData._id = result.insertedId
+
+      await menuData(product, addData, res)
     }catch(error){
-      res.status(404).json({message: 'Attempt Failed'})
+      res.status(404).json({message: error.message})
       return;
     }
 
