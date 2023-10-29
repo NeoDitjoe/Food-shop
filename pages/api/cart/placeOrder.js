@@ -1,4 +1,4 @@
-import { client } from "@/database/Database";
+import { client, getCartList } from "@/database/Database";
 
 export default async function handler( req, res){
     if( req.method === 'POST'){
@@ -18,5 +18,18 @@ export default async function handler( req, res){
         })
 
         res.status(201).json({ message: 'success'})
+    }
+
+    if(req.method === 'GET'){
+
+        const user = req.query.user || ''
+
+        try{
+            const results = await getCartList('cart', 'pendingOrders', user)
+            res.status(200).json({ cart: results})
+
+        }catch(error){
+            res.status(417).json({ message: 'failed to load' , error})
+        }
     }
 }

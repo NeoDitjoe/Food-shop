@@ -7,7 +7,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { useSession } from 'next-auth/react'
 import { useEffect } from 'react'
 
-export default function Cart({results, deleteOrder}){
+export default function Cart({results}){
 
     const { notification } = StateContext()
     const { data: session } = useSession()
@@ -84,7 +84,7 @@ export default function Cart({results, deleteOrder}){
              */
             // const route = 
             if(result){
-                notification.setText('Order has been sent successfully')
+                notification.setText('Order has been sent successfully sent')
                 notification.setBackground('successNotification')
                 router.replace(`/cart/${customer}/we have received your order`)
 
