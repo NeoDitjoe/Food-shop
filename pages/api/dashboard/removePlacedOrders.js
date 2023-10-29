@@ -1,4 +1,4 @@
-import removePlaceOrder from "@/database/helpers/dashboard/removePlacedOrders"
+import { removePlaceOrder } from "@/database/helpers/dashboard"
 
 export default async function handler(req, res){
 
@@ -13,6 +13,5 @@ export default async function handler(req, res){
         }catch(error){
             res.status(417).json({ message: error})
         }
-
     }
 }

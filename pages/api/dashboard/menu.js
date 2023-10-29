@@ -1,5 +1,5 @@
 import { getMenuList } from "@/database/Database"
-import menuData from "@/database/helpers/dashboard/menu"
+import menuData from "@/database/helpers/dashboard"
 
 export default async function handler(req, res) {
 
