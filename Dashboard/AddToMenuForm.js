@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { notificationTimer } from "@/components/Notification/Notification";
 
 async function addMenu(menu){
-    const response = await fetch('/api/menu', {
+    const response = await fetch('/api/dashboard/menu', {
         method: 'POST',
         body: JSON.stringify(menu),
         headers: {

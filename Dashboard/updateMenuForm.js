@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { notificationTimer } from '@/components/Notification/Notification';
 
 async function addItem(item) {
-  const response = await fetch('/api/addItem', {
+  const response = await fetch('/api/dashboard/updateMenu', {
     method: 'POST',
     body: JSON.stringify(item),
     headers: {
@@ -23,7 +23,7 @@ async function addItem(item) {
   return data;
 }
 
-export default function UpdateMenuForm() {
+export default function UpdateMenuForm() {  
 
   const { notification } = StateContext()
   const router = useRouter()
@@ -36,7 +36,7 @@ export default function UpdateMenuForm() {
 
   useEffect(() => {
 
-    fetch('/api/menu')
+    fetch('/api/dashboard/menu')
       .then(res => res.json())
       .then(data =>  setmenu(data.menu))
       

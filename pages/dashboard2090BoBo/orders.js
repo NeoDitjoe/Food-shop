@@ -58,7 +58,7 @@ export async function getServerSideProps(){
 }
 
 async function removeItem(item){
-    await fetch('/api/cart/removePlacedOrders', {
+    await fetch('/api/dashboard/removePlacedOrders', {
         method: 'POST',
         body: JSON.stringify(item),
         headers: {
