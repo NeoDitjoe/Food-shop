@@ -7,7 +7,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { useSession } from 'next-auth/react'
 import { useEffect } from 'react'
 
-export default function Cart({results, deleteOrder}){
+export default function Cart({results}){
 
     const { notification } = StateContext()
     const { data: session } = useSession()

@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import Error from "@/components/Error/Error";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { deleteSentOrder } from "@/database/Database";
 
 export default function Ccart(){
 
@@ -45,7 +46,6 @@ export default function Ccart(){
                 checkUser ? 
                     <Cart 
                         results = {cartList}
-                        deleteOrder={'what'}
                     /> : 
                     <Error errorMessage={'User No Found, click to'} link='/auth' linkText={'Login'}/>
             }
@@ -54,19 +54,19 @@ export default function Ccart(){
     )
 }
 
-
-
-// this is not used at all, but if i remove it and refresh the cart things do work
+// this function is soley used to clear cart after sending order , they rest is not used
 export async function getServerSideProps({params}){
 
     const { slug } = params
     const path = slug[1]
-    const pathToo = slug[0]
+
+    if(slug[2] === 'we have received your order') {
+        await deleteSentOrder('cart', 'pendingOrders', path)
+     } 
 
     return {
         props:{
             path,
-            pathToo
         }
     }
 }
