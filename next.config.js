@@ -3,19 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
 
   images: {
-    formats: [ 'image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        protocol:'https',
-        hostname: 'i.pinimg.com',
-        port: '',
-      },
-      {
-        protocol:'https',
-        hostname: 'images.pexels.com',
-        port: '',
-      },
-    ]
+    formats: ['image/avif', 'image/webp'],
+    domains: ['images.pexels.com', 'i.pinimg.com', 'www.pexels.com'], 
   },
 
   env: {

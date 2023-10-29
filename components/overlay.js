@@ -32,7 +32,7 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
             /**
              * Add data that is defined in the @components folder then in the / @grid file
              */
-            await fetch('/api/cart/cart', {
+            await fetch('/api/cart/overlay', {
                 method: 'POST',
                 body: JSON.stringify({ product: product, item: item, price: price, img: img, user: session.user.email[1] }),
                 headers: {

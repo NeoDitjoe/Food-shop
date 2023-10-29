@@ -1,15 +1,24 @@
 import Error from "@/components/Error/Error"
-import { getMenuList } from "@/database/Database"
+import { useEffect, useState } from "react";
 import { BsFillTrashFill } from "react-icons/bs";
 import style from 'styles/dashboard.module.css'
 
-export default function Orders({placedOrders}){
+export default function Orders(){
 
-    let NoOrders
+    const [ orders, setOrders] = useState(null)
 
-    if( placedOrders.length === 0 ) {
+    useEffect(() => {
+        fetch('/api/dashboard/orders')
+            .then(res => res.json())
+            .then(data => setOrders(data && data.orders))
+
+            console.log(orders)
+
+    })
+
+    if( orders && orders.length == 0 ) {
         return (
-            <Error errorMessage={'NO ORDERS PLACED'} />
+            <Error errorMessage={'NO ORDERS PLACED'} link={'.'} linkText={'dashboard'}/>
             
         )
     }
@@ -17,7 +26,7 @@ export default function Orders({placedOrders}){
     return (
         <div>
             {
-                placedOrders.map((order) => {
+                orders && orders.map((order) => {
                     return (
                         <div key={order.totalPrice+order.customer+order.item+new Date()} className={style.orders}>
                             <div className={style.order}>
@@ -44,21 +53,10 @@ export default function Orders({placedOrders}){
             }
         </div>
     )
-}
-
-export async function getServerSideProps(){
-
-    const placedOrders = await getMenuList('cart', 'placedOrders')
-
-    return{
-        props: {
-            placedOrders
-        }
-    }
-}
+} 
 
 async function removeItem(item){
-    await fetch('/api/cart/removePlacedOrders', {
+    await fetch('/api/dashboard/removePlacedOrders', {
         method: 'POST',
         body: JSON.stringify(item),
         headers: {
