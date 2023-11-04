@@ -42,7 +42,13 @@ export default function Header(){
                
                 <div className={style.collapseButton}>
                     <Button  
-                        click={() => setCollapse(!collapse)}
+                        click={() =>{ 
+                            setCollapse(!collapse)
+                            window.scrollTo({
+                                top: 0,
+                                behavior: 'smooth',
+                            });
+                        }}
                         name={'Menu'}
                     />
                 </div>
