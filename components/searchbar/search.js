@@ -1,10 +1,12 @@
 import style from 'styles/search.module.css'
-import { useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { debounce } from 'lodash'
+import FullWidthGrid from '../grid'
 
 export default function Search(){
 
     const inputRef = useRef()
+    const [ searchResults, setsearchResults ] = useState(null)
 
     function searchHandler(){
         const input = inputRef.current.value
@@ -12,7 +14,7 @@ export default function Search(){
 
         fetch(`/api/search/searchInput?input=${input}`)
             .then(res => res.json())
-            .then(data => console.log(data.results))
+            .then(data => setsearchResults(data.results || []))
         }
     }
 
@@ -33,6 +35,8 @@ export default function Search(){
                     />
                 </div>
             </form>
+
+            <FullWidthGrid menu={searchResults} /> 
         </div>
     )
 }
