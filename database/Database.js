@@ -63,3 +63,14 @@ export async function deleteSentOrder(folder, collection, user){
   return documents;
 
 }
+
+export async function getSearchDdata(input) {
+  const db = client.db('menulist');
+
+  const documents = await db
+    .collection('menu')
+    .find({ $or: [{ product : { $regex: new RegExp(input, 'i') }}, {menu: { $elemMatch: {item:  {$regex: new RegExp(input, 'i')}}}} ] })
+    .toArray();
+
+  return documents;
+}

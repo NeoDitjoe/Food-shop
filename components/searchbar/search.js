@@ -1,5 +1,5 @@
 import style from 'styles/search.module.css'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { debounce } from 'lodash'
 
 export default function Search(){
@@ -9,11 +9,14 @@ export default function Search(){
     function searchHandler(){
         const input = inputRef.current.value
         if(input.length >= 1){
-            console.log(input)
+
+        fetch(`/api/search/searchInput?input=${input}`)
+            .then(res => res.json())
+            .then(data => console.log(data.results))
         }
     }
 
-    const debounceSearchHandler = debounce(searchHandler, 1500)
+    const debounceSearchHandler = debounce(searchHandler, 1000)
 
     return (
         <div>
