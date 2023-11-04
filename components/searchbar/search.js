@@ -7,7 +7,10 @@ export default function Search(){
     const inputRef = useRef()
 
     function searchHandler(){
-        console.log(inputRef.current.value)
+        const input = inputRef.current.value
+        if(input.length >= 1){
+            console.log(input)
+        }
     }
 
     const debounceSearchHandler = debounce(searchHandler, 1500)
