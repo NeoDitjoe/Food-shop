@@ -1,33 +1,29 @@
-.headerText h1{
-    
-    width: 50%;
-    text-align: center;
-    align-self: center;
-    /* margin: 5%; */
+.welcome h1{
+    text-align: left;
     padding: 5%;
     font-size: 230%;
     font-family:  'Courier New', Courier, monospace;
-    text-shadow: 2px 2px 2px rgb(126, 126, 126);
+    text-shadow: 2px 2px 2px rgb(177, 176, 176);
 
-    /* font-family:  'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
 }
 
-.headerText{
-    background: rgb(215, 215, 215);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+.welcome{
+    background: url('https://images.pexels.com/photos/2498440/pexels-photo-2498440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    width: 100%;
+    height: 80vh;
+    background-size: cover;
+    background-position-y:50% ;
+    text-align: center;
+    padding: 3em;
 }
 
-.img{
-    margin: 2%;
-    width: 35%;
-    height: auto;
-    box-shadow: 10px 10px 10px rgb(146, 148, 146);
-    border-radius: 10px;
+.heading {
+    background-color: azure;
+    text-align: center;
+    padding: 10px;
+    font-size: 300%;
+    margin-top: 5%;
 }
-
 
 @media only screen and (min-width: 560px){
     .img{
