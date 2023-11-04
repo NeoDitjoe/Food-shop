@@ -45,7 +45,7 @@ export default function FullWidthGrid({menu}) {
         <Box  sx={{ flexGrow: 1 }}>
             <Grid container spacing={1}>
                 {
-                    menu.map((item) => (
+                    menu && menu.map((item) => (
                         <Grid xs={12} md={4} s={4} key={item.product}>
                             <Item>
                                 <Image 

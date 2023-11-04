@@ -5,7 +5,7 @@ import StateContext from '@/usecontext/stateContext'
 import { notificationTimer } from '../Notification/Notification'
 import { BsFillTrashFill } from "react-icons/bs";
 import { useSession } from 'next-auth/react'
-import { useEffect } from 'react'
+import loading from '../../public/Ball-1.2s-215px.svg'
 
 export default function Cart({results}){
 
@@ -136,7 +136,7 @@ export default function Cart({results}){
                     <h4>Place Order</h4>
                 </button>
                 
-            </div> : <h2 className={style.emptyCart}>YOUR CART IS EMPTY</h2>
+            </div> : <Image src={loading} width={200} heigh={100} alt={'...loading'}  className={style.emptyCart}/>
             }
         </>
     )
