@@ -12,8 +12,6 @@ export default function Orders(){
             .then(res => res.json())
             .then(data => setOrders(data && data.orders))
 
-            console.log(orders)
-
     })
 
     if( orders && orders.length == 0 ) {
@@ -38,10 +36,8 @@ export default function Orders(){
                             <div className={style.bin} onClick={() => {
                                     try{
                                         removeItem({ username: order.customer , item: order.item})
-                                        console.log('removed order')
 
                                     }catch(error){
-                                        console.log('attempt failed')
                                     }
                                     }}>
                                     <BsFillTrashFill color='red' size={25} />
