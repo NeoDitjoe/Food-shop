@@ -23,25 +23,13 @@ export default function Home({menuList}) {
       </Head>
 
       <main>
+      <div className={style.welcome}>
+        <h1>Welcome to BOBO <br/> Your Culinary Destination!</h1>
+      </div>
 
-        <Image 
-            src={'https://images.pexels.com/photos/2498440/pexels-photo-2498440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} 
-            // src={'https://images.pexels.com/photos/2235832/pexels-photo-2235832.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} 
-            // src={'https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} 
-            alt="background" 
-            width={400} 
-            height={300} 
-            className='img'
-        />
-
-        <div className={style.headerText}>
-          <h1>Welcome to BOBO - Your Culinary Destination!</h1>
-          <Image src={image} height={100} width={200} alt='Image' className={style.img}></Image>
-        </div>
-
-        <FullWidthGrid 
-          menu = {menuList}
-        />
+      <FullWidthGrid 
+        menu = {menuList}
+      />
         
       </main>
     </Fragment>
