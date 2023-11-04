@@ -1,11 +1,9 @@
-import Image from 'next/image'
 import FullWidthGrid from '@/components/grid'
 import { Fragment, useEffect } from 'react'
 import Head from 'next/head'
-import {  getMenuList } from '@/database/Database'
+import { getMenuList } from '@/database/Database'
 import StateContext from '@/usecontext/stateContext'
 import style from 'styles/mainIndex.module.css'
-import image from 'public/homepageImg.jpeg'
 
 export default function Home({menuList}) {
 
@@ -23,13 +21,19 @@ export default function Home({menuList}) {
       </Head>
 
       <main>
-      <div className={style.welcome}>
-        <h1>Welcome to BOBO <br/> Your Culinary Destination!</h1>
-      </div>
+        <div className={style.welcome}>
+          <h1>Welcome to BOBO <br/> Your Culinary Destination!</h1>
+        </div>
 
-      <FullWidthGrid 
-        menu = {menuList}
-      />
+        <h1 className={style.heading}>Specials</h1>
+        <FullWidthGrid 
+          menu = {menuList}
+        />
+
+        <h1 className={style.heading}>Order Now</h1>
+        <FullWidthGrid 
+          menu = {menuList}
+        />
         
       </main>
     </Fragment>
