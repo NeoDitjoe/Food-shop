@@ -23,7 +23,7 @@ export function Navlist(){
             {session ? <LinkButton link={`/cart/${session && session.user.email[1]}`} name={ <FaCartArrowDown/>} text='Cart'/> : ''}
             <LinkButton link='/' name={ <BsFillRocketTakeoffFill/>} text='Explore' />
             <LinkButton link='/search' name={ <BiSearchAlt/>} text='Search' />
-            <LinkButton link='/' name={ <AiFillPhone/>} text='Contact' />
+            <LinkButton link='/contactUs' name={ <AiFillPhone/>} text='Contact' />
             <LinkButton link={session ? '/profile' : '/auth'} name={ <CgProfile/>} text={username ? username.charAt(0).toLocaleUpperCase() + username.slice(1) : 'Login' } />
         </ul>
     )

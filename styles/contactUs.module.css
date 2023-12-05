@@ -1,0 +1,22 @@
+.main {
+    background: url('../public/imageedit_2_2258193660.png');
+    background-size: cover;
+    background-position-y: -90px;
+    height: 97vh;
+}
+
+.icon {
+    background-color: white;
+    border-radius: 100px;
+    height: 30px;
+    width: 30px;
+    border: none;
+    padding: 5px;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
