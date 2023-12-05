@@ -36,8 +36,7 @@ export default function ContactUs(){
                 </button>
                 <div>
                     <h6>Facebook</h6>
-                    
-                    <Link href={'https://www.facebook.com/search/top/?q=Martin%27s%20Gen%20Dealer-KwaBobo%20'}>Martin's Gen Dealer-KwaBobo </Link>
+                    <Link href={'https://www.facebook.com/search/top/?q=Martin%27s%20Gen%20Dealer-KwaBobo%20'}>{"Martin's Gen Dealer-KwaBobo"}</Link>
                 </div>
             </div>
         </div>
