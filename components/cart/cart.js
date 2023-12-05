@@ -7,7 +7,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { useSession } from 'next-auth/react'
 import loading from '../../public/Ball-1.2s-215px.svg'
 
-export default function Cart({results}){
+export default function Cart({results, key}){
 
     const { notification } = StateContext()
     const { data: session } = useSession()
@@ -74,7 +74,7 @@ export default function Cart({results}){
     async function orderHandler(e){
         e.preventDefault()
         notification.setText('sending Order')
-        notification.setBackground('loadingNotification')
+        notification.setSeverity('loadingNotification')
 
     try {
         const result = await placeOrder( items ,totalPrice.reduce((a, b) => a + b, 0), customer );
@@ -85,7 +85,7 @@ export default function Cart({results}){
             // const route = 
             if(result){
                 notification.setText('Order has been sent successfully sent')
-                notification.setBackground('successNotification')
+                notification.setSeverity('successNotification')
                 router.replace(`/cart/${customer}/we have received your order`)
 
                 setTimeout(() => {
@@ -99,7 +99,7 @@ export default function Cart({results}){
            
         } catch (error) {
             notification.setText("failed to send order: Please reload page and try again and make sure your cart has Items")
-            notification.setBackground('errorNotification')
+            notification.setSeverity('errorNotification')
             notificationTimer(notification)
         }
     }
@@ -115,7 +115,7 @@ export default function Cart({results}){
                         items.push(item.item + ' - '+ item.product + ' | ')
 
                         return (
-                            <div key={item.item + item.price} className={style.cart}>
+                            <div key={key} className={style.cart}>
                                 <Image alt='image' src={item.img} height={200} width={200} className={style.img}/>
                                 <div>
                                     <h3>{item.item} {item.product}</h3>

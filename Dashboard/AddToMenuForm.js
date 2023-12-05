@@ -40,7 +40,7 @@ export default function AddToMenuForm({collection}){
         const imageValue = imageRef.current.value
 
         notification.setText('Loading...')
-        notification.setBackground('loadingNotification')
+        notification.setSeverity('info')
 
         try{
             await addMenu({
@@ -52,14 +52,14 @@ export default function AddToMenuForm({collection}){
             }, collection)
             
             notification.setText('Item is added to menu')
-            notification.setBackground('successNotification')
+            notification.setSeverity('success')
             notificationTimer(notification)
             router.reload()
 
         }catch(error){
 
             notification.setText(error.message)
-            notification.setBackground('errorNotification')
+            notification.setSeverity('error')
             notificationTimer(notification)
         }
     }

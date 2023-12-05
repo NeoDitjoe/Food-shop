@@ -12,14 +12,14 @@ export function ContextProvider({children}){
     const [ collapse , setCollapse ] = useState(false)
     const [ options , setOptions ] = useState([])
     const [ text, setText ] = useState(null)
-    const [ background, setBackground ] = useState(null)
+    const [ severity, setSeverity ] = useState(null)
     const [ overlayCollapse, setOverlayCollapse] = useState(false)
 
     const notification = {
         setText,
         text,
-        setBackground,
-        background
+        setSeverity,
+        severity
 
     }
 
