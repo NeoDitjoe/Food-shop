@@ -5,6 +5,7 @@ import Error from "@/components/Error/Error";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { deleteSentOrder } from "@/database/Database";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Ccart(){
 
@@ -46,6 +47,7 @@ export default function Ccart(){
                 checkUser ? 
                     <Cart 
                         results = {cartList}
+                        key={uuidv4(img)}
                     /> : 
                     <Error errorMessage={'User No Found, click to'} link='/auth' linkText={'Login'}/>
             }

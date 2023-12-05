@@ -7,7 +7,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { useSession } from 'next-auth/react'
 import loading from '../../public/Ball-1.2s-215px.svg'
 
-export default function Cart({results}){
+export default function Cart({results, key}){
 
     const { notification } = StateContext()
     const { data: session } = useSession()
@@ -115,7 +115,7 @@ export default function Cart({results}){
                         items.push(item.item + ' - '+ item.product + ' | ')
 
                         return (
-                            <div key={item.item + item.price} className={style.cart}>
+                            <div key={key} className={style.cart}>
                                 <Image alt='image' src={item.img} height={200} width={200} className={style.img}/>
                                 <div>
                                     <h3>{item.item} {item.product}</h3>
