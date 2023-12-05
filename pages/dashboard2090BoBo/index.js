@@ -15,11 +15,13 @@ export default function Dashboard(){
             
             <div className={style.main}>
                 
+                <h2>Order Now Menu</h2>
                 <FormsGrid 
                     addMenu = {<AddToMenuForm collection = 'menu' />}
                     updateMenu = {<UpdateMenuForm collection = 'menu'/>}
                 />
                 
+                <h2>Specials</h2>
                 <FormsGrid 
                     addMenu = {<AddToMenuForm collection = 'specials' />}
                     updateMenu = {<UpdateMenuForm collection= 'specials' />}

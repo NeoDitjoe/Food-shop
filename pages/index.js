@@ -5,7 +5,7 @@ import { getMenuList } from '@/database/Database'
 import StateContext from '@/usecontext/stateContext'
 import style from 'styles/mainIndex.module.css'
 
-export default function Home({menuList}) {
+export default function Home({menuList, specials}) {
 
   const { setOptions } = StateContext()
 
@@ -27,7 +27,7 @@ export default function Home({menuList}) {
 
         <h1 className={style.heading}>Specials</h1>
         <FullWidthGrid 
-          menu = {menuList}
+          menu = {specials}
         />
 
         <h1 className={style.heading}>Order Now</h1>
@@ -43,10 +43,12 @@ export default function Home({menuList}) {
 export async function getStaticProps(){
 
   const menuList = await getMenuList('menulist', 'menu')
+  const specials = await getMenuList('menulist', 'specials')
 
   return{
     props: {
       menuList,
+      specials
     },
     revalidate: 1000
   }

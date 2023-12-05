@@ -36,7 +36,7 @@ export default function UpdateMenuForm({collection}) {
 
   useEffect(() => {
 
-    fetch('/api/dashboard/menu')
+    fetch(`/api/dashboard/menu?collection=${collection}`)
       .then(res => res.json())
       .then(data =>  setmenu(data.menu))
       

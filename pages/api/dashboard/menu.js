@@ -4,8 +4,10 @@ import menuData from "@/database/helpers/dashboard"
 export default async function handler(req, res) {
 
   if( req.method === 'GET'){
+
+    const collection = req.query.collection
     try{
-      const menuList = await getMenuList('menulist', 'menu')
+      const menuList = await getMenuList('menulist', collection)
 
       res.status(200).json({ menu: menuList})
     }catch {
