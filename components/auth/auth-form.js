@@ -57,7 +57,7 @@ function AuthForm() {
      */
     if (isLogin) {
       notification.setText('loading...')
-      notification.setBackground('loadingNotification')
+      notification.setBackground('info')
       const result = await signIn('credentials', {
         redirect: false,
         email: enteredEmail.toLowerCase(),
@@ -70,33 +70,33 @@ function AuthForm() {
       }
       if(!result.error){
         notification.setText('logged in')
-        notification.setBackground('successNotification')
+        notification.setBackground('success')
         notificationTimer(notification)
         router.push('/profile')
       }
 
       if(result.error){
         notification.setText(result.error)
-        notification.setBackground('errorNotification')
+        notification.setBackground('error')
         notificationTimer(notification)
       }
     } else {
 
       try {
         notification.setText('Loading...')
-        notification.setBackground('loadingNotification')
+        notification.setBackground('info')
 
         const result = await createUser(enteredUsername.toLowerCase(), enteredEmail.toLowerCase(), enteredPassword);
         if(result){
 
           notification.setText(`Welcome ${enteredUsername}`)
-          notification.setBackground('successNotification')
+          notification.setBackground('success')
           notificationTimer(notification)
         }
       } catch (error) {
 
         notification.setText(error.message);
-        notification.setBackground('errorNotification');
+        notification.setBackground('error');
         notificationTimer(notification)
       }
     }

@@ -10,19 +10,3 @@ body{
     overflow-x: hidden;
     /* border: 1px black solid; */
 }
-
-/* notification styling */
-.loadingNotification{
-    background-color: gray;
-    z-index: 2;
-}
-
-.successNotification{
-    background-color: rgb(29, 156, 29);
-    z-index: 2;
-}
-
-.errorNotification {
-    background-color: rgb(245, 42, 42);
-    z-index: 2;
-}

@@ -20,14 +20,14 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
     async function toCart(){
         if(!session){
             notification.setText(`Login to place order`)
-            notification.setBackground('errorNotification')
+            notification.setBackground('error')
             notificationTimer(notification)
         }
 
         if(session){
             //tracks process 
             notification.setText('Adding to cart')
-            notification.setBackground('loadingNotification')
+            notification.setBackground('info')
 
             /**
              * Add data that is defined in the @components folder then in the / @grid file
@@ -42,7 +42,7 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
     
             //tracks process
             notification.setText('Added to cart')
-            notification.setBackground('successNotification')
+            notification.setBackground('success')
             notificationTimer(notification)
         }
 

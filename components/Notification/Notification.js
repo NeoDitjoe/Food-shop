@@ -1,12 +1,15 @@
 import style from 'styles/notification.module.css'
 import StateContext from '@/usecontext/stateContext'
+import { Alert } from "@mui/material";
 
 export default function Notification({notificationMessage}){
 
     const { notification } = StateContext()
 
     return (
-        <h4 className={`${notification.background} ${style.notification}`} >{notificationMessage}</h4>
+        <div className={style.notification}>
+            <Alert severity={notification.background}>{notificationMessage}!</Alert>
+        </div>
     )
 }
 
@@ -14,5 +17,5 @@ export function notificationTimer(notification){
         setTimeout(() => {
             notification.setText(null)
             notification.setBackground(null)
-        }, [2000]);
+        }, [2300]);
 }
