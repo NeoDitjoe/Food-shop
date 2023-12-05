@@ -47,7 +47,7 @@ export default function Ccart(){
                 checkUser ? 
                     <Cart 
                         results = {cartList}
-                        key={uuidv4(img)}
+                        key={uuidv4()}
                     /> : 
                     <Error errorMessage={'User No Found, click to'} link='/auth' linkText={'Login'}/>
             }
