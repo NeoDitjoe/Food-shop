@@ -74,7 +74,7 @@ export default function Cart({results}){
     async function orderHandler(e){
         e.preventDefault()
         notification.setText('sending Order')
-        notification.setBackground('loadingNotification')
+        notification.setSeverity('loadingNotification')
 
     try {
         const result = await placeOrder( items ,totalPrice.reduce((a, b) => a + b, 0), customer );
@@ -85,7 +85,7 @@ export default function Cart({results}){
             // const route = 
             if(result){
                 notification.setText('Order has been sent successfully sent')
-                notification.setBackground('successNotification')
+                notification.setSeverity('successNotification')
                 router.replace(`/cart/${customer}/we have received your order`)
 
                 setTimeout(() => {
@@ -99,7 +99,7 @@ export default function Cart({results}){
            
         } catch (error) {
             notification.setText("failed to send order: Please reload page and try again and make sure your cart has Items")
-            notification.setBackground('errorNotification')
+            notification.setSeverity('errorNotification')
             notificationTimer(notification)
         }
     }

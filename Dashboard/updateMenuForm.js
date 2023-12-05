@@ -46,7 +46,7 @@ export default function UpdateMenuForm({collection}) {
     event.preventDefault()
 
     notification.setText(`Updating ${selectProduct.current.value} menu`)
-    notification.setBackground('info')
+    notification.setSeverity('info')
 
     const productInput = selectProduct.current.value
     const itemInput = itemRef.current.value
@@ -55,12 +55,12 @@ export default function UpdateMenuForm({collection}) {
     try {
       const result = await addItem({product: productInput, item: itemInput, price: priceInput, collection: collection});
       notification.setText(`successfully added ${itemRef.current.value} item to ${selectProduct.current.value} menu`)
-      notification.setBackground('success')
+      notification.setSeverity('success')
       notificationTimer(notification)
       router.reload()
     } catch (error) {
       notification.setText(`failed to Update Menu`)
-      notification.setBackground('error')
+      notification.setSeverity('error')
       notificationTimer(notification)
     }
 

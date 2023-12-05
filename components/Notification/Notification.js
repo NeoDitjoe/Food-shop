@@ -8,7 +8,7 @@ export default function Notification({notificationMessage}){
 
     return (
         <div className={style.notification}>
-            <Alert severity={notification.background}>{notificationMessage}!</Alert>
+            <Alert severity={notification.severity}>{notificationMessage}!</Alert>
         </div>
     )
 }
@@ -16,6 +16,6 @@ export default function Notification({notificationMessage}){
 export function notificationTimer(notification){
         setTimeout(() => {
             notification.setText(null)
-            notification.setBackground(null)
+            notification.setSeverity(null)
         }, [2300]);
 }
