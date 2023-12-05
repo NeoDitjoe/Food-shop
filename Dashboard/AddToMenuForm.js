@@ -5,8 +5,8 @@ import StateContext from "@/usecontext/stateContext";
 import { useRouter } from "next/router";
 import { notificationTimer } from "@/components/Notification/Notification";
 
-async function addMenu(menu){
-    const response = await fetch('/api/dashboard/menu', {
+async function addMenu(menu, collection){
+    const response = await fetch(`/api/dashboard/menu?collection=${collection}`, {
         method: 'POST',
         body: JSON.stringify(menu),
         headers: {
@@ -21,8 +21,7 @@ async function addMenu(menu){
       }
 }
 
-export default function AddToMenuForm(){
-
+export default function AddToMenuForm({collection}){
 
     const { notification } = StateContext()
     const router = useRouter()
@@ -50,7 +49,7 @@ export default function AddToMenuForm(){
                 menu: [
                     {price: itemPriceVaue, item: menuItemValue}
                 ]
-            })
+            }, collection)
             
             notification.setText('Item is added to menu')
             notification.setBackground('successNotification')

@@ -16,8 +16,12 @@ export default function Dashboard(){
             <div className={style.main}>
                 
                 <FormsGrid 
-                    addMenu = {<AddToMenuForm />}
+                    addMenu = {<AddToMenuForm collection = 'menu' />}
                     updateMenu = {<UpdateMenuForm/>}
+                />
+                <FormsGrid 
+                    addMenu = {<AddToMenuForm collection = 'specials' />}
+                    // updateMenu = {<UpdateMenuForm/>}
                 />
             </div>
         </div>

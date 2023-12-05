@@ -27,9 +27,11 @@ export default async function handler(req, res) {
       menu
     }
 
+    const collection = req.query.collection || ''
+
     try{
 
-      await menuData(product, 'menu', addData, res)
+      await menuData(product, collection , addData, res)
     }catch(error){
       res.status(404).json({message: error.message})
       return;
