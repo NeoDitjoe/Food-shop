@@ -1,6 +1,7 @@
 import style from 'styles/contactUs.module.css'
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt, FaFacebook  } from "react-icons/fa";
+import Link from 'next/link';
 
 export default function ContactUs(){
 
@@ -35,7 +36,8 @@ export default function ContactUs(){
                 </button>
                 <div>
                     <h6>Facebook</h6>
-                    Martin's Gen Dealer-KwaBobo 
+                    
+                    <Link href={'https://www.facebook.com/search/top/?q=Martin%27s%20Gen%20Dealer-KwaBobo%20'}>Martin's Gen Dealer-KwaBobo </Link>
                 </div>
             </div>
         </div>
