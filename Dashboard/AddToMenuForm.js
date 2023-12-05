@@ -1,5 +1,5 @@
 import { Button } from "@/components/button/button";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import style from 'styles/AddToMenuForm.module.css'
 import StateContext from "@/usecontext/stateContext";
 import { useRouter } from "next/router";
@@ -31,6 +31,7 @@ export default function AddToMenuForm(){
     const menuItemRef = useRef()
     const itemPrice = useRef()
     const imageRef = useRef()
+    const [image, setImage] = useState('')
 
     async function addMenuHandle(e){
         e.preventDefault()
@@ -44,7 +45,7 @@ export default function AddToMenuForm(){
 
         try{
             await addMenu({
-                image: imageValue,
+                image: image || imageValue,
                 product: inputValue.toLowerCase(),
                 menu: [
                     {price: itemPriceVaue, item: menuItemValue}
@@ -61,6 +62,20 @@ export default function AddToMenuForm(){
             notification.setText(error.message)
             notification.setBackground('errorNotification')
             notificationTimer(notification)
+        }
+    }
+
+    function convertToBase64(e){
+        console.log(e);
+
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = () => {
+            console.log(reader.result)
+            setImage(reader.result)
+        }
+        reader.onerror = error => {
+            console.log('Error: ', error)
         }
     }
 
@@ -81,7 +96,7 @@ export default function AddToMenuForm(){
                     <input type="text" ref={imageRef} />
                     <br/>
                     <label>Image File: </label> 
-                    <input type="file"  /> 
+                    <input accept="image/*" type="file" onChange={convertToBase64} /> 
                 </div>
             </div> 
                 <Button name='submit' />
