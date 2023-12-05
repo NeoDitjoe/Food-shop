@@ -23,7 +23,7 @@ async function addItem(item) {
   return data;
 }
 
-export default function UpdateMenuForm() {  
+export default function UpdateMenuForm({collection}) {  
 
   const { notification } = StateContext()
   const router = useRouter()
@@ -53,7 +53,7 @@ export default function UpdateMenuForm() {
     const priceInput = priceRef.current.value
 
     try {
-      const result = await addItem({product: productInput, item: itemInput, price: priceInput});
+      const result = await addItem({product: productInput, item: itemInput, price: priceInput, collection: collection});
       notification.setText(`successfully added ${itemRef.current.value} item to ${selectProduct.current.value} menu`)
       notification.setBackground('successNotification')
       notificationTimer(notification)

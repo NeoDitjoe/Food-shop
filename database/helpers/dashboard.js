@@ -22,11 +22,11 @@ export function removePlaceOrder( username, item){
     db.collection('placedOrders').deleteOne({customer: username, item : item})
 }
 
-export async function updateMenu(product, item, price){
+export async function updateMenu(product, collection, item, price){
 
   const db = client.db('menulist')
 
-  await db.collection('menu').updateOne({
+  await db.collection(collection).updateOne({
       
   product: product
   }, {

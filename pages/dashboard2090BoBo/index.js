@@ -17,11 +17,12 @@ export default function Dashboard(){
                 
                 <FormsGrid 
                     addMenu = {<AddToMenuForm collection = 'menu' />}
-                    updateMenu = {<UpdateMenuForm/>}
+                    updateMenu = {<UpdateMenuForm collection = 'menu'/>}
                 />
+                
                 <FormsGrid 
                     addMenu = {<AddToMenuForm collection = 'specials' />}
-                    // updateMenu = {<UpdateMenuForm/>}
+                    updateMenu = {<UpdateMenuForm collection= 'specials' />}
                 />
             </div>
         </div>
