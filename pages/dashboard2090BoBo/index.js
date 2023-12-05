@@ -2,9 +2,14 @@ import AddToMenuForm from "@/Dashboard/AddToMenuForm";
 import UpdateMenuForm from "@/Dashboard/updateMenuForm";
 import style from 'styles/dashboard.module.css'
 import { FormsGrid } from "@/components/grid";
-import LinkButton from "@/components/button/button";
+import LinkButton, { Button } from "@/components/button/button";
+import { useState } from "react";
+import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 export default function Dashboard(){
+
+    const [ showAddMenu, setShowAddMenu ] = useState(false)
+    const [ showSpecialsForm, setShowSpecialsForm ] = useState(false)
 
     return(            
     
@@ -15,17 +20,18 @@ export default function Dashboard(){
             
             <div className={style.main}>
                 
-                <h2>Order Now Menu</h2>
-                <FormsGrid 
+                <Button click={() => setShowAddMenu(!showAddMenu)} name={["Order Now Menu ",showAddMenu ? <SlArrowUp /> : <SlArrowDown />]} />
+                {showAddMenu ? <FormsGrid 
                     addMenu = {<AddToMenuForm collection = 'menu' />}
                     updateMenu = {<UpdateMenuForm collection = 'menu'/>}
-                />
-                
-                <h2>Specials</h2>
-                <FormsGrid 
+                /> : ''}
+                    <br/>
+
+                <Button click={() => setShowSpecialsForm(!showSpecialsForm)} name={["Specials ",showSpecialsForm ? <SlArrowUp /> : <SlArrowDown />]} />
+                {showSpecialsForm ? <FormsGrid 
                     addMenu = {<AddToMenuForm collection = 'specials' />}
-                    updateMenu = {<UpdateMenuForm collection= 'specials' />}
-                />
+                    updateMenu = {<UpdateMenuForm collection = 'specials'/>}
+                /> : ''}
             </div>
         </div>
     )
