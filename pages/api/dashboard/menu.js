@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
     try{
 
-      await menuData(product, addData, res)
+      await menuData(product, 'menu', addData, res)
     }catch(error){
       res.status(404).json({message: error.message})
       return;

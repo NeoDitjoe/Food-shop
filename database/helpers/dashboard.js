@@ -1,17 +1,17 @@
 import { client } from "../Database";
 
-export default async function menuData(product, addData, res){
+export default async function menuData(product, collection, addData, res){
 
     const db = client.db('menulist')
 
-    const productExist = await db.collection('menu').findOne({ product: product })
+    const productExist = await db.collection(collection).findOne({ product: product })
 
     if(productExist){
       res.status(400).json({ message: 'You already have this product, use the update form' })
       return;
     }
 
-    await db.collection('menu').insertOne(addData)
+    await db.collection(collection).insertOne(addData)
 
 }
 
