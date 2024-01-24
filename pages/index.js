@@ -22,7 +22,11 @@ export default function Home({menuList, specials}) {
 
       <main>
         <div className={style.welcome}>
-          <h1>Welcome to BOBO <br/> Your Culinary Destination!</h1>
+          <h1>
+            <span>Your </span> 
+            <span>Culinary </span> 
+            <span>Destination!</span>
+          </h1>
         </div>
 
         <h1 className={style.heading}>Specials</h1>

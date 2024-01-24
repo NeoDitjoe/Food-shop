@@ -1,14 +1,14 @@
 .link{
     text-decoration: none;
-    color: #05e35e;
+    color: orangered;
     font-size: 110%;
 }
 
 .button {
     padding: 15px;
     border-radius: 5px;
-    border: none;
-    background-color: #05e35e;
+    border: 1px rgba(255, 68, 0, 0.227) solid;
+    background-color:orange;
     color: black;
     cursor: pointer;
 }

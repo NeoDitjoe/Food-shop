@@ -6,7 +6,7 @@
 }
 
 .button{
-    border: solid 1px #05e35e;
+    border: solid 1px #e3b305;
     padding: 1.2%;
     border-radius: 5px;
     margin: 2%;
@@ -40,6 +40,7 @@
     border-bottom: white solid 1px;
     border-right: white solid 1px;
     align-items: center;
+    white-space: nowrap;
 }
 
 .price{
