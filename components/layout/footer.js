@@ -7,7 +7,7 @@ export default function Footer(){
             <br/>
             <p>The content of this website is intended for personal and non-commercial use. Any unauthorized use, distribution, or reproduction of this material is strictly prohibited.</p>
             <br/>
-            <p>For inquiries regarding the use or distribution of our content, please contact us at [Your Contact Email Address].</p>
+            <p>For inquiries regarding the use or distribution of our content, please contact us at on 072 554 8562.</p>
         </div>
     )
 }
