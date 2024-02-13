@@ -16,7 +16,7 @@ export default function Orders() {
 	useEffect(() => {
 		setUserName(session && session.user.email[1])
 		setUserEmail(session && session.user.email[0])
-	})
+	}, [userEmail, username])
 
 	const checkUser = username === 'administratorbobo'
 	const checkUserEmail = userEmail === 'martins@gmail.com'
