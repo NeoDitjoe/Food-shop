@@ -58,7 +58,7 @@ export default function Header(){
         <header className={style.header}>
             <nav className={style.nav}>
                 
-                <h1 className={style.logo}><Link href={'/'}>Martin's</Link></h1>
+                <h1 className={style.logo}><Link href={'/'}>{"Martin's"}</Link></h1>
                 <div className={style.navListDiv}>{Navlist()}</div>
                
                 <div className={style.collapseButton}>
