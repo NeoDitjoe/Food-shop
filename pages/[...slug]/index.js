@@ -41,7 +41,7 @@ export default function Ccart(){
         <Fragment>
 
             <Head>
-                <title>{getUserCart +"'s "+ pathname.charAt(0).toUpperCase() + pathname.slice(1)}</title>
+                <title>{getUserCart.charAt(0).toUpperCase() + getUserCart.slice(1) +"'s "+ pathname}</title>
             </Head>
             {
                 checkUser ? 
