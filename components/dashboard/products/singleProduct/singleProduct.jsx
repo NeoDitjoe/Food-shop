@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import addToDatabase from "@/database/addToDatabase";
 import { Button } from "@/components/button/button";
 import { BsFillTrashFill } from "react-icons/bs";
+import StateContext from "@/usecontext/stateContext";
 
 export default function Menu(props) {
 
@@ -16,6 +17,7 @@ export default function Menu(props) {
   const [addNewForm, setAddNewForm] = useState(false)
   const [currentItem, setCurrentItem] = useState(null)
   const paramName = useParams()
+  const { notification } = StateContext()
 
   async function editFormHandler(e) {
     e.preventDefault();
@@ -67,6 +69,23 @@ export default function Menu(props) {
     }
   }
 
+  async function deleteItem(item){
+    
+    try {
+      notification.setText('Removing Item')
+      notification.setSeverity('info')
+      await addToDatabase('/api/dashboard/removeItem', {product: paramName.slug, item: item})
+
+      notification.setText('Removed Product')
+      notification.setSeverity('success')
+
+      window.location.reload()
+
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
   return (
 
     <div className={style.main}>
@@ -96,10 +115,7 @@ export default function Menu(props) {
         {
           product.menu.map((item, index) => (
             <div
-              onClick={() => {
-                setEditform(true)
-                setCurrentItem(item.item)
-              }}
+              onClick={() => setCurrentItem(item.item)}
               className={style.menu}
               key={index}
             >
@@ -108,12 +124,18 @@ export default function Menu(props) {
               </div>
 
               <div className={style.itemsAndBin}>
-                <div className={style.items}>
+                <div 
+                  className={style.items}
+                  onClick={() => setEditform(true)}
+                >
                   <p>{item.item}</p>
                   <h5>R {Number(item.price).toFixed(2)}</h5>
                 </div>
 
-                <div className={style.bin}>
+                <div 
+                  onClick={() => deleteItem(item.item)}
+                  className={style.bin}
+                >
                   <BsFillTrashFill color="red"/>
                 </div>
               </div>
