@@ -29,7 +29,7 @@ export default function Form(props) {
 
           <Grid xs={12} md={12} s={2}  >
             <Item>
-              <input type='number' name="price" placeholder="price" />
+              <input type='number' name="price" step='0.01' placeholder="price" />
             </Item>
 
               <button type="submit">Submit</button>
