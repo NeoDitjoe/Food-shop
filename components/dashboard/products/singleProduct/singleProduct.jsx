@@ -4,18 +4,43 @@ import Backdrop from '@mui/material/Backdrop';
 import { IoMdClose } from "react-icons/io";
 import { useState } from "react";
 import Form from "./editForm/form";
+import { useParams } from "next/navigation";
+import addToDatabase from "@/database/addToDatabase";
 
 export default function Menu(props) {
 
   const { product } = props
   const [editForm, setEditform] = useState(false)
+  const [currentItem, setCurrentItem] = useState(null)
+  const paramName = useParams()
 
-  function editFormHandler(e) {
+  async function editFormHandler(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const itemValue = formData.get('item');
-    console.log(itemValue);
+    const itemPrice = formData.get('price');
+
+    try {
+      const response = await addToDatabase(
+        '/api/dashboard/editMenuItems',
+        {
+          product: paramName.slug,
+          item: currentItem,
+          updateItem: itemValue,
+          updatePrice: itemPrice
+        })
+
+      if (response.message === 'success') {
+        window.location.reload();
+      }
+      
+    } catch (error) {
+      alert('error')
+      console.log(error)
+    }
+
   }
+
 
   return (
 
@@ -39,7 +64,10 @@ export default function Menu(props) {
         {
           product.menu.map((item, index) => (
             <div
-              onClick={() => setEditform(true)}
+              onClick={() => {
+                setEditform(true)
+                setCurrentItem(item.item)
+              }}
               className={style.menu}
             >
               <div>
