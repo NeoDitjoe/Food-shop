@@ -65,7 +65,7 @@ export default function Menu(props) {
         window.location.reload();
       }
     } catch (error) {
-      alert('check your internet connection!')
+      alert(error.message || 'check your internet connection!')
     }
   }
 
