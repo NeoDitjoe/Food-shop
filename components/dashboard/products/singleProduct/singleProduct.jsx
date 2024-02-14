@@ -6,11 +6,13 @@ import { useState } from "react";
 import Form from "./editForm/form";
 import { useParams } from "next/navigation";
 import addToDatabase from "@/database/addToDatabase";
+import { Button } from "@/components/button/button";
 
 export default function Menu(props) {
 
   const { product } = props
   const [editForm, setEditform] = useState(false)
+  const [addNewForm, setAddNewForm] = useState(false)
   const [currentItem, setCurrentItem] = useState(null)
   const paramName = useParams()
 
@@ -33,7 +35,7 @@ export default function Menu(props) {
       if (response.message === 'success') {
         window.location.reload();
       }
-      
+
     } catch (error) {
       alert('error')
       console.log(error)
@@ -41,6 +43,27 @@ export default function Menu(props) {
 
   }
 
+  async function addNewItem(e) {
+    e.preventDefault()
+    const formData = new FormData(e.target);
+    const itemValue = formData.get('item');
+    const itemPrice = formData.get('price');
+
+    try {
+      console.log(itemValue, itemPrice)
+      const response = await addToDatabase(
+        '/api/dashboard/updateMenu',
+        { product: paramName.slug, item: itemValue, price: itemPrice }
+      )
+
+      console.log(response)
+      if (response.message === 'Successfully stored!') {
+        window.location.reload();
+      }
+    } catch (error) {
+      alert('check your internet connection!')
+    }
+  }
 
   return (
 
@@ -57,6 +80,13 @@ export default function Menu(props) {
           width={400}
           height={400}
           className={style.img}
+        />
+      </div>
+
+      <div className={style.addNew}>
+        <Button
+          name='Add new'
+          click={() => setAddNewForm(true)}
         />
       </div>
 
@@ -83,6 +113,23 @@ export default function Menu(props) {
           ))
         }
       </div>
+
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={addNewForm}
+      >
+        <div className={style.Backdrop}>
+          <p
+            className={style.closeEditForm}
+            onClick={() => setAddNewForm(false)}
+          ><IoMdClose color="red" size={30} /></p>
+
+          <Form
+            editForm={addNewItem}
+          />
+
+        </div>
+      </Backdrop>
 
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
