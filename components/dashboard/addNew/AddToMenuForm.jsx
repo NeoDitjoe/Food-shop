@@ -45,7 +45,7 @@ export default function AddToMenuForm({collection}){
                 image: image,
                 product: inputValue.toLowerCase(),
                 menu: [
-                    {price: itemPriceVaue, item: menuItemValue}
+                    {price: itemPriceVaue, item: menuItemValue.toLowerCase()}
                 ]
             }, collection)
             
