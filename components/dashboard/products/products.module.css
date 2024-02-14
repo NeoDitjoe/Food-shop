@@ -17,3 +17,13 @@
   background-color: rgba(255, 166, 0, 0.395);
   cursor: pointer;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 20fr 1fr;
+}
+
+.trashBin{
+  margin: 20px;
+  cursor: pointer;
+}
