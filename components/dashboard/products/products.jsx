@@ -4,18 +4,31 @@ import { BsFillTrashFill } from "react-icons/bs";
 import Link from "next/link";
 import AddNewProduct from "../addNew/addNewPoductForm";
 import { removeItem } from "@/database/removeFromDatabase";
+import StateContext from "@/usecontext/stateContext";
 
 export default function Products(props) {
 
+  const { notification } = StateContext()
+
   const { products } = props
 
-  async function removeProduct(product){
+  async function removeProduct(product) {
     try {
-      const response = 
+
+      notification.setText('Removing product...')
+      notification.setSeverity('info')
+
+      const response =
         await removeItem(`/api/dashboard/removeProduct?product=${product}`)
-      console.log(response)
+
+      notification.setText('Removed product')
+      notification.setSeverity('success')
+      window.location.reload()
+
     } catch (error) {
-      alert(error.message)
+      console.log(error)
+      notification.setText(error.message)
+      notification.setSeverity('error')
     }
   }
 
