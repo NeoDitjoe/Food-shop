@@ -28,7 +28,7 @@ export default function Menu(props) {
         {
           product: paramName.slug,
           item: currentItem,
-          updateItem: itemValue,
+          updateItem: itemValue.toLocaleLowerCase(),
           updatePrice: itemPrice
         })
 
@@ -53,7 +53,11 @@ export default function Menu(props) {
       console.log(itemValue, itemPrice)
       const response = await addToDatabase(
         '/api/dashboard/updateMenu',
-        { product: paramName.slug, item: itemValue, price: itemPrice }
+        {
+          product: paramName.slug,
+          item: itemValue.toLocaleLowerCase(),
+          price: itemPrice
+        }
       )
 
       console.log(response)
@@ -61,7 +65,7 @@ export default function Menu(props) {
         window.location.reload();
       }
     } catch (error) {
-      alert('check your internet connection!')
+      alert(error.message || 'check your internet connection!')
     }
   }
 
