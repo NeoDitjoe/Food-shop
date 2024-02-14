@@ -1,9 +1,21 @@
 import Image from "next/image"
 import style from './singleProduct.module.css'
+import Backdrop from '@mui/material/Backdrop';
+import { IoMdClose } from "react-icons/io";
+import { useState } from "react";
+import Form from "./editForm/form";
 
 export default function Menu(props) {
 
   const { product } = props
+  const [editForm, setEditform] = useState(false)
+
+  function editFormHandler(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const itemValue = formData.get('item');
+    console.log(itemValue);
+  }
 
   return (
 
@@ -26,9 +38,12 @@ export default function Menu(props) {
       <div>
         {
           product.menu.map((item, index) => (
-            <div className={style.menu}>
+            <div
+              onClick={() => setEditform(true)}
+              className={style.menu}
+            >
               <div>
-                {index + 1}. 
+                {index + 1}.
               </div>
 
               <div className={style.items}>
@@ -39,6 +54,23 @@ export default function Menu(props) {
           ))
         }
       </div>
+
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={editForm}
+      >
+        <div className={style.Backdrop}>
+          <p
+            className={style.closeEditForm}
+            onClick={() => setEditform(false)}
+          ><IoMdClose color="red" size={30} /></p>
+
+          <Form
+            editForm={editFormHandler}
+          />
+
+        </div>
+      </Backdrop>
 
     </div>
   )

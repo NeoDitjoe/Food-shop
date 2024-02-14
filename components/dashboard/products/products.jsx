@@ -1,6 +1,5 @@
 import Image from "next/image"
 import style from './products.module.css'
-import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import { BsFillTrashFill } from "react-icons/bs";
 import Link from "next/link";
 

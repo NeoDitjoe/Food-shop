@@ -27,3 +27,16 @@
   flex-direction: column;
   text-align: start;
 }
+
+.closeEditForm{
+  cursor: pointer;
+}
+
+.Backdrop{
+  background-color: rgba(0, 0, 0, 0.485);
+  padding: 20px;
+  border-radius: 5px;
+}
+.Backdrop p {
+  text-align: end;
+}
