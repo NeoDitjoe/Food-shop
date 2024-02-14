@@ -69,6 +69,7 @@ export default function Menu(props) {
                 setCurrentItem(item.item)
               }}
               className={style.menu}
+              key={index}
             >
               <div>
                 {index + 1}.

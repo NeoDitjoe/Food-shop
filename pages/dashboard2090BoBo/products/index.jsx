@@ -6,10 +6,6 @@ export default function products(props){
 
   const { products } = props
 
-  useEffect(() => {
-    console.log(products)
-  })
-
   return(
     <Products 
       products = {products}

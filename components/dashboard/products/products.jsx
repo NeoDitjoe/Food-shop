@@ -10,12 +10,14 @@ export default function Products(props) {
   return (
     <div>
       {
-        products && products.map((product) => {
+        products && products.map((product, index) => {
 
           return (
             <Link
-            href={`/dashboard2090BoBo/products/${product.product}`} 
-              className={style.main}>
+              href={`/dashboard2090BoBo/products/${product.product}`}
+              className={style.main}
+              key={index}
+            >
               <div>
                 <Image
                   src={product.image}
@@ -32,9 +34,9 @@ export default function Products(props) {
               </div>
 
               <div>
-                <BsFillTrashFill color="red"/>
+                <BsFillTrashFill color="red" />
               </div>
-             
+
             </Link>
           )
         })
