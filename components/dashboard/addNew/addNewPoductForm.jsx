@@ -1,7 +1,7 @@
 import AddToMenuForm from './AddToMenuForm';
 import style from 'styles/dashboard.module.css'
 import { FormsGrid } from "@/components/grid";
-import LinkButton, { Button } from "@/components/button/button";
+import { Button } from "@/components/button/button";
 import { useEffect, useState } from "react";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import { useSession } from "next-auth/react";
@@ -10,7 +10,6 @@ import Link from "next/link";
 export default function AddNewProduct() {
 
 	const [showAddMenu, setShowAddMenu] = useState(false)
-	const [showSpecialsForm, setShowSpecialsForm] = useState(false)
 	const { data: session} = useSession()
 	const [username, setUserName] = useState('')
 	const [userEmail, setUserEmail] = useState('')
@@ -33,7 +32,7 @@ export default function AddNewProduct() {
 
 					<Button 
           
-            click={() => setShowAddMenu(!showAddMenu)} name={["Order Now Menu ", showAddMenu ? <SlArrowUp /> : <SlArrowDown />]} />
+            click={() => setShowAddMenu(!showAddMenu)} name={["Add new product ", showAddMenu ? <SlArrowUp /> : <SlArrowDown />]} />
 					{showAddMenu ? <FormsGrid
 						addMenu={<AddToMenuForm collection='menu' />}
 					/> : ''}
