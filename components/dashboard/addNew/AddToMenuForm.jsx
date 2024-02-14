@@ -29,7 +29,6 @@ export default function AddToMenuForm({collection}){
     const menuRef = useRef()
     const menuItemRef = useRef()
     const itemPrice = useRef()
-    const imageRef = useRef()
     const [image, setImage] = useState('')
 
     async function addMenuHandle(e){
@@ -37,14 +36,13 @@ export default function AddToMenuForm({collection}){
         const inputValue = menuRef.current.value
         const menuItemValue = menuItemRef.current.value
         const itemPriceVaue = itemPrice.current.value
-        const imageValue = imageRef.current.value
 
         notification.setText('Loading...')
         notification.setSeverity('info')
 
         try{
             await addMenu({
-                image: image || imageValue,
+                image: image,
                 product: inputValue.toLowerCase(),
                 menu: [
                     {price: itemPriceVaue, item: menuItemValue}
@@ -91,9 +89,7 @@ export default function AddToMenuForm({collection}){
                 <input type="text" required ref={itemPrice} />
 
                 <div className={style.imageDiv}>
-                    <label>Paste Image Link: </label>
-                    <input type="text" ref={imageRef} />
-                    <br/>
+                   
                     <label>Image File: </label> 
                     <input accept="image/*" type="file" onChange={convertToBase64} /> 
                 </div>

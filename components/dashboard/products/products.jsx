@@ -2,6 +2,7 @@ import Image from "next/image"
 import style from './products.module.css'
 import { BsFillTrashFill } from "react-icons/bs";
 import Link from "next/link";
+import AddNewProduct from "../addNew/addNewPoductForm";
 
 export default function Products(props) {
 
@@ -9,6 +10,8 @@ export default function Products(props) {
 
   return (
     <div>
+
+      <AddNewProduct />
       {
         products && products.map((product, index) => {
 
