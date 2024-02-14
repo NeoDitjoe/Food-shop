@@ -6,8 +6,6 @@ export default function singleProduct(props) {
 
   const { data } = props
 
-  console.log(data[0])
-
   return (
     <div>
       <Menu 

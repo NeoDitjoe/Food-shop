@@ -45,7 +45,7 @@ export default function AddToMenuForm({collection}){
                 image: image,
                 product: inputValue.toLowerCase(),
                 menu: [
-                    {price: itemPriceVaue, item: menuItemValue}
+                    {price: itemPriceVaue, item: menuItemValue.toLowerCase()}
                 ]
             }, collection)
             
@@ -63,12 +63,10 @@ export default function AddToMenuForm({collection}){
     }
 
     function convertToBase64(e){
-        console.log(e);
 
         var reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onload = () => {
-            console.log(reader.result)
             setImage(reader.result)
         }
         reader.onerror = error => {

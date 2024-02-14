@@ -38,7 +38,6 @@ export default function Menu(props) {
 
     } catch (error) {
       alert('error')
-      console.log(error)
     }
 
   }
@@ -50,7 +49,6 @@ export default function Menu(props) {
     const itemPrice = formData.get('price');
 
     try {
-      console.log(itemValue, itemPrice)
       const response = await addToDatabase(
         '/api/dashboard/updateMenu',
         {
@@ -60,7 +58,6 @@ export default function Menu(props) {
         }
       )
 
-      console.log(response)
       if (response.message === 'Successfully stored!') {
         window.location.reload();
       }
@@ -111,7 +108,7 @@ export default function Menu(props) {
 
               <div className={style.items}>
                 <p>{item.item}</p>
-                <h5>{Number(item.price).toFixed(2)}</h5>
+                <h5>R {Number(item.price).toFixed(2)}</h5>
               </div>
             </div>
           ))
