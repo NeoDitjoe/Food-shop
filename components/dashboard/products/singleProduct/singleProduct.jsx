@@ -111,7 +111,7 @@ export default function Menu(props) {
 
               <div className={style.items}>
                 <p>{item.item}</p>
-                <h5>{Number(item.price).toFixed(2)}</h5>
+                <h5>R {Number(item.price).toFixed(2)}</h5>
               </div>
             </div>
           ))
