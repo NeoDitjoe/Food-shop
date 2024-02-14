@@ -1,0 +1,15 @@
+.main Input {
+  width: 100%;
+  height: 8vh;
+  border-radius: 5px;
+  border: 1px solid;
+  text-align: center;
+}
+
+.main button{
+  width: 50%;
+  height: 7vh;
+  border-radius: 5px;
+  background-color: orange;
+  margin: 10px;
+}

@@ -11,6 +11,7 @@ import { ImHome } from "react-icons/im";
 import { MdDashboardCustomize } from "react-icons/md";
 import Link from "next/link";
 import { useSession } from "next-auth/react"
+import { IoFastFoodSharp } from "react-icons/io5";
 
 export function Navlist(){
 
@@ -31,10 +32,14 @@ export function Navlist(){
         <>
             { checkUser && checkUserEmail 
                 ? <ul className={ collapse ? style.collapseNavList : style.navList}>
-                    <LinkButton link='/' name={ <ImHome/>} text='Home' />
+                    <LinkButton link='/' name={ <ImHome/>} text='Customer_View' />
+                    <LinkButton link='/dashboard2090BoBo/products' name={ <IoFastFoodSharp/>} text='Products' />
                     <LinkButton link='/dashboard2090BoBo' name={ <MdDashboardCustomize/>} text='Dashboard' />
                     <LinkButton link='/dashboard2090BoBo/orders' name={ <BsFillRocketTakeoffFill/>} text='Orders' />
-                    <LinkButton link={session ? '/profile' : '/auth'} name={ <CgProfile/>} text={username ? username.charAt(0).toLocaleUpperCase() + username.slice(1) : 'Login' } />
+                    <LinkButton 
+                        link={session ? '/profile' : '/auth'} 
+                        name={ <CgProfile/>} 
+                        text={username ? username.charAt(0).toLocaleUpperCase() + username.slice(1) : 'Login' } />
                 </ul>
                 :
                 <ul className={ collapse ? style.collapseNavList : style.navList}>
