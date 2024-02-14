@@ -13,14 +13,17 @@ export default async function handler( req, res){
 
         if( username.includes(' ') ){
             res.status(400).json({ message: 'Username should not inlude spaces'})
+            return
         }
 
         if( !email.includes('@')){
             res.status(400).json({ message: 'Email should include @'})
+            return
         }
 
         if( !password.length >= 8 ){
             res.status(400).json({ message: 'Password should include atleast 8 characters'})
+            return
         }
 
         //connect to database
