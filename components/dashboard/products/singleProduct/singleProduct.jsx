@@ -7,6 +7,7 @@ import Form from "./editForm/form";
 import { useParams } from "next/navigation";
 import addToDatabase from "@/database/addToDatabase";
 import { Button } from "@/components/button/button";
+import { BsFillTrashFill } from "react-icons/bs";
 
 export default function Menu(props) {
 
@@ -102,13 +103,19 @@ export default function Menu(props) {
               className={style.menu}
               key={index}
             >
-              <div>
+              <div className={style.index}>
                 {index + 1}.
               </div>
 
-              <div className={style.items}>
-                <p>{item.item}</p>
-                <h5>R {Number(item.price).toFixed(2)}</h5>
+              <div className={style.itemsAndBin}>
+                <div className={style.items}>
+                  <p>{item.item}</p>
+                  <h5>R {Number(item.price).toFixed(2)}</h5>
+                </div>
+
+                <div className={style.bin}>
+                  <BsFillTrashFill color="red"/>
+                </div>
               </div>
             </div>
           ))
