@@ -40,3 +40,8 @@
 .Backdrop p {
   text-align: end;
 }
+
+.addNew{
+  text-align: start;
+  margin-left: 10px;
+}

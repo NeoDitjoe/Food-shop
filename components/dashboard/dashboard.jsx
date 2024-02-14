@@ -1,5 +1,4 @@
 import AddToMenuForm from "@/Dashboard/AddToMenuForm";
-import UpdateMenuForm from "@/Dashboard/updateMenuForm";
 import style from 'styles/dashboard.module.css'
 import { FormsGrid } from "@/components/grid";
 import LinkButton, { Button } from "@/components/button/button";
@@ -40,7 +39,6 @@ export default function Dashboard() {
             click={() => setShowAddMenu(!showAddMenu)} name={["Order Now Menu ", showAddMenu ? <SlArrowUp /> : <SlArrowDown />]} />
 					{showAddMenu ? <FormsGrid
 						addMenu={<AddToMenuForm collection='menu' />}
-						updateMenu={<UpdateMenuForm collection='menu' />}
 					/> : ''}
 					<br />
 
@@ -48,7 +46,6 @@ export default function Dashboard() {
             click={() => setShowSpecialsForm(!showSpecialsForm)} name={["Specials ", showSpecialsForm ? <SlArrowUp /> : <SlArrowDown />]} />
 					{showSpecialsForm ? <FormsGrid
 						addMenu={<AddToMenuForm collection='specials' />}
-						updateMenu={<UpdateMenuForm collection='specials' />}
 					/> : ''}
 				</div>
 			</div> : <div>Please log in with as partner <Link href={'/'}>back</Link></div>
