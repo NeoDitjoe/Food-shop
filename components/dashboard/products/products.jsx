@@ -26,7 +26,6 @@ export default function Products(props) {
       window.location.reload()
 
     } catch (error) {
-      console.log(error)
       notification.setText(error.message)
       notification.setSeverity('error')
     }
@@ -40,11 +39,11 @@ export default function Products(props) {
         products && products.map((product, index) => {
 
           return (
-            <div className={style.container}>
+            <div className={style.container} key={index}>
               <Link
                 href={`/dashboard2090BoBo/products/${product.product}`}
                 className={style.main}
-                key={index}
+                
               >
                 <div>
                   <Image
@@ -65,6 +64,7 @@ export default function Products(props) {
               </Link>
 
               <BsFillTrashFill
+                key={index *19}
                 onClick={() => removeProduct(product.product)}
                 color="red"
                 className={style.trashBin}
