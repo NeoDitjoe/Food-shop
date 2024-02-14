@@ -4,7 +4,7 @@ export default function dashboard(){
 
 	return(
 		<Fragment>
-			'dashboard'
+			dashboard
 		</Fragment>
 
 	)
