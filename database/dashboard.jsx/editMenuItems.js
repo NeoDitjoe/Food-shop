@@ -1,6 +1,6 @@
 import { client } from "../Database";
 
-export default async function editMenuItems(product, item, updateItem, updatePrice) {
+export default async function editMenuItems(product, item, updateItem, updatePrice, special) {
 
   const db = client.db('menulist')
 
@@ -8,7 +8,8 @@ export default async function editMenuItems(product, item, updateItem, updatePri
     {product: product, 'menu.item': item},
 
     {
-      $set: { 'menu.$.item': updateItem, 'menu.$.price': updatePrice }
+      $set: { 'menu.$.item': updateItem, 'menu.$.price': updatePrice, 'menu.$.special': special }
     }
   )
 }
+

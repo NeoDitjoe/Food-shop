@@ -5,10 +5,10 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
 
-    const { product, item, updateItem, updatePrice } = req.body
+    const { product, item, updateItem, updatePrice, special  } = req.body
 
     try {
-      await editMenuItems(product, item, updateItem, updatePrice)
+      await editMenuItems(product, item, updateItem, updatePrice, special)
       res.status(200).json({ message: 'success'})
     } catch (error) {
       res.status(417).json({ message: 'failed to update menu!, Check your internet connection!'})

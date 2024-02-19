@@ -32,9 +32,17 @@ export default function Form(props) {
               <input type='number' name="price" step='0.01' placeholder="price" />
             </Item>
 
-              <button type="submit">Submit</button>
-
           </Grid>
+
+          <Grid xs={12} md={12} s={2}  >
+            <Item style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '20px'}}>
+              <label>Is this a special : </label>
+              <input style={{ width: '30px'}} type='checkbox' name="special" />
+            </Item>
+
+              <button type="submit">Submit</button>
+          </Grid>
+          
         </Grid>
       </Box>
     </form>

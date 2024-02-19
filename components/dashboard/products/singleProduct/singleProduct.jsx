@@ -24,6 +24,8 @@ export default function Menu(props) {
     const formData = new FormData(e.target);
     const itemValue = formData.get('item');
     const itemPrice = formData.get('price');
+    const itemIsSpecial = formData.get('special')
+    const special = itemIsSpecial === 'on' ? true : false
 
     try {
       const response = await addToDatabase(
@@ -32,7 +34,8 @@ export default function Menu(props) {
           product: paramName.slug,
           item: currentItem,
           updateItem: itemValue.toLocaleLowerCase(),
-          updatePrice: itemPrice
+          updatePrice: itemPrice,
+          special
         })
 
       if (response.message === 'success') {
@@ -50,6 +53,8 @@ export default function Menu(props) {
     const formData = new FormData(e.target);
     const itemValue = formData.get('item');
     const itemPrice = formData.get('price');
+    const itemIsSpecial = formData.get('special')
+    const special = itemIsSpecial === 'on' ? true : false
 
     try {
       const response = await addToDatabase(
@@ -57,7 +62,8 @@ export default function Menu(props) {
         {
           product: paramName.slug,
           item: itemValue.toLocaleLowerCase(),
-          price: itemPrice
+          price: itemPrice,
+          special
         }
       )
 
