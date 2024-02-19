@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /*?
+Disallow: /auth
+Disallow: /dashboard2090BoBo
+Disallow: /profile
