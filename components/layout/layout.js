@@ -7,13 +7,19 @@ import StateContext from "@/usecontext/stateContext";
 import style from 'styles/layout.module.css'
 import Notification from "../Notification/Notification";
 import Footer from "./footer";
+import { useSession } from "next-auth/react";
 
 const inter = Inter({ subsets: ['latin'] })
 
 
 export default function Layout({children}){
 
-    const { collapse, setCollapse, notification } = StateContext()
+    const { collapse, setCollapse, notification, setUserOnly } = StateContext()
+    const { data: session } = useSession()
+
+	const checkUsername = session && session.user.email[1] === 'administratorbobo'
+	const checkUserEmail = session && session.user.email[0] === 'martins@gmail.com'
+	setUserOnly(checkUsername && checkUserEmail)
 
     return(
         <div className={inter.className}>

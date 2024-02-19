@@ -1,10 +1,21 @@
+import StateContext from "@/usecontext/stateContext";
+import Link from "next/link";
 import { Fragment } from "react";
 
-export default function dashboard(){
+export default function Dashboard() {
 
-	return(
+	const {  userOnly } = StateContext()
+
+	return (
 		<Fragment>
-			dashboard
+			{
+				userOnly
+					? 'dashboard'
+					: <div>
+						{'Click '}
+						<Link href={'/'}>here</Link>
+					</div>
+			}
 		</Fragment>
 
 	)
