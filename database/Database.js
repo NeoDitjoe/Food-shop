@@ -25,7 +25,46 @@ export async function getMenuList(folder, collection) {
   
     const documents = await db
       .collection(collection)
-      .find()
+      .aggregate([])
+      .toArray();
+      
+    const menuList = documents.map((doc) => {
+      const { _id, ...menuData } = doc;
+      return menuData;
+    });
+  
+    return menuList;
+}
+
+export async function getSpecials(folder, collection) {
+    const db = client.db(folder);
+  
+    const documents = await db
+      .collection(collection)
+      .aggregate([
+        {
+          $unwind: "$menu" 
+        },
+        {
+          $match: {
+            "menu.special": true
+          }
+        },
+        {
+          $group: {
+            _id: { _id: "$_id", product: "$product", image: "$image" },
+            menu: { $push: "$menu" } 
+          }
+        },
+        {
+          $project: {
+            _id: "$_id._id",
+            product: "$_id.product",
+            image: "$_id.image",
+            menu: 1
+          }
+        }
+      ])
       .toArray();
       
     const menuList = documents.map((doc) => {
@@ -69,7 +108,10 @@ export async function getSearchDdata(input) {
 
   const documents = await db
     .collection('menu')
-    .find({ $or: [{ product : { $regex: new RegExp(input, 'i') }}, {menu: { $elemMatch: {item:  {$regex: new RegExp(input, 'i')}}}} ] })
+    .find({ $or: [
+      { product : { $regex: new RegExp(input, 'i') }}, 
+      {menu: { $elemMatch: {item:  {$regex: new RegExp(input, 'i')}}}} 
+    ] })
     .toArray();
 
   return documents;

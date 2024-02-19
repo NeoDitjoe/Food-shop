@@ -47,9 +47,8 @@ export default function AddToMenuForm({ collection }) {
                 image: image,
                 product: inputValue.toLowerCase(),
                 menu: [
-                    { price: itemPriceVaue, item: menuItemValue.toLowerCase() }
-                ],
-                special
+                    { price: itemPriceVaue, item: menuItemValue.toLowerCase(), special }
+                ]
             }, collection)
 
             notification.setText('Item is added to menu')
