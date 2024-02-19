@@ -1,6 +1,6 @@
 import { client } from "../Database";
 
-export async function updateMenu(product, Additem, Addprice, res) {
+export async function updateMenu(product, Additem, Addprice, special,  res) {
 
   const db = client.db('menulist')
 
@@ -16,7 +16,7 @@ export async function updateMenu(product, Additem, Addprice, res) {
       product: product
     }, {
       $push: {
-        menu: { item: Additem, price: Addprice }
+        menu: { item: Additem, price: Addprice, special }
       }
     });
 
