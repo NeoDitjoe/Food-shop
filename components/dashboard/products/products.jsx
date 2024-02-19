@@ -57,7 +57,7 @@ export default function Products(props) {
                 </div>
 
                 <div>
-                  <h5>{product.product}</h5>
+                  <h4>{product.product}</h4>
                 </div>
 
 
