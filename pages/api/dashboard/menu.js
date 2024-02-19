@@ -16,7 +16,7 @@ export default async function handler(req, res) {
   }
 
   if(req.method === 'POST'){
-    const { product, menu, image } = req.body
+    const { product, menu, image, special } = req.body
 
     if(!product){
       res.status(402).json({message: "Invalid Input"})
@@ -26,7 +26,8 @@ export default async function handler(req, res) {
     const addData = {
       image,
       product,
-      menu
+      menu,
+      special
     }
 
     const collection = req.query.collection || ''
