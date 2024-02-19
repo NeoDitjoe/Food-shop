@@ -14,14 +14,27 @@
 
 .form Button{
    margin-top: 5px;
+   padding-left: 50px;
+   padding-right: 50px;
 }
 
 .imageDiv{
-    background-color: rgb(216, 216, 216);
+    background-color: rgba(216, 216, 216, 0.308);
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
 
-    padding: 5%;
     margin-top: 10px;
+}
+
+.checkbox{
+    display: flex;
+    width: 300px;
+    gap: 10px;
+    align-items: center;
+
+    margin: 10px;
+}
+
+.checkbox input{
+    width: 20px;
+    height: 20px;
 }

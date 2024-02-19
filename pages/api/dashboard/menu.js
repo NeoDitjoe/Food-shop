@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     const addData = {
       image,
       product,
-      menu
+      menu,
     }
 
     const collection = req.query.collection || ''

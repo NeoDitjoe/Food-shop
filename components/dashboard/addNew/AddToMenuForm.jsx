@@ -5,7 +5,7 @@ import StateContext from "@/usecontext/stateContext";
 import { useRouter } from "next/router";
 import { notificationTimer } from "@/components/Notification/Notification";
 
-async function addMenu(menu, collection){
+async function addMenu(menu, collection) {
     const response = await fetch(`/api/dashboard/menu?collection=${collection}`, {
         method: 'POST',
         body: JSON.stringify(menu),
@@ -18,10 +18,10 @@ async function addMenu(menu, collection){
 
     if (!response.ok) {
         throw new Error(data.message || 'Something went wrong!');
-      }
+    }
 }
 
-export default function AddToMenuForm({collection}){
+export default function AddToMenuForm({ collection }) {
 
     const { notification } = StateContext()
     const router = useRouter()
@@ -29,32 +29,34 @@ export default function AddToMenuForm({collection}){
     const menuRef = useRef()
     const menuItemRef = useRef()
     const itemPrice = useRef()
+    const specialRef = useRef()
     const [image, setImage] = useState('')
 
-    async function addMenuHandle(e){
+    async function addMenuHandler(e) {
         e.preventDefault()
         const inputValue = menuRef.current.value
         const menuItemValue = menuItemRef.current.value
         const itemPriceVaue = itemPrice.current.value
+        const special = specialRef.current.checked
 
         notification.setText('Loading...')
         notification.setSeverity('info')
 
-        try{
+        try {
             await addMenu({
                 image: image,
                 product: inputValue.toLowerCase(),
                 menu: [
-                    {price: itemPriceVaue, item: menuItemValue.toLowerCase()}
+                    { price: itemPriceVaue, item: menuItemValue.toLowerCase(), special }
                 ]
             }, collection)
-            
+
             notification.setText('Item is added to menu')
             notification.setSeverity('success')
             notificationTimer(notification)
             router.reload()
 
-        }catch(error){
+        } catch (error) {
 
             notification.setText(error.message)
             notification.setSeverity('error')
@@ -62,7 +64,7 @@ export default function AddToMenuForm({collection}){
         }
     }
 
-    function convertToBase64(e){
+    function convertToBase64(e) {
 
         var reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
@@ -75,24 +77,29 @@ export default function AddToMenuForm({collection}){
     }
 
     return (
-        <form onSubmit={addMenuHandle} className={style.form}>
+        <form onSubmit={addMenuHandler} className={style.form}>
             <div className={style.formDiv}>
                 <label>Menu: </label>
-                <input type="text" required ref={menuRef}/>
+                <input type="text" required ref={menuRef} />
 
                 <label>Menu Item: </label>
                 <input type="text" required ref={menuItemRef} />
-                
+
                 <label>Item Price: </label>
                 <input type="text" required ref={itemPrice} />
 
                 <div className={style.imageDiv}>
-                   
-                    <label>Image File: </label> 
-                    <input accept="image/*" type="file" onChange={convertToBase64} /> 
+
+                    <label>Image File: </label>
+                    <input accept="image/*" type="file" onChange={convertToBase64} />
                 </div>
-            </div> 
-                <Button name='submit' />
+
+                <div className={style.checkbox}>
+                    <label>Add to special menu</label>
+                    <input type="checkbox" ref={specialRef}/>
+                </div>
+            </div>
+            <Button name='submit' />
         </form>
     )
 }

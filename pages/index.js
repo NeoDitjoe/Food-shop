@@ -1,11 +1,11 @@
 import FullWidthGrid from '@/components/grid'
 import { Fragment, useEffect } from 'react'
 import Head from 'next/head'
-import { getMenuList } from '@/database/Database'
+import { getMenuList, getSpecials } from '@/database/Database'
 import StateContext from '@/usecontext/stateContext'
 import style from 'styles/mainIndex.module.css'
 
-export default function Home({menuList, specials}) {
+export default function Home({ menuList, specials }) {
 
   const { setOptions } = StateContext()
 
@@ -23,33 +23,36 @@ export default function Home({menuList, specials}) {
       <main>
         <div className={style.welcome}>
           <h1>
-            <span>Your </span> 
-            <span>Culinary </span> 
+            <span>Your </span>
+            <span>Culinary </span>
             <span>Destination!</span>
           </h1>
         </div>
 
-        <h1 className={style.heading}>Specials</h1>
-        <FullWidthGrid 
-          menu = {specials}
-        />
+        {specials &&
+          <>
+            <h1 className={style.heading}>Specials</h1>
+            <FullWidthGrid
+              menu={specials}
+            />
+          </>}
 
         <h1 className={style.heading}>Order Now</h1>
-        <FullWidthGrid 
-          menu = {menuList}
+        <FullWidthGrid
+          menu={menuList}
         />
-        
+
       </main>
     </Fragment>
   )
 }
 
-export async function getStaticProps(){
+export async function getStaticProps() {
 
   const menuList = await getMenuList('menulist', 'menu')
-  const specials = await getMenuList('menulist', 'specials')
+  const specials = await getSpecials('menulist', 'menu')
 
-  return{
+  return {
     props: {
       menuList,
       specials
