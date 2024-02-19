@@ -1,4 +1,5 @@
 import Error from "@/components/Error/Error"
+import StateContext from "@/usecontext/stateContext";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -7,19 +8,18 @@ import style from 'styles/dashboard.module.css'
 
 export default function Orders() {
 
-	const [orders, setOrders] = useState(null)
 
 	const { data: session } = useSession()
 	const [username, setUserName] = useState('')
 	const [userEmail, setUserEmail] = useState('')
+	const [orders, setOrders] = useState(null)
+
+	const { userOnly } = StateContext()
 
 	useEffect(() => {
 		setUserName(session && session.user.email[1])
 		setUserEmail(session && session.user.email[0])
 	}, [userEmail, username])
-
-	const checkUser = username === 'administratorbobo'
-	const checkUserEmail = userEmail === 'martins@gmail.com'
 
 	useEffect(() => {
 		fetch('/api/dashboard/orders')
@@ -37,7 +37,7 @@ export default function Orders() {
 
 	return (
 		<>
-			{checkUser && checkUserEmail
+			{userOnly
 				? <div>
 					{
 						orders && orders.map((order) => {
@@ -63,7 +63,11 @@ export default function Orders() {
 							)
 						})
 					}
-				</div> : <div> Log in as Partner <Link href={'/'}>back</Link></div>
+				</div>
+				: <div>
+					{'Click '}
+					<Link href={'/'}>here</Link>
+				</div>
 
 			}
 		</>
