@@ -1,13 +1,14 @@
 import style from 'styles/cart.module.css'
 import Image from "next/image"
 import { useRouter } from 'next/router'
-import StateContext from '@/usecontext/stateContext'
 import { notificationTimer } from '../Notification/Notification'
 import { BsFillTrashFill } from "react-icons/bs";
 import { useSession } from 'next-auth/react'
 import loading from '../../public/Ball-1.2s-215px.svg'
+import { v4 as uuidv4 } from 'uuid';
+import StateContext from '@/usecontext/stateContext';
 
-export default function Cart({results, key}){
+export default function Cart({results}){
 
     const { notification } = StateContext()
     const { data: session } = useSession()
@@ -73,20 +74,21 @@ export default function Cart({results, key}){
      */    
     async function orderHandler(e){
         e.preventDefault()
-        notification.setText('sending Order')
-        notification.setSeverity('loadingNotification')
+
+        notification.setText(`sending Order`)
+        notification.setSeverity('info')
 
     try {
-        const result = await placeOrder( items ,totalPrice.reduce((a, b) => a + b, 0), customer );
+        const results = await placeOrder( items ,totalPrice.reduce((a, b) => a + b, 0), customer );
 
             /**
              * {@link route } p
              */
             // const route = 
-            if(result){
+            if(results.message === 'success'){
                 notification.setText('Order has been sent successfully sent')
-                notification.setSeverity('successNotification')
-                router.replace(`/cart/${customer}/we have received your order`)
+                notification.setSeverity('success')
+                router.replace(`/cart/${customer}?status=Sent`)
 
                 setTimeout(() => {
                     router.push('/')
@@ -99,8 +101,9 @@ export default function Cart({results, key}){
            
         } catch (error) {
             notification.setText("failed to send order: Please reload page and try again and make sure your cart has Items")
-            notification.setSeverity('errorNotification')
+            notification.setSeverity('error')
             notificationTimer(notification)
+            alert('error')
         }
     }
 
@@ -115,7 +118,7 @@ export default function Cart({results, key}){
                         items.push(item.item + ' - '+ item.product + ' | ')
 
                         return (
-                            <div key={key} className={style.cart}>
+                            <div key={uuidv4()} className={style.cart}>
                                 <Image alt='image' src={item.img} height={200} width={200} className={style.img}/>
                                 <div>
                                     <h3>{item.item} {item.product}</h3>
@@ -130,11 +133,11 @@ export default function Cart({results, key}){
                         )
                     })
                 }
-                <button className={style.totalPrice} onClick={orderHandler} >
+                {totalPrice > 0 && <button className={style.totalPrice} onClick={orderHandler} >
                     <h4>Total Cost: R {results && totalPrice.reduce((a, b) => a + b, 0).toFixed(2)}</h4>
                     <br />
                     <h4>Place Order</h4>
-                </button>
+                </button>}
                 
             </div> : <Image src={loading} width={200} heigh={100} alt={'...loading'}  className={style.emptyCart}/>
             }
