@@ -65,7 +65,10 @@ export default function FullWidthGrid({ menu }) {
                                                     setOverlay({ product: item.product, item: item2.item, price: item2.price, img: item.image })
                                                 }}>
                                                     <h4>{item2.item}</h4>
-                                                    <p className={style.price}>{Number(item2.price).toFixed(2)} R</p>
+                                                    <div>
+                                                        <p className={style.price}>{Number(item2.price).toFixed(2)} R</p>
+                                                        <h6 style={{ color: 'green' }}>{item2.special && 'Special'}</h6>
+                                                    </div>
                                                 </div>
 
                                             )
