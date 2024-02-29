@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 export default function Ccart(){
 
     const route = useRouter()
-    const [ cartList, setCartList ] = useState(null)
+    const [ cartList, setCartList ] = useState([])
 
     const getUserCart = route.query.slug[1]
     const pathname = route.query.slug[0]
@@ -35,6 +35,10 @@ export default function Ccart(){
     //compares the logged in user from the session with the name from the path
     //so the correct users data can always be retrieved
     const checkUser = userEmail === getUserCart
+
+    if(cartList.length < 1){
+        return <Error errorMessage={'Your cart is empty'} link='/' linkText={'add to cart'}/>
+    }
     
     return(
 
@@ -57,12 +61,13 @@ export default function Ccart(){
 }
 
 // this function is soley used to clear cart after sending order , they rest is not used
-export async function getServerSideProps({params}){
+export async function getServerSideProps({params, query}){
 
     const { slug } = params
     const path = slug[1]
+    const { status } = query
 
-    if(slug[2] === 'we have received your order') {
+    if(status === 'Sent') {
         await deleteSentOrder('cart', 'pendingOrders', path)
      } 
 
