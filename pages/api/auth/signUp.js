@@ -1,5 +1,6 @@
 import { client } from "@/database/Database";
 import hashPassword from "@/database/auth";
+import getCurrentWeek from "@/util/getCurrentWeek";
 
 export default async function handler( req, res){
     if( req.method === 'POST'){
@@ -61,7 +62,8 @@ export default async function handler( req, res){
         const result = await db.collection('users').insertOne({
             username: username,
             email: email,
-            password: hashedPassword
+            password: hashedPassword,
+            createdAtWeek: getCurrentWeek()
         })
 
         res.status(201).json({ message: `Welcome ${username}`})
