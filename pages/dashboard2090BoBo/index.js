@@ -1,16 +1,23 @@
+
+import Chart from "@/components/dashboard/chart/chart";
+import getUsers from "@/database/dashboard.jsx/getUsers";
 import StateContext from "@/usecontext/stateContext";
 import Link from "next/link";
 import { Fragment } from "react";
 
-export default function Dashboard() {
+export default function Dashboard(props) {
 
-	const {  userOnly } = StateContext()
+	const { users } = props 
+
+	const { userOnly } = StateContext()
 
 	return (
 		<Fragment>
 			{
 				userOnly
-					? 'dashboard'
+					? <Chart
+						users={users}
+					/>
 					: <div>
 						{'Click '}
 						<Link href={'/'}>here</Link>
@@ -19,4 +26,14 @@ export default function Dashboard() {
 		</Fragment>
 
 	)
+}
+
+export async function getServerSideProps() {
+	const users = await getUsers()
+
+	return{
+		props: {
+			users
+		}
+	}
 }
