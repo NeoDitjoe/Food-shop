@@ -23,13 +23,13 @@ export default function Form(props) {
         <Grid container spacing={{ xs: 2, md: 3 }}>
           <Grid xs={12} md={12} s={2}  >
             <Item>
-              <input name="item" placeholder="Item" />
+              <input name="item" placeholder="Item" required />
             </Item>
           </Grid>
 
           <Grid xs={12} md={12} s={2}  >
             <Item>
-              <input type='number' name="price" step='0.01' placeholder="price" />
+              <input type='number' name="price" step='0.01' placeholder="price" required/>
             </Item>
 
           </Grid>
@@ -37,7 +37,7 @@ export default function Form(props) {
           <Grid xs={12} md={12} s={2}  >
             <Item style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '20px'}}>
               <label>Is this a special : </label>
-              <input style={{ width: '30px'}} type='checkbox' name="special" />
+              <input style={{ width: '30px', cursor: 'pointer'}} type='checkbox' name="special" />
             </Item>
 
               <button type="submit">Submit</button>

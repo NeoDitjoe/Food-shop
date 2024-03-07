@@ -91,7 +91,7 @@ export default function AddToMenuForm({ collection }) {
                 <div className={style.imageDiv}>
 
                     <label>Image File: </label>
-                    <input accept="image/*" type="file" onChange={convertToBase64} />
+                    <input accept="image/*" type="file" onChange={convertToBase64} required/>
                 </div>
 
                 <div className={style.checkbox}>
