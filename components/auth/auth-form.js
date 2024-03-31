@@ -38,14 +38,14 @@ function AuthForm() {
   function switchAuthModeHandler() {
     setIsLogin((prevState) => !prevState);
   }
- 
+
   async function submitHandler(event) {
     event.preventDefault();
 
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
-    let enteredUsername ;
-    if(!isLogin){
+    let enteredUsername;
+    if (!isLogin) {
       enteredUsername = usernameInputRef.current.value;
     }
 
@@ -64,18 +64,18 @@ function AuthForm() {
         password: enteredPassword,
       });
 
-      if(result){
+      if (result) {
         sessionStorage.setItem('Token', enteredEmail.toLowerCase())
-       
+
       }
-      if(!result.error){
+      if (!result.error) {
         notification.setText('logged in')
         notification.setSeverity('success')
         notificationTimer(notification)
         router.push('/profile')
       }
 
-      if(result.error){
+      if (result.error) {
         notification.setText(result.error)
         notification.setSeverity('error')
         notificationTimer(notification)
@@ -87,7 +87,7 @@ function AuthForm() {
         notification.setSeverity('info')
 
         const result = await createUser(enteredUsername.toLowerCase(), enteredEmail.toLowerCase(), enteredPassword);
-        if(result){
+        if (result) {
 
           notification.setText(`Welcome ${enteredUsername}`)
           notification.setSeverity('success')
@@ -108,20 +108,20 @@ function AuthForm() {
       <form onSubmit={submitHandler}>
 
         {!isLogin && <div className={classes.control}>
-          <br/>
+          <br />
           <label htmlFor='name'>Username</label>
           <input type='name' id='name' required ref={usernameInputRef} />
         </div>}
 
         <div className={classes.control}>
-          <br/>
-          <label htmlFor='email'>Your Email</label>
+          <br />
+          <label htmlFor='email'>Email</label>
           <input type='email' id='email' required ref={emailInputRef} />
         </div>
 
         <div className={classes.control}>
-          <br/>
-          <label htmlFor='password'>Your Password</label>
+          <br />
+          <label htmlFor='password'>Password</label>
           <input
             type='password'
             id='password'
@@ -130,6 +130,13 @@ function AuthForm() {
           />
         </div>
         <div className={classes.actions}>
+          <p
+            className={classes.number}
+            onClick={() => router.push('/auth/sms')}
+          >Sign up with phone number</p>
+
+          <br />
+          
           <button>{isLogin ? 'Login' : 'Create Account'}</button>
           <button
             type='button'
