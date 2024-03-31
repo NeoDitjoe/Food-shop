@@ -29,7 +29,6 @@ export default function SendCode() {
       }
       
     } catch (error) {
-      alert('error')
       notification.setText(error.message);
       notification.setSeverity('error');
     }

@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     const { number, code } = req.body
 
     try {
-      await sendSMS(number, code)
+      await sendSMS(number, code, res)
 
       res.status(200).json({ message: 'success' })
     } catch (error) {
