@@ -3,7 +3,7 @@ const accountSid = 'ACe80c5bcda1f361dfef98c8c36d92cc66';
 const authToken = '6b0655e3a280f7363456bfe6c25e201c';
 const sms = require('twilio')(accountSid, authToken);
 
-export default async function sendSMS(number, code){
+export default async function sendSMS(number, code) {
 
   const db = client.db('authentication')
 
@@ -13,9 +13,9 @@ export default async function sendSMS(number, code){
   })
 
   sms.messages
-  .create({
-    body: code,
-    from: '+12567332185',
-    to: number
-  })
+    .create({
+      body: `BOBO verification code is: ${code} `,
+      from: '+12567332185',
+      to: number
+    })
 }

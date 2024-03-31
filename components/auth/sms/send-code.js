@@ -2,10 +2,12 @@ import { useRouter } from 'next/router'
 import classes from '../../../styles/auth-form.module.css'
 import postMethod from '@/util/post-method'
 import { v4 as uuidv4 } from 'uuid';
+import StateContext from '@/usecontext/stateContext';
 
 export default function SendCode() {
 
   const router = useRouter()
+  const { notification } = StateContext()
 
   async function sendCodeHandler(e){
     e.preventDefault()
@@ -13,12 +15,22 @@ export default function SendCode() {
     const formData = new FormData(e.target)
     const number = formData.get('number')
     const code = uuidv4()
-    console.log(`+27${number.substring(1, 10)}`)
+
+    notification.setText('sending code...');
+    notification.setSeverity('info');
 
     try {
-      await postMethod('/api/auth/send-sms-code', {number: `+27${number.substring(1, 10)}`, code: code.substring(2, 7)})
+      const respondse = await postMethod('/api/auth/send-sms-code', {number: `+27${number.substring(1, 10)}`, code: code.substring(2, 7)})
+
+      if(respondse.message === 'success'){
+        notification.setText(`code sent to ${`+27 ${number.substring(1, 10)}`}`);
+        notification.setSeverity('success');
+      }
+      
     } catch (error) {
       alert('error')
+      notification.setText(error.message);
+      notification.setSeverity('error');
     }
   }
 
@@ -42,7 +54,7 @@ export default function SendCode() {
         >Sign up with email</p>
 
         <div className={classes.actions}>
-          <button> submit </button>
+          <button> Send Code </button>
         </div>
       </form>
     </section>
