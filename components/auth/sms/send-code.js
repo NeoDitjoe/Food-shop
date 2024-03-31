@@ -20,11 +20,12 @@ export default function SendCode() {
     notification.setSeverity('info');
 
     try {
-      const respondse = await postMethod('/api/auth/send-sms-code', {number: `+27${number.substring(1, 10)}`, code: code.substring(2, 7)})
+      const response = await postMethod('/api/auth/sms/send-code', {number: `+27${number.substring(1, 10)}`, code: code.substring(2, 7)})
 
-      if(respondse.message === 'success'){
+      if(response.message === 'success'){
         notification.setText(`code sent to ${`+27 ${number.substring(1, 10)}`}`);
         notification.setSeverity('success');
+        router.push('/auth/sms/verify')
       }
       
     } catch (error) {
