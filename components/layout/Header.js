@@ -17,20 +17,13 @@ export function Navlist(){
 
     const { collapse } = StateContext()
     const { data: session, status } = useSession()
-    const username = session && session.user.email[1]
-	const [userEmail, setUserEmail] = useState('')
+    const username = session?.user?.email.username
 
-	useEffect(() => {
-		// setUserName(session && session.user.email[1])
-		setUserEmail(session && session.user.email[0])
-	})
-
-	const checkUser = username === 'administratorbobo'
-	const checkUserEmail = userEmail === 'martins@gmail.com'
+	const isAdmin = session?.user?.email.isAdmin
     
     return (
         <>
-            { checkUser && checkUserEmail 
+            { isAdmin  
                 ? <ul className={ collapse ? style.collapseNavList : style.navList}>
                     <LinkButton link='/' name={ <ImHome/>} text='Customer_View' />
                     <LinkButton link='/dashboard2090BoBo/products' name={ <IoFastFoodSharp/>} text='Products' />
@@ -44,7 +37,7 @@ export function Navlist(){
                 :
                 <ul className={ collapse ? style.collapseNavList : style.navList}>
                     <LinkButton link='/' name={ <ImHome/>} text='Home' />
-                    {session ? <LinkButton link={`/cart/${session && session.user.email[1]}`} name={ <FaCartArrowDown/>} text='Cart'/> : ''}
+                    {session ? <LinkButton link={`/cart/${session?.user?.email.username}`} name={ <FaCartArrowDown/>} text='Cart'/> : ''}
                     {/* <LinkButton link='/' name={ <BsFillRocketTakeoffFill/>} text='Explore' /> */}
                     <LinkButton link='/search' name={ <BiSearchAlt/>} text='Search' />
                     <LinkButton link='/contactUs' name={ <AiFillPhone/>} text='Contact' />

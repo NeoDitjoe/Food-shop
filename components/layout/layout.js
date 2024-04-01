@@ -16,10 +16,9 @@ export default function Layout({children}){
 
     const { collapse, setCollapse, notification, setUserOnly } = StateContext()
     const { data: session } = useSession()
-
-	const checkUsername = session && session.user.email[1] === 'administratorbobo'
-	const checkUserEmail = session && session.user.email[0] === 'martins@gmail.com'
-	setUserOnly(checkUsername && checkUserEmail)
+    
+	const isAdmin = session?.user?.email.isAdmin
+	setUserOnly(isAdmin)
 
     return(
         <div className={inter.className}>

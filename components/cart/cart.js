@@ -13,7 +13,7 @@ export default function Cart({results}){
     const { notification } = StateContext()
     const { data: session } = useSession()
 
-    const username = session &&  session.user.email[1]
+    const username = session?.user?.email.username
     
     /**
      * Stores the order
