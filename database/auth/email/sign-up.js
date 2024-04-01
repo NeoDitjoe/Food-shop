@@ -33,6 +33,7 @@ export default async function emailSignUp(username, email, password, code, res) 
  * */
   const existingUserEmail = await db.collection('users').findOne({ email: email })
   const existingUsername = await db.collection('users').findOne({ username: username })
+  const unVerifiedExistingEmail = await db.collection('verifyEmail').findOne({ email })
 
   //Notify customer that details are already in use
   if (existingUserEmail) {
@@ -42,15 +43,32 @@ export default async function emailSignUp(username, email, password, code, res) 
 
   //Notify customer that details are already in use
   if (existingUsername) {
-    res.status(500).json({ message: 'username is already in use'  })
+    res.status(500).json({ message: 'username is already in use' })
     return;
   }
 
   /**
- * This is a password that has been encrypted,
- * before sent to database
- */
+  * This is a password that has been encrypted,
+  * before sent to database
+  */
   const hashedPassword = await hashPassword(password)
+
+  if (unVerifiedExistingEmail) {
+    await db.collection('verifyEmail').updateOne(
+      { email: email },
+      {
+        $set: {
+          username: username,
+          email: email,
+          password: hashedPassword,
+          createdAtWeek: getCurrentWeek(),
+          code
+        }
+      }
+    )
+
+    return
+  }
 
   /**
    * when all checks are successful customer details are then sent to database

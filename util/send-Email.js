@@ -25,17 +25,3 @@ export default async function sendCodeToEmail(email, username, code) {
   });
 
 }
-
-// export async function sendCodeToEmail(email, code) {
-//   const info = await transporter.sendMail({
-//     from: '"Pizza4Real 🍕" no-reply@gmail.com',
-//     to: email,
-//     subject: "Reset your password",
-//     text: "Pizza4Real",
-//     html: `
-//       Reset password code: <h3>${code}</h3>
-//       Click <a href='https://pizza4real.vercel.app/auth/reset-password/create-new-password'>here</a> to reset your password
-//       `,
-//   });
-
-// }
