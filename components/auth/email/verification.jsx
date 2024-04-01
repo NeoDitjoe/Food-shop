@@ -2,6 +2,7 @@ import postMethod from '@/util/post-method'
 import classes from '../../../styles/auth-form.module.css'
 import StateContext from '@/usecontext/stateContext'
 import { useRouter } from 'next/router'
+import { notificationTimer } from '@/components/Notification/Notification'
 
 export default function EmailVerification() {
 
@@ -26,6 +27,7 @@ export default function EmailVerification() {
       if (response.message) {
         notification.setText('Thank you for registering at BOBO')
         notification.setSeverity('success')
+        notificationTimer(notification)
         setIsLogin(true)
         router.push('/auth')
       }
@@ -33,6 +35,7 @@ export default function EmailVerification() {
     } catch (error) {
       notification.setText(error.message)
       notification.setSeverity('error')
+      notificationTimer(notification)
     }
   }
 

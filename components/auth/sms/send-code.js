@@ -3,6 +3,7 @@ import classes from '../../../styles/auth-form.module.css'
 import postMethod from '@/util/post-method'
 import { v4 as uuidv4 } from 'uuid';
 import StateContext from '@/usecontext/stateContext';
+import { notificationTimer } from '@/components/Notification/Notification';
 
 export default function SendCode() {
 
@@ -26,11 +27,13 @@ export default function SendCode() {
         notification.setText(`code sent to ${`+27 ${number.substring(1, 10)}`}`);
         notification.setSeverity('success');
         router.push('/auth/sms/verify')
+        notificationTimer(notification)
       }
 
     } catch (error) {
       notification.setText(error.message);
       notification.setSeverity('error');
+      notificationTimer(notification)
     }
   }
 

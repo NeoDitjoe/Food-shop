@@ -5,6 +5,7 @@ import Link from "next/link";
 import AddNewProduct from "../addNew/addNewPoductForm";
 import { removeItem } from "@/database/removeFromDatabase";
 import StateContext from "@/usecontext/stateContext";
+import { notificationTimer } from "@/components/Notification/Notification";
 
 export default function Products(props) {
 
@@ -23,11 +24,13 @@ export default function Products(props) {
 
       notification.setText('Removed product')
       notification.setSeverity('success')
+      notificationTimer(notification)
       window.location.reload()
 
     } catch (error) {
       notification.setText(error.message)
       notification.setSeverity('error')
+      notificationTimer(notification)
     }
   }
 

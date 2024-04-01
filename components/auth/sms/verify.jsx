@@ -2,6 +2,7 @@ import postMethod from '@/util/post-method'
 import classes from '../../../styles/auth-form.module.css'
 import StateContext from '@/usecontext/stateContext'
 import { useRouter } from 'next/router'
+import { notificationTimer } from '@/components/Notification/Notification'
 
 export default function VerifyNumber() {
 
@@ -26,11 +27,13 @@ export default function VerifyNumber() {
       if (response.message === 'success') {
         notification.setText(`SMS with "Login Email" is sent to your phone`);
         notification.setSeverity('success');
+        notificationTimer(notification)
         router.push('/auth')
       }
     } catch (error) {
       notification.setText(error.message || 'Failed attempt!');
       notification.setSeverity('error');
+      notificationTimer(notification)
     }
   }
 
