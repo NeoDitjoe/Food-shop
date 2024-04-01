@@ -15,6 +15,7 @@ export function ContextProvider({children}){
     const [ severity, setSeverity ] = useState(null)
     const [ overlayCollapse, setOverlayCollapse] = useState(false)
     const [ userOnly, setUserOnly] = useState(null)
+    const [isLogin, setIsLogin] = useState(true);
 
     const notification = {
         setText,
@@ -25,7 +26,13 @@ export function ContextProvider({children}){
     }
 
     return (
-        <Context.Provider value={{userOnly, setUserOnly, overlayCollapse, setOverlayCollapse, notification, collapse, setCollapse, options, setOptions}}>
+        <Context.Provider value={{ 
+            isLogin, setIsLogin, 
+            userOnly, setUserOnly, 
+            overlayCollapse, setOverlayCollapse, 
+            notification, 
+            collapse, setCollapse, 
+            options, setOptions}}>
             {children}
         </Context.Provider>
     )

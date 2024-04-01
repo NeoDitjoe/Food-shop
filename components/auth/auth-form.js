@@ -26,13 +26,12 @@ async function createUser(username, email, password) {
 
 function AuthForm() {
 
-  const { notification } = StateContext()
+  const { notification, isLogin, setIsLogin } = StateContext()
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const usernameInputRef = useRef();
 
-  const [isLogin, setIsLogin] = useState(true);
   const router = useRouter();
 
   function switchAuthModeHandler() {
@@ -130,10 +129,10 @@ function AuthForm() {
           />
         </div>
         <div className={classes.actions}>
-          <p
+        {!isLogin &&<p
             className={classes.number}
             onClick={() => router.push('/auth/sms')}
-          >Sign up with phone number</p>
+          >Sign up with phone number</p>}
 
           <br />
           

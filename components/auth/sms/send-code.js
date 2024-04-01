@@ -7,9 +7,9 @@ import StateContext from '@/usecontext/stateContext';
 export default function SendCode() {
 
   const router = useRouter()
-  const { notification } = StateContext()
+  const { notification, setIsLogin } = StateContext()
 
-  async function sendCodeHandler(e){
+  async function sendCodeHandler(e) {
     e.preventDefault()
 
     const formData = new FormData(e.target)
@@ -20,14 +20,14 @@ export default function SendCode() {
     notification.setSeverity('info');
 
     try {
-      const response = await postMethod('/api/auth/sms/send-code', {number: `+27${number.substring(1, 10)}`, code: code.substring(2, 7)})
+      const response = await postMethod('/api/auth/sms/send-code', { number: `+27${number.substring(1, 10)}`, code: code.substring(2, 7) })
 
-      if(response.message === 'success'){
+      if (response.message === 'success') {
         notification.setText(`code sent to ${`+27 ${number.substring(1, 10)}`}`);
         notification.setSeverity('success');
         router.push('/auth/sms/verify')
       }
-      
+
     } catch (error) {
       notification.setText(error.message);
       notification.setSeverity('error');
@@ -50,12 +50,24 @@ export default function SendCode() {
         <br />
         <p
           className={classes.number}
-          onClick={() => router.push('/auth')}
+          onClick={() => {
+            router.push('/auth')
+            setIsLogin(false)
+          }}
         >Sign up with email</p>
 
         <div className={classes.actions}>
           <button> Send Code </button>
         </div>
+        <br />
+        
+        <p
+          className={classes.number}
+          onClick={() => {
+            router.push('/auth')
+            setIsLogin(true)
+          }}
+        >Login with existing account</p>
       </form>
     </section>
   )
