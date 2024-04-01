@@ -22,7 +22,7 @@ export default function EmailVerification() {
     notification.setSeverity('info')
 
     try {
-      const response = await postMethod('/api/auth/email/verification', { email, code })
+      const response = await postMethod('/api/auth/email/verification', { email : email.toLowerCase(), code })
 
       if (response.message) {
         notification.setText('Thank you for registering at BOBO')
