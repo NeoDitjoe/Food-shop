@@ -79,6 +79,7 @@ function AuthForm() {
           notification.setText(`Open Emails for verification code`)
           notification.setSeverity('success')
           notificationTimer(notification)
+          router.push('/auth/verify-email')
         }
       } catch (error) {
 
