@@ -1,28 +1,11 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import classes from 'styles/auth-form.module.css';
 import StateContext from '@/usecontext/stateContext';
 import { notificationTimer } from '../Notification/Notification';
-
-async function createUser(username, email, password) {
-
-  const response = await fetch('/api/auth/signUp', {
-    method: 'POST',
-    body: JSON.stringify({ username, email, password }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || 'Something went wrong!');
-  }
-
-  return data;
-}
+import postMethod from '@/util/post-method';
+import { v4 as uuidv4 } from 'uuid';
 
 function AuthForm() {
 
@@ -81,14 +64,19 @@ function AuthForm() {
       }
     } else {
 
+      const code = uuidv4()
+
       try {
         notification.setText('Loading...')
         notification.setSeverity('info')
 
-        const result = await createUser(enteredUsername.toLowerCase(), enteredEmail.toLowerCase(), enteredPassword);
+        const result = await postMethod( '/api/auth/email/signUp', 
+          { username: enteredUsername.toLowerCase(), email: enteredEmail.toLowerCase(), 
+            password: enteredPassword, code:  code.substring(2, 7) 
+          });
         if (result) {
 
-          notification.setText(`Welcome ${enteredUsername}`)
+          notification.setText(`Open Emails for verification code`)
           notification.setSeverity('success')
           notificationTimer(notification)
         }
