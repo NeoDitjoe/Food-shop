@@ -3,6 +3,7 @@ import style from 'styles/overlay.module.css'
 import { useSession } from "next-auth/react";
 import StateContext from "@/usecontext/stateContext";
 import {notificationTimer} from "./Notification/Notification";
+import { useRouter } from "next/router";
 
 /**
  * Appears when customers clicks on a product 
@@ -14,6 +15,8 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
 
     //Extract user details
     const { data: session, status } = useSession()
+
+    const router = useRouter()
     
     const {notification, setOverlayCollapse } = StateContext()
 
@@ -22,6 +25,7 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
             notification.setText(`Login to place order`)
             notification.setSeverity('error')
             notificationTimer(notification)
+            router.push('/auth')
         }
 
         if(session){
@@ -58,13 +62,6 @@ export default function Overlay({click, orderNow, addtoCart, product, item, pric
                 <p>R {price}</p>
 
                 <div className={style.buttons}>
-
-                    <div className={style.button} >
-                        <Button 
-                            name={'ORDER NOW'} 
-                            click = {orderNow}
-                        />
-                    </div>
 
                     <div className={style.button} >
                         <Button 
