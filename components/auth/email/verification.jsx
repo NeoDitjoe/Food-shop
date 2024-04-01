@@ -33,7 +33,7 @@ export default function EmailVerification() {
       }
 
     } catch (error) {
-      notification.setText(error.message)
+      notification.setText('Incorrect Email or Code')
       notification.setSeverity('error')
       notificationTimer(notification)
     }
