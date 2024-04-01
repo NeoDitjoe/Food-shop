@@ -74,4 +74,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  color: orange;
+  cursor: pointer;
+  justify-content: center;
 }

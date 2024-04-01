@@ -9,6 +9,7 @@ import addToDatabase from "@/database/addToDatabase";
 import { Button } from "@/components/button/button";
 import { BsFillTrashFill } from "react-icons/bs";
 import StateContext from "@/usecontext/stateContext";
+import { notificationTimer } from "@/components/Notification/Notification";
 
 export default function Menu(props) {
 
@@ -84,7 +85,7 @@ export default function Menu(props) {
 
       notification.setText('Removed Product')
       notification.setSeverity('success')
-
+      notificationTimer(notification)
       window.location.reload()
 
     } catch (error) {

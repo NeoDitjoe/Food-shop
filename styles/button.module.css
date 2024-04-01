@@ -11,4 +11,5 @@
     background-color:orange;
     color: black;
     cursor: pointer;
+    white-space: nowrap;
 }
