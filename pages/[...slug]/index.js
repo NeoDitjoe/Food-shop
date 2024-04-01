@@ -29,7 +29,7 @@ export default function Ccart(){
     const [ userEmail, setUserEmail ] = useState(null)
 
     useEffect(() => {
-        setUserEmail(session && session.user.email[1])
+        setUserEmail(session?.user?.email.username)
     }, [session])
     
     //compares the logged in user from the session with the name from the path

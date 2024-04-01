@@ -17,8 +17,8 @@ export default function Orders() {
 	const { userOnly } = StateContext()
 
 	useEffect(() => {
-		setUserName(session && session.user.email[1])
-		setUserEmail(session && session.user.email[0])
+		setUserName(session?.user?.email.username)
+		setUserEmail(session?.user?.email.email)
 	}, [userEmail, username])
 
 	useEffect(() => {

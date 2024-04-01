@@ -11,21 +11,16 @@ export default function AddNewProduct() {
 
 	const [showAddMenu, setShowAddMenu] = useState(false)
 	const { data: session} = useSession()
-	const [username, setUserName] = useState('')
-	const [userEmail, setUserEmail] = useState('')
+	const [isAdmin, setIsAdmin] = useState(null)
 
 	useEffect(() => {
-		setUserName(session && session.user.email[1])
-		setUserEmail(session && session.user.email[0])
+		setIsAdmin(session?.user?.email.username)
 	})
-
-	const checkUser = username === 'administratorbobo'
-	const checkUserEmail = userEmail === 'martins@gmail.com'
 
 	return (
 		<>
 			{
-				checkUser && checkUserEmail 
+				isAdmin 
 				? <div>
 
 				<div className={style.main}>
