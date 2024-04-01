@@ -23,7 +23,7 @@ export default function VerifyNumber() {
     notification.setSeverity('info');
 
     try {
-      const response = await postMethod('/api/auth/sms/verify', { number: `+27${number.substring(1, 10)}`, code, username, password })
+      const response = await postMethod('/api/auth/sms/verify', { number: `+27${number.substring(1, 10)}`, code, username: username.toLowerCase(), password })
       if (response.message === 'success') {
         notification.setText(`SMS with "Login Email" is sent to your phone`);
         notification.setSeverity('success');
